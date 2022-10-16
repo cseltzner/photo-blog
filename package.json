@@ -1,0 +1,15 @@
+{
+  "name": "photo-blog",
+  "version": "1.0.0",
+  "description": "Personal photography blog",
+  "main": "index.js",
+  "scripts": {
+
+  },
+  "keywords": [
+    "photography",
+    "blog"
+  ],
+  "author": "Chase Seltzner",
+  "license": "ISC"
+}
