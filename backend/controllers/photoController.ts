@@ -5,6 +5,7 @@ import { getSinglePhoto } from "../db/queries/get-single-photo";
 /**
  * @route   GET /api/photo/:photoId
  * @desc    Get single photo by its photoId
+ * @access  Public
  *
  * @params  :photoId - Unique, length 10 alphanumeric Id
  */

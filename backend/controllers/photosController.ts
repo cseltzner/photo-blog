@@ -5,6 +5,7 @@ import { getAllPhotosQuery } from "../db/queries/get-all-photos";
 /**
  * @route   GET /api/photos/
  * @desc    Get all photos based on query
+ * @access  Public
  *
  * @query   category - Category of photograph (eg. 'plant')
  * @query   favorite - Boolean value of photograph's "favorite" status
