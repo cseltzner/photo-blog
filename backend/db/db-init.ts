@@ -1,6 +1,7 @@
 import queries from "./queries/db-init-queries";
 import { config as dotEnvConfig } from "dotenv";
 import { Pool } from "pg";
+import bcryptjs from "bcryptjs";
 
 dotEnvConfig();
 
@@ -35,10 +36,26 @@ dotEnvConfig();
     else console.log("Image table initialized");
   });
 
-  await pool.query(queries.initUsersTable, (err, res) => {
+  await pool.query(queries.initUsersTable, async (err, res) => {
     if (err) console.error(err);
-    else console.log("User table initialized");
-  });
+    else {
+      console.log("User table initialized");
+      // Create default administrator //
+      // Encrypt password
+      const salt = await bcryptjs.genSalt(10);
+      const encryptedPassword = await bcryptjs.hash(
+        process.env.DEFAULT_ADMIN_PASSWORD!,
+        salt
+      );
 
-  console.log("Databases and tables initialized...");
+      // Insert default administrator into database
+      await pool.query(
+        queries.createDefaultAdminUser(encryptedPassword),
+        (err, res) => {
+          if (err) console.error(err);
+          else console.log("Default administrator initialized");
+        }
+      );
+    }
+  });
 })();

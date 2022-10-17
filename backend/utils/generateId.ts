@@ -5,5 +5,5 @@ import cryptoRandomString from "crypto-random-string";
  * @returns {string} alphanumeric string of length 10
  */
 export default function generateId() {
-  cryptoRandomString({length: 10, type: "alphanumeric"});
+  return cryptoRandomString({ length: 10, type: "alphanumeric" });
 }
