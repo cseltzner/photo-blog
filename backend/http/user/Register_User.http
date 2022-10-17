@@ -1,0 +1,11 @@
+POST http://localhost:4000/api/user
+Content-Type: application/json
+Authorization: @todo
+
+{
+  "username": "http user",
+  "password": "secret",
+  "role": "admin"
+}
+
+###

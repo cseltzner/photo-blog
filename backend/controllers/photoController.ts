@@ -1,6 +1,6 @@
 import express from "express";
 import pool from "../db/db-connect";
-import { getSinglePhoto } from "../db/queries/get-single-photo";
+import { getSinglePhoto } from "../db/queries/images/get-single-photo";
 
 /**
  * @route   GET /api/photo/:photoId
