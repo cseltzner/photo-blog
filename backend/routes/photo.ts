@@ -1,6 +1,10 @@
 import express from "express";
 import multer from "multer";
-import { getPhoto, postPhoto } from "../controllers/photoController";
+import {
+  deletePhoto,
+  getPhoto,
+  postPhoto,
+} from "../controllers/photoController";
 import auth from "../middleware/auth";
 
 // Multer configuration
@@ -14,7 +18,7 @@ const router = express.Router();
  * @access  Public
  * @desc    Get single photo by its photoId
  *
- * @params  :photoId - Unique, length 10 alphanumeric Id
+ * @params  :photoId - Unique, length 10 alphanumeric ID
  */
 router.get("/:photoId", getPhoto);
 
@@ -32,5 +36,14 @@ router.get("/:photoId", getPhoto);
  * @body    FormData.append("description", string) // Required if favorite is true
  */
 router.post("/", auth, upload.single("image"), postPhoto);
+
+/**
+ * @route   DELETE /api/photo/:photoId
+ * @access  Private - Authorization header
+ * @desc    Delete a single photo by ID
+ *
+ * @params  :photoId - Unique, length 10 alphanumeric ID of the photo to be deleted
+ */
+router.delete("/:photoId", auth, deletePhoto);
 
 export default router;

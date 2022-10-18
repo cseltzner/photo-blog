@@ -5,6 +5,7 @@ import pool from "../db/db-connect";
 import { getSinglePhoto } from "../db/queries/images/get-single-photo";
 import { insertPhoto } from "../db/queries/images/insert-photo";
 import generateId from "../utils/generateId";
+import { deleteSinglePhoto } from "../db/queries/images/delete-single-photo";
 
 // Cloudinary configuration
 cloudinary.config({
@@ -84,6 +85,7 @@ export const postPhoto = (req: express.Request, res: express.Response) => {
         await pool.query(
           insertPhoto(
             generateId(),
+            result?.public_id!,
             title,
             description,
             result?.secure_url!,
@@ -99,5 +101,55 @@ export const postPhoto = (req: express.Request, res: express.Response) => {
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: "Error uploading file" });
+  }
+};
+
+/**
+ * @route   DELETE /api/photo/:photoId
+ * @access  Private - Authorization header
+ * @desc    Delete a single photo by ID
+ *
+ * @params  :photoId - Unique, length 10 alphanumeric ID of the photo to be deleted
+ *
+ * @status  200 - Successfully deleted photo from Cloudinary and database
+ * @status  404 - Could not find image in database
+ */
+export const deletePhoto = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const photoId = req.params.photoId;
+
+  try {
+    // Get photo from database
+    const queryRes = await pool.query(getSinglePhoto(photoId));
+    const photo = queryRes.rows[0];
+
+    if (!photo) {
+      return res
+        .status(404)
+        .json({ message: `Image with photoId ${photoId} not found` });
+    }
+
+    // If photo exists, delete from Cloudinary cdn
+    const cloudinaryResponse = await cloudinary.uploader.destroy(
+      photo.cloudinary_public_id
+    );
+
+    // Return server error without deleting anything from DB if cloudinary fails to delete
+    if (cloudinaryResponse.result !== "ok") {
+      return res.status(500).json({ message: "Server Error" });
+    }
+
+    // If photo deleted from Cloudinary, delete from database
+    await pool.query(deleteSinglePhoto(photo.id));
+
+    // If all is successful
+    return res
+      .status(200)
+      .json({ message: `Successfully deleted photo with photoId: ${photoId}` });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: "Server Error" });
   }
 };
