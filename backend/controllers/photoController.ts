@@ -2,10 +2,10 @@ import express from "express";
 import streamifier from "streamifier";
 import { v2 as cloudinary } from "cloudinary";
 import pool from "../db/db-connect";
-import { getSinglePhoto } from "../db/queries/images/get-single-photo";
-import { insertPhoto } from "../db/queries/images/insert-photo";
+import { getSinglePhotoQuery } from "../db/queries/images/get-single-photo-query";
+import { insertPhotoQuery } from "../db/queries/images/insert-photo-query";
 import generateId from "../utils/generateId";
-import { deleteSinglePhoto } from "../db/queries/images/delete-single-photo";
+import { deleteSinglePhotoQuery } from "../db/queries/images/delete-single-photo-query";
 
 // Cloudinary configuration
 cloudinary.config({
@@ -27,7 +27,7 @@ export const getPhoto = async (req: express.Request, res: express.Response) => {
   const { photoId } = req.params;
 
   try {
-    const response = await pool.query(getSinglePhoto(photoId));
+    const response = await pool.query(getSinglePhotoQuery(photoId));
     const photo = response.rows[0];
 
     res.json(photo);
@@ -83,7 +83,7 @@ export const postPhoto = (req: express.Request, res: express.Response) => {
         }
         // If upload succeeds, add photo to database
         await pool.query(
-          insertPhoto(
+          insertPhotoQuery(
             generateId(),
             result?.public_id!,
             title,
@@ -122,7 +122,7 @@ export const deletePhoto = async (
 
   try {
     // Get photo from database
-    const queryRes = await pool.query(getSinglePhoto(photoId));
+    const queryRes = await pool.query(getSinglePhotoQuery(photoId));
     const photo = queryRes.rows[0];
 
     if (!photo) {
@@ -142,7 +142,7 @@ export const deletePhoto = async (
     }
 
     // If photo deleted from Cloudinary, delete from database
-    await pool.query(deleteSinglePhoto(photo.id));
+    await pool.query(deleteSinglePhotoQuery(photo.id));
 
     // If all is successful
     return res

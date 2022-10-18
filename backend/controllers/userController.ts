@@ -1,9 +1,9 @@
 import express from "express";
 import bcryptjs from "bcryptjs";
 import pool from "../db/db-connect";
-import { checkIfUserExists } from "../db/queries/users/get-user";
+import { checkIfUserExistsQuery } from "../db/queries/users/get-user";
 import generateId from "../utils/generateId";
-import { addUser } from "../db/queries/users/add-user";
+import { addUserQuery } from "../db/queries/users/add-user-query";
 import jwt from "jsonwebtoken";
 
 /**
@@ -41,7 +41,7 @@ export const registerUser = async (
 
   try {
     // Check if user already exists
-    const possibleUser = await pool.query(checkIfUserExists(username));
+    const possibleUser = await pool.query(checkIfUserExistsQuery(username));
     if (possibleUser.rows) {
       return res.status(409).json({ message: "User already exists" });
     }
@@ -57,7 +57,7 @@ export const registerUser = async (
 
     // Save user to database
     await pool.query(
-      addUser(id, username, encryptedPassword, role.toLowerCase())
+      addUserQuery(id, username, encryptedPassword, role.toLowerCase())
     );
 
     // Create jsonwebtoken

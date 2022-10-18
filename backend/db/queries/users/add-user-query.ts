@@ -1,6 +1,6 @@
 import { UserRole } from "../../../interfaces/UserRole";
 
-export const addUser = (
+export const addUserQuery = (
   id: string,
   username: string,
   password: string,

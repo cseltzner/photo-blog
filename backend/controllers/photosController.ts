@@ -1,6 +1,6 @@
 import express from "express";
 import pool from "../db/db-connect";
-import { getAllPhotosQuery } from "../db/queries/images/get-all-photos";
+import { getAllPhotosQuery } from "../db/queries/images/get-all-photos-query";
 
 /**
  * @route   GET /api/photos/

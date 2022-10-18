@@ -1,4 +1,4 @@
-export const insertPhoto = (
+export const insertPhotoQuery = (
   id: string,
   cloudinary_public_id: string,
   title: string,
