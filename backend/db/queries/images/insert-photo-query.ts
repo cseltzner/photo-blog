@@ -1,3 +1,5 @@
+import { getCategoryString } from "../../../utils/getCategoryString";
+
 export const insertPhotoQuery = (
   id: string,
   cloudinary_public_id: string,
@@ -8,14 +10,7 @@ export const insertPhotoQuery = (
   front_page: string,
   categories: string[]
 ) => {
-  let catString = "";
-  categories.forEach((category, index) => {
-    if (index < categories.length - 1) {
-      catString = catString.concat(`'${category}'`, ", ");
-    } else {
-      catString = catString.concat(`'${category}'`);
-    }
-  });
+  const catString = getCategoryString(categories);
 
   return `INSERT INTO images (id, cloudinary_public_id, title, description, img_url, favorite, front_page, categories)
           VALUES ('${id}', '${cloudinary_public_id}', ${

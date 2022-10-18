@@ -4,6 +4,7 @@ import {
   deletePhoto,
   getPhoto,
   postPhoto,
+  updatePhoto,
 } from "../controllers/photoController";
 import auth from "../middleware/auth";
 
@@ -45,5 +46,21 @@ router.post("/", auth, upload.single("image"), postPhoto);
  * @params  :photoId - Unique, length 10 alphanumeric ID of the photo to be deleted
  */
 router.delete("/:photoId", auth, deletePhoto);
+
+/**
+ * @route   POST /api/photo/:photoId
+ * @access  Private - Authorization header
+ * @desc    Update a photo's title, description, favorite status, front page status, or category array
+ *          All parameters to update are optionally passed into the body of the request
+ *
+ * @params  :photoId - Unique, length 10 alphanumeric ID of the photo to be updated
+ *
+ * @body    title? - Title to be updated
+ * @body    description? - Title to be updated
+ * @body    favorite? - Boolean indicating "favorite" status
+ * @body    front_page? - Boolean indicating whether photo will have front_page status
+ * @body    categories? - Array of strings describing the categories the image belongs to
+ */
+router.put("/:photoId", auth, updatePhoto);
 
 export default router;

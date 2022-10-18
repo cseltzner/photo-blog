@@ -6,6 +6,7 @@ import { getSinglePhotoQuery } from "../db/queries/images/get-single-photo-query
 import { insertPhotoQuery } from "../db/queries/images/insert-photo-query";
 import generateId from "../utils/generateId";
 import { deleteSinglePhotoQuery } from "../db/queries/images/delete-single-photo-query";
+import { updatePhotoQuery } from "../db/queries/images/update-photo-query";
 
 // Cloudinary configuration
 cloudinary.config({
@@ -148,6 +149,65 @@ export const deletePhoto = async (
     return res
       .status(200)
       .json({ message: `Successfully deleted photo with photoId: ${photoId}` });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+/**
+ * @route   POST /api/photo/:photoId
+ * @access  Private - Authorization header
+ * @desc    Update a photo's title, description, favorite status, front page status, or category array
+ *          All parameters to update are optionally passed into the body of the request
+ *
+ * @params  :photoId - Unique, length 10 alphanumeric ID of the photo to be updated
+ *
+ * @body    title? - Title to be updated
+ * @body    description? - Title to be updated
+ * @body    favorite? - Boolean indicating "favorite" status
+ * @body    front_page? - Boolean indicating whether photo will have front_page status
+ * @body    categories? - Array of strings describing the categories the image belongs to
+ *
+ * @status  200 - Successfully updated image
+ * @status  404 - Could not find image in database
+ */
+export const updatePhoto = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const photoId = req.params.photoId;
+
+  try {
+    // Check if photo exists
+    const queryRes = await pool.query(getSinglePhotoQuery(photoId));
+    const photo = queryRes.rows[0];
+
+    if (!photo) {
+      return res
+        .status(404)
+        .json({ message: `Image with photoId ${photoId} not found` });
+    }
+
+    // Get parameters to update from the request body, OR set them the same as what is already in the database if not passed
+    const title = req.body.title || photo.title;
+    const description = req.body.description || photo.description;
+    const favorite = req.body.favorite || photo.favorite;
+    const front_page = req.body.front_page || photo.front_page;
+    const categories = req.body.categories || photo.categories;
+
+    await pool.query(
+      updatePhotoQuery(
+        photoId,
+        title,
+        description,
+        favorite,
+        front_page,
+        categories
+      )
+    );
+
+    return res.status(200).json({ message: "Image successfully updated" });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: "Server Error" });
