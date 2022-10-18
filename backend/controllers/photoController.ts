@@ -80,7 +80,7 @@ export const postPhoto = (req: express.Request, res: express.Response) => {
         if (error) {
           return res.status(500).json({ message: "Error uploading file" });
         }
-        // If upload succeeds
+        // If upload succeeds, add photo to database
         await pool.query(
           insertPhoto(
             generateId(),

@@ -10,9 +10,9 @@ export const insertPhoto = (
   let catString = "";
   categories.forEach((category, index) => {
     if (index < categories.length - 1) {
-      catString.concat(category, ", ");
+      catString = catString.concat(`'${category}'`, ", ");
     } else {
-      catString.concat(category);
+      catString = catString.concat(`'${category}'`);
     }
   });
 
