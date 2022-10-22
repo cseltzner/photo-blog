@@ -1,5 +1,9 @@
 import generateId from "../../utils/generateId";
 
+/**
+ * Currently only used for local database initialization with db-init.ts
+ * This has no use with the Docker setup
+ */
 const init_db_queries = {
   initDb: `CREATE DATABASE IF NOT EXISTS ${process.env.DATABASE}`,
   initImageTable:
