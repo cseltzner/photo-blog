@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+#  client:
+#    build:
+#      context: ./client
+#      dockerfile: dev.Dockerfile
+#    depends_on:
+#      - backend
+#    ports:
+#      - "4001:3000"
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    depends_on:
+      - postgres_db
+    ports:
+      - "4000:4000"
+  postgres_db:
+    image: postgres:15-alpine
+    restart: always
+    env_file:
+      - production.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data  # Named volume for data storage
+volumes:
+  dbdata:

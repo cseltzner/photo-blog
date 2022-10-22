@@ -3,3 +3,6 @@ notes.md
 .idea/
 .env
 backend/build/**/*
+/backend/db/init.sql
+/postgres-data/
+/production.env
