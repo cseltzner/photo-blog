@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="147.021"
+   height="131.28035"
+   viewBox="0 0 147.021 131.28035"
+   version="1.1"
+   id="svg51"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs55">
+    <linearGradient
+       id="linearGradient385">
+      <stop
+         style="stop-color:#16a5f7;stop-opacity:1;"
+         offset="0"
+         id="stop381" />
+      <stop
+         style="stop-color:#2700ff;stop-opacity:1;"
+         offset="1"
+         id="stop383" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient385"
+       id="linearGradient387"
+       x1="9.1183882"
+       y1="302.28598"
+       x2="156.92268"
+       y2="183.47882"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80081634,0,0,0.80081634,-10.441183,-120.51743)" />
+  </defs>
+  <path
+     fill="var(--ci-primary-color, currentColor)"
+     d="M 73.594592,2.424515e-4 A 73.595605,65.7158 0 0 0 21.555149,112.18368 73.595605,65.7158 0 0 0 125.63435,19.247862 73.114604,65.2863 0 0 0 73.594592,2.424515e-4 Z M 70.549892,8.8544324 39.56439,56.983502 22.961554,31.166512 A 63.703716,56.883026 0 0 1 70.550812,8.8544324 Z m 17.35693,34.8859496 14.120038,21.80814 -14.208608,22.18657 H 59.339562 L 45.235835,65.804472 59.441052,43.740382 Z m -70.911648,-4.20521 30.996881,48.19992 H 14.804836 a 63.692644,56.87314 0 0 1 2.190338,-48.19992 z m 3.011176,56.98711 H 82.192022 L 65.740192,122.21048 A 63.841496,57.006054 0 0 1 20.00635,96.522832 Z M 76.846272,122.56941 107.72721,74.351102 124.38633,100.08049 A 63.713249,56.891539 0 0 1 76.846272,122.56996 Z M 130.31857,91.684902 99.275552,43.740382 h 33.129098 a 63.702793,56.882202 0 0 1 -2.08608,47.94452 z M 65.099882,34.952652 81.653502,9.2411024 A 63.849185,57.012919 0 0 1 127.21544,34.952652 Z"
+     class="ci-primary"
+     id="path49"
+     style="fill:url(#linearGradient387);fill-opacity:1;stroke-width:0.290615" />
+</svg>
