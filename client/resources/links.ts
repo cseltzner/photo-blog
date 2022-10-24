@@ -1,6 +1,6 @@
 export const navGalleryLinks: { href: string; name: string }[] = [
   {
-    name: "All",
+    name: "All Photos",
     href: "/gallery",
   },
   {

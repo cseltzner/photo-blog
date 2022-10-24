@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "../../assets/sp-with-icon.svg";
 import Link from "next/link";
 import NavDropdown from "./NavDropdown";
 import { navGalleryLinks } from "../../resources/links";
+import NavMenu from "./NavMenu";
 
 const Navbar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const onMenuButtonClick = () => {
+    setSidebarOpen(true);
+  };
+
+  const onMenuCloseButtonClick = () => {
+    setSidebarOpen(false);
+  };
+
+  // Hide sidebar when screen is larger than lg breakpoint
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (document.body.offsetWidth >= 1024) {
+        setSidebarOpen(false);
+      }
+    });
+    return () => {
+      // Remove event listener on unmount
+      window.removeEventListener("resize", () => {
+        if (document.body.offsetWidth >= 1024) {
+          setSidebarOpen(false);
+        }
+      });
+    };
+  }, []);
+
   return (
     <nav
       className={
@@ -18,7 +46,19 @@ const Navbar = () => {
       </div>
 
       {/*  Hamburger icon when smaller than lg screens  */}
-      <div className={"lg:hidden"}>
+      <div
+        className={
+          "group lg:hidden relative cursor-pointer p-4 transition-all rounded-full hover:bg-blue-50 "
+        }
+        onClick={() => onMenuButtonClick()}
+      >
+        <div
+          className={
+            "absolute left-0 transition-all duration-300 ease-in-out -translate-x-[200%] opacity-0 group-hover:-translate-x-[120%] group-hover:opacity-90"
+          }
+        >
+          Menu
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -34,6 +74,11 @@ const Navbar = () => {
           />
         </svg>
       </div>
+      {/*  Navigation menu on small screens  */}
+      <NavMenu
+        onCloseHandler={() => onMenuCloseButtonClick()}
+        isOpen={sidebarOpen}
+      />
 
       {/*  Navbar at lg screens */}
       {/*  Main links  */}
