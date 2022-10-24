@@ -28,3 +28,14 @@ export const navGalleryLinks: { href: string; name: string }[] = [
     href: "/gallery/other",
   },
 ];
+
+export const navAdminLinks: { href: string; name: string }[] = [
+  {
+    name: "Upload photo",
+    href: "/admin/upload",
+  },
+  {
+    name: "Create user",
+    href: "/admin/user",
+  },
+];

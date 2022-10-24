@@ -3,11 +3,16 @@ import Image from "next/image";
 import logo from "../../assets/sp-with-icon.svg";
 import Link from "next/link";
 import NavDropdown from "./NavDropdown";
-import { navGalleryLinks } from "../../resources/links";
+import { navAdminLinks, navGalleryLinks } from "../../resources/links";
 import NavMenu from "./NavMenu";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Navbar = () => {
+  // State
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Context
+  const auth = useAuthContext();
 
   const onMenuButtonClick = () => {
     setSidebarOpen(true);
@@ -122,6 +127,13 @@ const Navbar = () => {
           Contact
         </a>
       </Link>
+
+      {/*  Admin tab (if logged in)  */}
+      {auth.isLoggedIn && (
+        <div className={"hidden lg:inline-block"}>
+          <NavDropdown links={navAdminLinks}>Admin</NavDropdown>
+        </div>
+      )}
     </nav>
   );
 };
