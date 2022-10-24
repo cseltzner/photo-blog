@@ -1,6 +1,15 @@
+import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import "../styles/globals.css"
+import Navbar from "../components/navbar/Navbar";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      {/* Container */}
+      <div className="container mx-auto">
+        <Navbar />
+        <Component {...pageProps} />
+      </div>
+    </>
+  );
 }

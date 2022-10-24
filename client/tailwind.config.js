@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ["Neuton", "sans-serif"],
+    },
   },
+
   plugins: [],
-}
+};
