@@ -3,9 +3,10 @@ import CarouselItem from "./CarouselItem";
 
 interface Props {
   imgUrls: string[];
+  height?: number;
 }
 
-const Carousel = ({ imgUrls }: Props) => {
+const Carousel = ({ imgUrls, height }: Props) => {
   const [itemIndex, setItemIndex] = useState(0);
   const [animateForward, setAnimateForward] = useState<boolean | null>(null);
 
@@ -30,6 +31,7 @@ const Carousel = ({ imgUrls }: Props) => {
   return (
     <>
       <div
+        style={{ height: `${height}px` ? height : "auto" }}
         className={"flex justify-center group relative w-full overflow-hidden"}
       >
         {imgUrls &&

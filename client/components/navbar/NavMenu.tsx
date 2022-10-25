@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { navAdminLinks, navGalleryLinks } from "../../resources/links";
 import Link from "next/link";
 import NavMenuDropdown from "./NavMenuDropdown";
@@ -11,6 +11,21 @@ interface Props {
 
 const NavMenu = ({ onCloseHandler, isOpen }: Props) => {
   const auth = useAuthContext();
+
+  // Escape key exits menu
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Esc" || e.key === "Escape") {
+        onCloseHandler();
+      }
+    });
+    // Remove event listener on unmount
+    window.removeEventListener("keydown", (e) => {
+      if (e.key === "Esc" || e.key === "Escape") {
+        onCloseHandler();
+      }
+    });
+  }, []);
 
   return (
     <>

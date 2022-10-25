@@ -2,8 +2,11 @@ import Head from "next/head";
 import Carousel from "../components/carousel/Carousel";
 import { useEffect, useState } from "react";
 import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
+import Spinner from "../components/spinner/Spinner";
 
 export default function Home() {
+  const [carouselLoading, setCarouselLoading] = useState(true);
+
   // Remove this test image state when actual images are fetched
   const [testImages, setTestImages] = useState<any>();
   useEffect(() => {
@@ -13,7 +16,9 @@ export default function Home() {
       data.forEach((img) => photos.push(img.url));
       setTestImages(photos);
     };
-    fetchPhotos().catch(console.error);
+    fetchPhotos()
+      .then(() => setCarouselLoading(false))
+      .catch(console.error);
   }, []);
   // End test images
 
@@ -34,9 +39,23 @@ export default function Home() {
           <link rel="icon" href="/favicon.png" />
         </Head>
 
-        <main>
-          <Carousel imgUrls={testImages} />
-        </main>
+        {/* Carousel section */}
+        <section className={"relative"}>
+          <div
+            className={`transition-all duration-700 ${
+              carouselLoading ? "opacity-0" : "opacity-1"
+            }`}
+          >
+            <Carousel imgUrls={testImages} />
+          </div>
+          {carouselLoading && (
+            <Spinner
+              top={"50%"}
+              left={"50%"}
+              transform={"translate(-50%, -50%)"}
+            />
+          )}
+        </section>
       </div>
     </>
   );
