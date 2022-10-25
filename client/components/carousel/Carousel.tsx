@@ -42,18 +42,16 @@ const Carousel = ({ imgUrls }: Props) => {
                   animateForward={animateForward}
                   key={index}
                 />{" "}
-                {/* Change key based on data in real project*/}
               </>
             );
           })}
 
         {/* Carousel controls */}
-        {/* You may want to change the default gradient opacity by extending colors */}
         {/* Next button */}
         <div
           role={"button"}
           className={
-            "absolute right-0 px-12 cursor-pointer active:bg-none opacity-50 group-hover:opacity-90 transition-all duration-300 ease-out flex items-center text-black h-full"
+            "absolute right-0 px-12 cursor-pointer active:bg-none opacity-50 group-hover:opacity-90 group-hover:scale-[115%] transition-all duration-300 ease-out flex items-center text-black h-full"
           }
           onClick={() => shiftNext()}
         >
@@ -76,7 +74,7 @@ const Carousel = ({ imgUrls }: Props) => {
         <div
           role={"button"}
           className={
-            "absolute left-0 px-12 cursor-pointer active:bg-none flex opacity-50 group-hover:opacity-90 transition-all duration-300 ease-out items-center text-black h-full"
+            "absolute left-0 px-12 cursor-pointer flex opacity-50 group-hover:opacity-90 group-hover:scale-[115%] transition-all duration-300 ease-out items-center text-black h-full"
           }
           onClick={() => shiftPrev()}
         >
