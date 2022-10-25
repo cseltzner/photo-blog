@@ -27,7 +27,7 @@ const CarouselItem = ({
 
   return (
     <div
-      className={` ${
+      className={` height-auto max-w-full ${
         show ? "relative" : "absolute hidden"
       } shrink-0 transition-all`}
       style={

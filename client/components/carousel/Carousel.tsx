@@ -43,7 +43,7 @@ const Carousel = ({ imgUrls, height }: Props) => {
                   show={index === itemIndex}
                   animateForward={animateForward}
                   key={index}
-                />{" "}
+                />
               </>
             );
           })}
