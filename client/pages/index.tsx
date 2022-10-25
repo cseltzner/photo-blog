@@ -1,8 +1,7 @@
 import Head from "next/head";
-import Carousel from "../components/carousel/Carousel";
 import { useEffect, useState } from "react";
 import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
-import Spinner from "../components/spinner/Spinner";
+import CarouselSection from "../components/sections/home/CarouselSection";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
@@ -40,22 +39,10 @@ export default function Home() {
         </Head>
 
         {/* Carousel section */}
-        <section className={"relative"}>
-          <div
-            className={`transition-all duration-700 ${
-              carouselLoading ? "opacity-0" : "opacity-1"
-            }`}
-          >
-            <Carousel imgUrls={testImages} />
-          </div>
-          {carouselLoading && (
-            <Spinner
-              top={"50%"}
-              left={"50%"}
-              transform={"translate(-50%, -50%)"}
-            />
-          )}
-        </section>
+        <CarouselSection
+          carouselLoading={carouselLoading}
+          images={testImages}
+        />
       </div>
     </>
   );
