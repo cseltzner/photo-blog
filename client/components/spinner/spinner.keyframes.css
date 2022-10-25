@@ -1,0 +1,14 @@
+@keyframes cs-custom-spinner-pop-in {
+  0% {
+    scale: 0;
+  }
+  30% {
+    scale: 100%;
+  }
+  80% {
+    scale: 0;
+  }
+  100% {
+    scale: 0;
+  }
+}
