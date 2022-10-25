@@ -1,0 +1,17 @@
+@keyframes cs-custom-carousel-animate-forward {
+  0% {
+    transform: translateX(-150%)
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes cs-custom-carousel-animate-backward {
+  0% {
+    transform: translateX(150%)
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

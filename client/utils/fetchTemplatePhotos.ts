@@ -1,7 +1,9 @@
 /**
  * Fetch specific amount of placeholder image urls from
  * jsonplaceholder.typicode.com for testing purposes.
+ *
  * @param amount - Amount of photos to fetch
+ * @returns - Array of objects with "url" and "thumbnailUrl" property
  */
 export const fetchTemplatePhotos = async (amount: number) => {
   const res = await fetch("https://jsonplaceholder.typicode.com/photos");

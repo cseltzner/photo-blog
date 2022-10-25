@@ -1,6 +1,22 @@
 import Head from "next/head";
+import Carousel from "../components/carousel/Carousel";
+import { useEffect, useState } from "react";
+import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
 
 export default function Home() {
+  // Remove this test image state when actual images are fetched
+  const [testImages, setTestImages] = useState<any>();
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const data = await fetchTemplatePhotos(20);
+      const photos: Array<string> = [];
+      data.forEach((img) => photos.push(img.url));
+      setTestImages(photos);
+    };
+    fetchPhotos().catch(console.error);
+  }, []);
+  // End test images
+
   return (
     <>
       <div>
@@ -18,7 +34,9 @@ export default function Home() {
           <link rel="icon" href="/favicon.png" />
         </Head>
 
-        <main></main>
+        <main>
+          <Carousel imgUrls={testImages} />
+        </main>
       </div>
     </>
   );

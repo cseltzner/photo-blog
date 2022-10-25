@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../components/carousel/carousel.keyframes.css";
 import type { AppProps } from "next/app";
 import Navbar from "../components/navbar/Navbar";
 import { AuthContext } from "../context/AuthContext";
