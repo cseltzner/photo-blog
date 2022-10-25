@@ -6,7 +6,9 @@
  * @returns - Array of objects with "url" and "thumbnailUrl" property
  */
 export const fetchTemplatePhotos = async (amount: number) => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+  const res = await fetch(
+    "https://jsonplaceholder.typicode.com/photos?_start=0&_limit=" + amount
+  );
   const photos = await res.json();
   const urlList: Array<{ url: string; thumbnailUrl: string }> = [];
   photos.forEach((photo) => {
