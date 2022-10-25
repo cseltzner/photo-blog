@@ -9,7 +9,7 @@ interface Props {
 
 const CarouselSection = ({ carouselLoading, images }: Props) => {
   return (
-    <section className={"relative"}>
+    <section className={"container mx-auto relative"}>
       <div
         className={`transition-all duration-700 ${
           carouselLoading ? "opacity-0" : "opacity-1"

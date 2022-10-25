@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav
       className={
-        "text-[1.35rem] w-full py-12 flex flex-row justify-evenly items-center"
+        "container mx-auto text-[1.35rem] w-full py-12 flex flex-row justify-evenly items-center"
       }
     >
       {/*  Logo  */}

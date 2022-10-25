@@ -11,7 +11,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <AuthContext.Provider value={useAuthContextDefaults()}>
         {/* Container */}
-        <div className="container mx-auto">
+        <div>
           <Navbar />
           <Component {...pageProps} />
         </div>

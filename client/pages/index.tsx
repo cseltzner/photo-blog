@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
 import CarouselSection from "../components/sections/home/CarouselSection";
 import Metadata from "../components/meta/Metadata";
+import AboutSection from "../components/sections/home/AboutSection";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
@@ -33,6 +34,8 @@ export default function Home() {
           carouselLoading={carouselLoading}
           images={testImages}
         />
+        {/* About section */}
+        <AboutSection />
       </div>
     </>
   );
