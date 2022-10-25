@@ -1,6 +1,8 @@
 import React from "react";
-import { navGalleryLinks } from "../../resources/links";
+import { navAdminLinks, navGalleryLinks } from "../../resources/links";
 import Link from "next/link";
+import NavMenuDropdown from "./NavMenuDropdown";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 interface Props {
   onCloseHandler: () => void;
@@ -8,6 +10,8 @@ interface Props {
 }
 
 const NavMenu = ({ onCloseHandler, isOpen }: Props) => {
+  const auth = useAuthContext();
+
   return (
     <>
       {/* Black backdrop */}
@@ -41,20 +45,38 @@ const NavMenu = ({ onCloseHandler, isOpen }: Props) => {
           </svg>
         </div>
         {/*  Main navigation links  */}
-        {navGalleryLinks.map((link, index) => {
-          return (
-            <div
-              key={index}
-              className={
-                "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
-              }
-            >
-              <Link href={link.href} passHref={true}>
-                <a>{link.name}</a>
-              </Link>{" "}
-            </div>
-          );
-        })}
+        <div
+          className={
+            "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
+          }
+        >
+          <Link href={"/"} passHref={true}>
+            <a>Home</a>
+          </Link>
+        </div>
+        {/* Gallery */}
+        <NavMenuDropdown links={navGalleryLinks}>Gallery</NavMenuDropdown>
+        <div
+          className={
+            "text-white py-4 text-4xl transition-all hover:text-zinc-400"
+          }
+        >
+          <Link href={"/"} passHref={true}>
+            <a> Chase&apos;s favorites</a>
+          </Link>
+        </div>
+        <div
+          className={
+            "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
+          }
+        >
+          <Link href={"/"} passHref={true}>
+            <a>About</a>
+          </Link>
+        </div>
+        {auth.isLoggedIn && (
+          <NavMenuDropdown links={navAdminLinks}>Admin</NavMenuDropdown>
+        )}
       </div>
     </>
   );
