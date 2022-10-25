@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
 import CarouselSection from "../components/sections/home/CarouselSection";
+import Metadata from "../components/meta/Metadata";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
@@ -24,19 +25,8 @@ export default function Home() {
   return (
     <>
       <div>
-        <Head>
-          <title>Create Next App</title>
-          <meta name="author" content="Chase Seltzner" />
-          <meta
-            name="description"
-            content="Chase's personal photography blog"
-          />
-          <meta
-            name="keywords"
-            content="photography, blog, photographs, photo, picture"
-          />
-          <link rel="icon" href="/favicon.png" />
-        </Head>
+        {/* Head metadata */}
+        <Metadata />
 
         {/* Carousel section */}
         <CarouselSection
