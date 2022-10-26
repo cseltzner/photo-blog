@@ -18,7 +18,7 @@ const NavDropdown = ({ children, links, defaultHref }: Props) => {
         )}
         <ul
           className={
-            "absolute text-black ml-1 mt-2 scale-0 group-hover:scale-100 transition-all ease-in-out origin-top from-zinc-100 to-zinc-50 via-zinc-50 bg-gradient-to-br rounded"
+            "absolute z-10 text-black ml-1 mt-2 scale-0 group-hover:scale-100 transition-all ease-in-out origin-top from-zinc-100 to-zinc-50 via-zinc-50 bg-gradient-to-br rounded"
           }
         >
           {links.map((link, index) => {
@@ -26,7 +26,7 @@ const NavDropdown = ({ children, links, defaultHref }: Props) => {
               <li
                 key={index}
                 className={
-                  "py-4 rounded px-8 from-zinc-200 to-zinc-300 hover:bg-gradient-to-r"
+                  "py-4 rounded px-10 text-xl from-zinc-200 to-zinc-300 hover:bg-gradient-to-r"
                 }
               >
                 <Link href={link.href}>{link.name}</Link>

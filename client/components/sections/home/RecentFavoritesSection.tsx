@@ -30,14 +30,14 @@ const RecentFavoritesSection = () => {
     <section
       className={"container mx-auto flex flex-col items-center my-24 text-4xl"}
     >
-      <h3 className={"font-serif mb-12"}>
+      <h3 className={"font-serif mb-12 lg:text-5xl"}>
         <span className={"italic"}>The Latest</span> Favorites
       </h3>
       <TriplePhotoGallery images={placeholderImages} />
       <Link href={"/favorites"} passHref={true}>
         <a
           className={
-            "inline-block mt-4 lg:mt-8 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
+            "inline-block mt-4 lg:mt-16 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
           }
         >
           View the favorites

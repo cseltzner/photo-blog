@@ -12,7 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <AuthContext.Provider value={useAuthContextDefaults()}>
         {/* Container */}
-        <div>
+        <div className={"text-black/90"}>
           <Navbar />
           <Component {...pageProps} />
           <Footer />

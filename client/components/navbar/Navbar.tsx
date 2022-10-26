@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import logo from "../../assets/sp-with-icon.svg";
+import logo from "../../assets/logo/sp-with-icon.svg";
 import Link from "next/link";
 import NavDropdown from "./NavDropdown";
 import { navAdminLinks, navGalleryLinks } from "../../resources/links";
@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav
       className={
-        "container mx-auto text-[1.35rem] w-full py-12 flex flex-row justify-evenly items-center"
+        "container mx-auto text-[1.35rem] lg:text-2xl w-full py-12 flex flex-row justify-between items-center"
       }
       id="top-nav"
     >
