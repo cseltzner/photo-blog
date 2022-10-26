@@ -44,6 +44,7 @@ const Navbar = () => {
       className={
         "container mx-auto text-[1.35rem] w-full py-12 flex flex-row justify-evenly items-center"
       }
+      id="top-nav"
     >
       {/*  Logo  */}
       <div className={"max-w-[225px] min-w-[200px] cursor-pointer"}>
