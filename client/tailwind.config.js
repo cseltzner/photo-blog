@@ -8,6 +8,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       sans: ["Neuton", "sans-serif"],
+      serif: ["Playfair Display", "serif"],
     },
   },
 

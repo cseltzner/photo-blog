@@ -12,7 +12,7 @@ const AboutSection = () => {
         "py-24 px-4 md:px-12 mt-24 bg-cover text-white text-center text-xl lg:text-xl leading-8 lg:leading-9"
       }
     >
-      <h3 className={"text-5xl mb-8"}>Chase Seltzner</h3>
+      <h3 className={"text-4xl mb-8 font-serif"}>Chase Seltzner</h3>
       <p className={"mb-6 max-w-[70ch] mx-auto"}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi harum
         ipsa maiores mollitia pariatur perferendis quo rem voluptates
