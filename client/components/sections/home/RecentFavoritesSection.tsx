@@ -30,7 +30,7 @@ const RecentFavoritesSection = () => {
     <section
       className={"container mx-auto flex flex-col items-center my-24 text-4xl"}
     >
-      <h3 className={"font-serif mb-8"}>
+      <h3 className={"font-serif mb-12"}>
         <span className={"italic"}>The Latest</span> Favorites
       </h3>
       <TriplePhotoGallery images={placeholderImages} />
