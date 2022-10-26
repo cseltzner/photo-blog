@@ -37,7 +37,7 @@ const RecentFavoritesSection = () => {
       <Link href={"/favorites"} passHref={true}>
         <a
           className={
-            "inline-block mt-4 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
+            "inline-block mt-4 lg:mt-8 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
           }
         >
           View the favorites
