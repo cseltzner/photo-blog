@@ -13,7 +13,7 @@ export default function Home() {
   const [testImages, setTestImages] = useState<any>();
   useEffect(() => {
     const fetchPhotos = async () => {
-      const data = await fetchTemplatePhotos(20);
+      const data = await fetchTemplatePhotos(10);
       const photos: Array<string> = [];
       data.forEach((img) => photos.push(img.url));
       setTestImages(photos);

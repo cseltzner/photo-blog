@@ -15,7 +15,7 @@ const CarouselSection = ({ carouselLoading, images }: Props) => {
           carouselLoading ? "opacity-0" : "opacity-1"
         }`}
       >
-        <Carousel imgUrls={images} />
+        <Carousel imgUrls={images} autoScroll={true} />
       </div>
       {carouselLoading && (
         <Spinner top={"50%"} left={"50%"} transform={"translate(-50%, -50%)"} />

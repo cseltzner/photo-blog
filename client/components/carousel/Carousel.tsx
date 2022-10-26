@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CarouselItem from "./CarouselItem";
 
 interface Props {
   imgUrls: string[];
   height?: number;
+  autoScroll?: boolean;
+  autoScrollTimeMs?: number;
 }
 
-const Carousel = ({ imgUrls, height }: Props) => {
+const Carousel = ({ imgUrls, height, autoScroll, autoScrollTimeMs }: Props) => {
   const [itemIndex, setItemIndex] = useState(0);
   const [animateForward, setAnimateForward] = useState<boolean | null>(null);
+
+  // Auto scroll effect
+  useEffect(() => {
+    if (autoScroll) {
+      const interval = setInterval(() => {
+        if (imgUrls) {
+          shiftNext();
+        }
+      }, autoScrollTimeMs || 5000);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [imgUrls, itemIndex]);
 
   const shiftPrev = () => {
     if (itemIndex === 0) {
