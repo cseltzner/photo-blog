@@ -4,6 +4,7 @@ import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
 import CarouselSection from "../components/sections/home/CarouselSection";
 import Metadata from "../components/meta/Metadata";
 import AboutSection from "../components/sections/home/AboutSection";
+import RecentFavoritesSection from "../components/sections/home/RecentFavoritesSection";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
@@ -36,6 +37,8 @@ export default function Home() {
         />
         {/* About section */}
         <AboutSection />
+        {/* Recent favorites section */}
+        <RecentFavoritesSection />
       </div>
     </>
   );
