@@ -10,7 +10,7 @@ interface Props {
 const NavDropdown = ({ children, links, defaultHref }: Props) => {
   return (
     <>
-      <div className={"relative group cursor-pointer p-2 hover:text-gray-800"}>
+      <div className={"relative group cursor-pointer p-2 hover:text-zinc-500"}>
         {defaultHref ? (
           <Link href={defaultHref}>{children}</Link>
         ) : (

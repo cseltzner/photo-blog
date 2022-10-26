@@ -47,7 +47,11 @@ const Navbar = () => {
       id="top-nav"
     >
       {/*  Logo  */}
-      <div className={"max-w-[225px] min-w-[200px] cursor-pointer"}>
+      <div
+        className={
+          "max-w-[225px] min-w-[200px] cursor-pointer hover:opacity-90"
+        }
+      >
         <Image src={logo} alt={"SeltzPort brand"} role={"navigation"} />
       </div>
 
@@ -95,7 +99,7 @@ const Navbar = () => {
       >
         <li>
           <Link href={"/"} passHref={true}>
-            <a className={"inline-block px-1 py-2 hover:text-gray-800"}>Home</a>
+            <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>Home</a>
           </Link>
         </li>
         <li>
@@ -108,14 +112,14 @@ const Navbar = () => {
         </li>
         <li>
           <Link href={"/favorites"} passHref={true}>
-            <a className={"inline-block px-1 py-2 hover:text-gray-800"}>
+            <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>
               Chase&apos;s favorites
             </a>
           </Link>
         </li>
         <li>
           <Link href={"/about"} passHref={true}>
-            <a className={"inline-block px-1 py-2 hover:text-gray-800"}>
+            <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>
               About
             </a>
           </Link>
@@ -124,7 +128,7 @@ const Navbar = () => {
 
       {/*  Contact  */}
       <Link href={"/contact"} passHref={true} className={"hidden lg:block"}>
-        <a className={"hidden lg:inline-block px-1 py-2 hover:text-gray-800"}>
+        <a className={"hidden lg:inline-block px-1 py-2 hover:text-zinc-500"}>
           Contact
         </a>
       </Link>
