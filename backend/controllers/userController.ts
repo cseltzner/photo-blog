@@ -1,10 +1,14 @@
 import express from "express";
 import bcryptjs from "bcryptjs";
 import pool from "../db/db-connect";
-import { checkIfUserExistsQuery } from "../db/queries/users/get-user";
+import {
+  checkIfUserExistsQuery,
+  getUserByIdQuery,
+} from "../db/queries/users/get-user";
 import generateId from "../utils/generateId";
 import { addUserQuery } from "../db/queries/users/add-user-query";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 /**
  * @route   POST /api/user/
@@ -75,5 +79,71 @@ export const registerUser = async (
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: "Server Error" });
+  }
+};
+
+/**
+ * @route   POST /api/user/auth
+ * @access  Public
+ * @desc    Authorize a user and send back a new, signed JWT
+ *
+ * @body    username - the user's username
+ * @body    password - the user's password
+ *
+ * @status  400 - Invalid request body
+ * @status  401 - Invalid credentials
+ * @status  404 - User not found
+ */
+export const authorizeUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  // Check if username and password were sent
+  if (!username || !password) {
+    return res.status(400).json({
+      message: "Please include all required fields in the request body",
+    });
+  }
+
+  try {
+    // Check if user exists
+    const cQueryRes = await pool.query(checkIfUserExistsQuery(username));
+    const userId = cQueryRes.rows[0]?.id;
+
+    if (!userId) {
+      return res
+        .status(404)
+        .json({ message: `User with username '${username}' not found` });
+    }
+
+    // Get user from database
+    const uQueryRes = await pool.query(getUserByIdQuery(userId));
+    const user = uQueryRes.rows[0];
+
+    // Compare passwords
+    const doPasswordsMatch = await bcrypt.compare(password, user.password);
+
+    if (!doPasswordsMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // If valid credentials, return the JWT
+    const payload = {
+      username: user.username,
+      role: user.role,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+      expiresIn: "7 days",
+    });
+
+    // Return jsonwebtoken
+    res.json({ token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
   }
 };

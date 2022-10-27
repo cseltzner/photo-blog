@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser } from "../controllers/userController";
+import { authorizeUser, registerUser } from "../controllers/userController";
 import auth from "../middleware/auth";
 const router = express.Router();
 
@@ -13,5 +13,15 @@ const router = express.Router();
  * @body    role     - ("admin" | "user") - currently only "admin" has any use. "user" functionality may be added later
  */
 router.post("/", auth, registerUser);
+
+/**
+ * @route   POST /api/user/auth
+ * @access  Public
+ * @desc    Authorize a user and send back a new, signed JWT
+ *
+ * @body    username - the user's username
+ * @body    password - the user's password
+ */
+router.post("/auth", authorizeUser);
 
 export default router;

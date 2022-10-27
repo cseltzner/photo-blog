@@ -3,5 +3,5 @@ export const checkIfUserExistsQuery = (username: string) => {
 };
 
 export const getUserByIdQuery = (id: string) => {
-  return `SELECT id, username, role FROM users WHERE id = '${id}'`;
+  return `SELECT id, username, role, password FROM users WHERE id = '${id}'`;
 };
