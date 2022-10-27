@@ -47,13 +47,17 @@ const Navbar = () => {
       id="top-nav"
     >
       {/*  Logo  */}
-      <div
-        className={
-          "max-w-[225px] min-w-[200px] cursor-pointer hover:opacity-90"
-        }
-      >
-        <Image src={logo} alt={"SeltzPort brand"} role={"navigation"} />
-      </div>
+      <Link href={"/"} passHref>
+        <a>
+          <div
+            className={
+              "max-w-[225px] min-w-[200px] cursor-pointer hover:opacity-90"
+            }
+          >
+            <Image src={logo} alt={"SeltzPort brand"} role={"navigation"} />
+          </div>
+        </a>
+      </Link>
 
       {/*  Hamburger icon when smaller than lg screens  */}
       <div
