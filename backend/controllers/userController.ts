@@ -147,3 +147,36 @@ export const authorizeUser = async (
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+/**
+ * @route   GET /api/user
+ * @access  Private - Authorization header
+ * @desc    Check if authorization token is valid and user exists
+ *
+ * @status 200  Successfully authorized
+ * @status 401  Unauthorized
+ */
+export const validateUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const username = req.username;
+
+  if (!username) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const uQueryRes = await pool.query(checkIfUserExistsQuery(username));
+    const user = uQueryRes.rows[0];
+
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return res.status(200).json({ message: "Authorization successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};

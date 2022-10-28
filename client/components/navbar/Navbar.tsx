@@ -8,6 +8,7 @@ import NavMenu from "./NavMenu";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import { useAlertContext } from "../../hooks/useAlertContext";
+import { apiProxy } from "../../utils/apiProxy";
 
 const Navbar = () => {
   // State
@@ -53,6 +54,38 @@ const Navbar = () => {
         }
       });
     };
+  }, []);
+
+  // Check if user is authenticated on initial load
+  useEffect(() => {
+    console.log("Useeffect called");
+    const checkAuthorized = async () => {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      if (token) {
+        const res = await fetch(apiProxy.concat("/user"), {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        });
+        const status = res.status;
+        console.log(status);
+
+        if (status === 401) {
+          auth.setIsLoggedIn(false);
+          return;
+        }
+
+        if (status === 200) {
+          auth.setIsLoggedIn(true);
+          return;
+        }
+
+        auth.setIsLoggedIn(false);
+      }
+    };
+    checkAuthorized().catch(console.error);
   }, []);
 
   return (

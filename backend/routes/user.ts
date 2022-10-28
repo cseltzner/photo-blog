@@ -1,5 +1,9 @@
 import express from "express";
-import { authorizeUser, registerUser } from "../controllers/userController";
+import {
+  authorizeUser,
+  registerUser,
+  validateUser,
+} from "../controllers/userController";
 import auth from "../middleware/auth";
 const router = express.Router();
 
@@ -23,5 +27,12 @@ router.post("/", auth, registerUser);
  * @body    password - the user's password
  */
 router.post("/auth", authorizeUser);
+
+/**
+ * @route   GET /api/user
+ * @access  Private - Authorization header
+ * @desc    Check if authorization token is valid and user exists
+ */
+router.get("/", auth, validateUser);
 
 export default router;
