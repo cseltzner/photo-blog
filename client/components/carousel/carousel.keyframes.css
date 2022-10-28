@@ -1,4 +1,4 @@
-@keyframes cs-custom-carousel-animate-forward {
+@keyframes cs-custom-carousel-animate-backward {
   0% {
     transform: translateX(-150%)
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes cs-custom-carousel-animate-backward {
+@keyframes cs-custom-carousel-animate-forward {
   0% {
     transform: translateX(150%)
   }
