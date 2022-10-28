@@ -4,9 +4,10 @@ import Link from "next/link";
 interface Props {
   children: any;
   links: { href: string; name: string }[];
+  onClose: () => void;
 }
 
-const NavMenuDropdown = ({ children, links }: Props) => {
+const NavMenuDropdown = ({ children, links, onClose }: Props) => {
   const [isActive, setIsActive] = useState(false);
   return (
     <>
@@ -28,7 +29,11 @@ const NavMenuDropdown = ({ children, links }: Props) => {
         >
           {links.map((link, index) => {
             return (
-              <li key={index} className={"py-2 hover:text-zinc-400"}>
+              <li
+                key={index}
+                className={"py-2 hover:text-zinc-400"}
+                onClick={() => onClose()}
+              >
                 <Link href={link.href}>{link.name}</Link>
               </li>
             );

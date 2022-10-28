@@ -59,6 +59,7 @@ const Navbar = () => {
   // Check if user is authenticated on initial load
   useEffect(() => {
     const checkAuthorized = async () => {
+      auth.setLoading(true);
       const token = localStorage.getItem("token");
       if (token) {
         const res = await fetch(apiProxy.concat("/user"), {
@@ -71,15 +72,18 @@ const Navbar = () => {
 
         if (status === 401) {
           auth.setIsLoggedIn(false);
+          auth.setLoading(false);
           return;
         }
 
         if (status === 200) {
           auth.setIsLoggedIn(true);
+          auth.setLoading(false);
           return;
         }
 
         auth.setIsLoggedIn(false);
+        auth.setLoading(false);
       }
     };
     checkAuthorized().catch(console.error);

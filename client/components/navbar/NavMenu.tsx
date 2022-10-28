@@ -61,38 +61,53 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
           </svg>
         </div>
         {/*  Main navigation links  */}
+        {/* Home */}
         <div
           className={
             "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
           }
         >
           <Link href={"/"} passHref={true}>
-            <a>Home</a>
+            <a onClick={() => onCloseHandler()}>Home</a>
           </Link>
         </div>
         {/* Gallery */}
-        <NavMenuDropdown links={navGalleryLinks}>Gallery</NavMenuDropdown>
+        <NavMenuDropdown
+          links={navGalleryLinks}
+          onClose={() => onCloseHandler()}
+        >
+          Gallery
+        </NavMenuDropdown>
+        {/* Chase's favorites */}
         <div
           className={
             "text-white py-4 text-4xl transition-all hover:text-zinc-400"
           }
         >
-          <Link href={"/"} passHref={true}>
-            <a> Chase&apos;s favorites</a>
+          <Link href={"/favorites"} passHref={true}>
+            <a onClick={() => onCloseHandler()}> Chase&apos;s favorites</a>
           </Link>
         </div>
+        {/* About */}
         <div
           className={
             "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
           }
         >
-          <Link href={"/"} passHref={true}>
-            <a>About</a>
+          <Link href={"/about"} passHref={true}>
+            <a onClick={() => onCloseHandler()}>About</a>
           </Link>
+          {/* Admin tab */}
         </div>
         {auth.isLoggedIn && (
-          <NavMenuDropdown links={navAdminLinks}>Admin</NavMenuDropdown>
+          <NavMenuDropdown
+            links={navAdminLinks}
+            onClose={() => onCloseHandler()}
+          >
+            Admin
+          </NavMenuDropdown>
         )}
+        {/* Log out */}
         {auth.isLoggedIn && (
           <div className="text-white py-4 text-4xl  transition-all hover:text-zinc-400">
             <button
