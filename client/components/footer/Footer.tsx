@@ -20,6 +20,9 @@ const Footer = () => {
           <Link href={"/about"} passHref={true}>
             <a className={"hover:text-blue-300"}>About</a>
           </Link>
+          <Link href={"/admin/login"} passHref={true}>
+            <a className={"hover:text-blue-300"}>Admin</a>
+          </Link>
         </div>
         <div className={"flex flex-col flex-wrap"}>
           <Link href={"/gallery"} passHref={true}>

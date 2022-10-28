@@ -6,6 +6,8 @@ import NavDropdown from "./NavDropdown";
 import { navAdminLinks, navGalleryLinks } from "../../resources/links";
 import NavMenu from "./NavMenu";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useRouter } from "next/router";
+import { useAlertContext } from "../../hooks/useAlertContext";
 
 const Navbar = () => {
   // State
@@ -13,6 +15,9 @@ const Navbar = () => {
 
   // Context
   const auth = useAuthContext();
+  const alert = useAlertContext();
+
+  const router = useRouter();
 
   const onMenuButtonClick = () => {
     setSidebarOpen(true);
@@ -20,6 +25,17 @@ const Navbar = () => {
 
   const onMenuCloseButtonClick = () => {
     setSidebarOpen(false);
+  };
+
+  const onLogOut = () => {
+    localStorage.removeItem("token");
+    auth.setIsLoggedIn(false);
+    router.push("/");
+    alert.setAlert({
+      type: "success",
+      title: "Successful log out",
+      messages: ["You are now logged out"],
+    });
   };
 
   // Hide sidebar when screen is larger than lg breakpoint
@@ -92,6 +108,7 @@ const Navbar = () => {
       <NavMenu
         onCloseHandler={() => onMenuCloseButtonClick()}
         isOpen={sidebarOpen}
+        onLogout={() => onLogOut()}
       />
 
       {/*  Navbar at lg screens */}
@@ -139,8 +156,15 @@ const Navbar = () => {
 
       {/*  Admin tab (if logged in)  */}
       {auth.isLoggedIn && (
-        <div className={"hidden lg:inline-block"}>
+        <div className={"hidden lg:flex gap-8"}>
           <NavDropdown links={navAdminLinks}>Admin</NavDropdown>
+          <button
+            onClick={() => {
+              onLogOut();
+            }}
+          >
+            Log out
+          </button>
         </div>
       )}
     </nav>

@@ -7,9 +7,10 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 interface Props {
   onCloseHandler: () => void;
   isOpen: boolean;
+  onLogout: () => void;
 }
 
-const NavMenu = ({ onCloseHandler, isOpen }: Props) => {
+const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
   const auth = useAuthContext();
 
   // Escape key exits menu
@@ -91,6 +92,18 @@ const NavMenu = ({ onCloseHandler, isOpen }: Props) => {
         </div>
         {auth.isLoggedIn && (
           <NavMenuDropdown links={navAdminLinks}>Admin</NavMenuDropdown>
+        )}
+        {auth.isLoggedIn && (
+          <div className="text-white py-4 text-4xl  transition-all hover:text-zinc-400">
+            <button
+              onClick={() => {
+                onLogout();
+                onCloseHandler();
+              }}
+            >
+              Log out
+            </button>
+          </div>
         )}
       </div>
     </>
