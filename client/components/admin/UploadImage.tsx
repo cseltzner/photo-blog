@@ -260,7 +260,7 @@ const UploadImage = () => {
           <button
             type="submit"
             className={
-              "block w-full py-5 rounded-lg bg-blue-300 shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
+              "block w-full py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
             }
             disabled={!file || !titleValidity || !descriptionValidity}
           >
