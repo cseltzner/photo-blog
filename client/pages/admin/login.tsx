@@ -12,7 +12,7 @@ const Login = () => {
 
   // Redirect user if already logged in
   useEffect(() => {
-    if (auth.isLoggedIn) {
+    if (!auth.loading && auth.isLoggedIn) {
       router.push("/");
     }
   }, [auth.isLoggedIn]);

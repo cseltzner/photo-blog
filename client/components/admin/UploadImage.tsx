@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { categories } from "../../resources/links";
+import { useRouter } from "next/router";
+import { useAlertContext } from "../../hooks/useAlertContext";
 
 const UploadImage = () => {
   const [file, setFile] = useState<File>(null);
@@ -10,6 +12,9 @@ const UploadImage = () => {
   const [titleValidity, setTitleValidity] = useState(true);
   const [description, setDescription] = useState("");
   const [descriptionValidity, setDescriptionValidity] = useState(true);
+
+  const { setAlert } = useAlertContext();
+  const router = useRouter();
 
   const onFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFile(e.target.files[0]);
@@ -65,6 +70,30 @@ const UploadImage = () => {
     e.preventDefault();
     //  Submit form
   };
+
+  // Redirect when unauthenticated
+  useEffect(() => {
+    /**
+     * To check if user is logged in, I am checking if there is a
+     * token in localstorage. Using the AuthContext will always
+     * have a default "loading" state of false and a "loggedIn"
+     * state of false, which will immediately redirect the user.
+     * For now, I will assume if the user has a token they will
+     * be logged in and I will let my backend deal with any
+     * invalid tokens
+     */
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/");
+      setAlert({
+        type: "error",
+        title: "error",
+        messages: [
+          "You must be logged in as an administrator to upload a photo!",
+        ],
+      });
+    }
+  }, []);
 
   return (
     <>
