@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { categories } from "../../resources/links";
 import { useRouter } from "next/router";
 import { useAlertContext } from "../../hooks/useAlertContext";
+import { apiProxy } from "../../utils/apiProxy";
+import Spinner from "../spinner/Spinner";
 
 const UploadImage = () => {
   const [file, setFile] = useState<File>(null);
@@ -12,6 +14,8 @@ const UploadImage = () => {
   const [titleValidity, setTitleValidity] = useState(true);
   const [description, setDescription] = useState("");
   const [descriptionValidity, setDescriptionValidity] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [filesUploaded, setFilesUploaded] = useState<Array<string>>([]);
 
   const { setAlert } = useAlertContext();
   const router = useRouter();
@@ -66,9 +70,91 @@ const UploadImage = () => {
     }
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const clearInputs = () => {
+    setFile(null);
+    setCategoriesChecked([]);
+    setIsFavorite(false);
+    setIsFront(false);
+    setTitle("");
+    setTitleValidity(true);
+    setDescription("");
+    setDescriptionValidity(true);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //  Submit form
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const categoryArray: Array<string> = [];
+    categoriesChecked.forEach((categoryChecked) => {
+      categoryArray.push(categories[categoryChecked]);
+    });
+    formData.append("categories", JSON.stringify(categoryArray));
+
+    formData.append("favorite", JSON.stringify(isFavorite));
+    formData.append("front_page", JSON.stringify(isFront));
+    formData.append("title", title);
+    formData.append("description", description);
+
+    try {
+      const res = await fetch(apiProxy.concat("/photo"), {
+        method: "POST",
+        headers: {
+          // "Content-Type": "multipart/form-data",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: formData,
+      });
+
+      // Handle fail status codes
+      if (res.status === 400) {
+        setAlert({
+          type: "error",
+          title: "error",
+          messages: ["Bad request. Please check your file and try again"],
+        });
+        setLoading(false);
+        return;
+      }
+
+      if (res.status === 500) {
+        setAlert({
+          type: "error",
+          title: "error",
+          messages: ["Server error. Please try again later"],
+        });
+        setLoading(false);
+        return;
+      }
+
+      // If successful upload
+      if (res.status === 200) {
+        setAlert({
+          type: "success",
+          title: "Photo uploaded",
+          messages: ["Your photo has been successfully uploaded"],
+        });
+        clearInputs();
+        const { url } = await res.json();
+        setFilesUploaded((prev) => [...prev, url]);
+        setLoading(false);
+        return;
+      }
+
+      throw new Error();
+    } catch (err) {
+      console.error(err);
+      setAlert({
+        type: "error",
+        title: "error",
+        messages: [
+          "An error occurred. Please check your internet connection and try again",
+        ],
+      });
+      setLoading(false);
+    }
   };
 
   // Redirect when unauthenticated
@@ -289,13 +375,44 @@ const UploadImage = () => {
           <button
             type="submit"
             className={
-              "block w-full py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
+              "block relative w-full transition py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
             }
-            disabled={!file || !titleValidity || !descriptionValidity}
+            disabled={
+              loading || !file || !titleValidity || !descriptionValidity
+            }
           >
-            Add Photo
+            {loading ? (
+              <div className={"py-4"}>
+                <Spinner size={12} />
+              </div>
+            ) : (
+              "Add Photo"
+            )}
           </button>
         </form>
+
+        {/*  Files uploaded this session  */}
+        {filesUploaded.length > 0 && (
+          <div className={"mt-8"}>
+            <h3 className={"text-2xl mt-4 pt-8 border-t-2"}>
+              Files uploaded this session
+            </h3>
+            <ul>
+              {filesUploaded.map((url) => {
+                return (
+                  <li
+                    key={url}
+                    className={"mt-8 text-blue-800 hover:underline"}
+                  >
+                    <a href={url} target={"_blank"} rel="noreferrer">
+                      {url}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </>
   );
