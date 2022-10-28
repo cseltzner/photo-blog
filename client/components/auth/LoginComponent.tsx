@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import logo from "../../assets/logo/sp-icon-only.svg";
 import Image from "next/image";
 import Link from "next/link";

@@ -58,10 +58,8 @@ const Navbar = () => {
 
   // Check if user is authenticated on initial load
   useEffect(() => {
-    console.log("Useeffect called");
     const checkAuthorized = async () => {
       const token = localStorage.getItem("token");
-      console.log(token);
       if (token) {
         const res = await fetch(apiProxy.concat("/user"), {
           method: "GET",
@@ -70,7 +68,6 @@ const Navbar = () => {
           },
         });
         const status = res.status;
-        console.log(status);
 
         if (status === 401) {
           auth.setIsLoggedIn(false);
