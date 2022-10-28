@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import logo from "../../assets/logo/sp-icon-only.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,9 @@ const LoginComponent = () => {
     setAuthInput({ ...authInput, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!authInput.username && !authInput.password) {
       setAlert({
         type: "error",
@@ -150,7 +152,7 @@ const LoginComponent = () => {
             <a className="text-blue-600 hover:opacity-90"> return to home</a>
           </Link>
         </p>
-        <form className="mt-12">
+        <form className="mt-12" onSubmit={(e) => onSubmit(e)}>
           <input
             type="text"
             placeholder="Username"
@@ -189,8 +191,7 @@ const LoginComponent = () => {
             </a>
           </div>
           <input
-            type="button"
-            onClick={() => onSubmit()}
+            type="submit"
             value="Sign in"
             className="m-0 mt-8 block w-full cursor-pointer rounded-lg bg-blue-600 py-3 text-xl text-white shadow hover:opacity-95 hover:shadow-sm active:opacity-100 active:shadow-lg"
           />
