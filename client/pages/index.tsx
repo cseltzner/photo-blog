@@ -5,9 +5,12 @@ import CarouselSection from "../components/sections/home/CarouselSection";
 import Metadata from "../components/meta/Metadata";
 import AboutSection from "../components/sections/home/AboutSection";
 import RecentFavoritesSection from "../components/sections/home/RecentFavoritesSection";
+import Alert from "../components/alert/Alert";
+import { useAlertContext } from "../hooks/useAlertContext";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
+  const { alert, setAlert, removeAlert } = useAlertContext();
 
   // Remove this test image state when actual images are fetched
   const [testImages, setTestImages] = useState<any>();
@@ -27,6 +30,11 @@ export default function Home() {
   return (
     <>
       <div>
+        <Alert
+          title={alert?.title}
+          type={alert?.type}
+          messages={alert?.messages}
+        />
         {/* Head metadata */}
         <Metadata />
 

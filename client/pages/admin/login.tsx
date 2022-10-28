@@ -1,17 +1,16 @@
 import React from "react";
 import LoginComponent from "../../components/auth/LoginComponent";
 import Alert from "../../components/alert/Alert";
+import { useAlertContext } from "../../hooks/useAlertContext";
 
 const Login = () => {
+  const { alert } = useAlertContext();
   return (
     <>
       <Alert
-        type={"error"}
-        title={"Login success"}
-        messages={[
-          "You have been successfully logged in",
-          "You have failed to log in",
-        ]}
+        type={alert?.type}
+        title={alert?.title}
+        messages={alert?.messages}
       />
       <LoginComponent />
     </>

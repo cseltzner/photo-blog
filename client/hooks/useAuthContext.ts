@@ -12,7 +12,7 @@ export const useAuthContext = () => {
  * Creates initial state values for AuthContext that can be passed
  * into AuthContext.Provider's value
  *
- * @returns AuthContext object with default valuse
+ * @returns AuthContext object with default values
  */
 export const useAuthContextDefaults = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

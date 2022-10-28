@@ -3,9 +3,10 @@ import React from "react";
 interface Props {
   title: string;
   messages: string[];
+  onClose: () => void;
 }
 
-const AlertSuccess = ({ title, messages }: Props) => {
+const AlertSuccess = ({ title, messages, onClose }: Props) => {
   return (
     <>
       <div className="relative mx-auto text-lg flex flex-col rounded-lg bg-green-50 p-4 shadow-lg opacity-[.95]">
@@ -35,6 +36,28 @@ const AlertSuccess = ({ title, messages }: Props) => {
               );
             })}
           </div>
+        </div>
+        {/* Close icon */}
+        <div
+          className={
+            "absolute right-4 top-4 p-2 text-green-900 rounded-full cursor-pointer hover:bg-green-200"
+          }
+          onClick={() => onClose()}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
         </div>
       </div>
     </>
