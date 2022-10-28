@@ -39,3 +39,12 @@ export const navAdminLinks: { href: string; name: string }[] = [
     href: "/admin/user",
   },
 ];
+
+export const categories: string[] = [
+  "Plants",
+  "Landscape",
+  "Birds",
+  "Animals",
+  "Sky",
+  "Other",
+];
