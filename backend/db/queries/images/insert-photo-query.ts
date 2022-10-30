@@ -17,5 +17,7 @@ export const insertPhotoQuery = (
     title ? `'${title}'` : null
   }, ${
     description ? `'${description}'` : null
-  }, '${img_url}', '${favorite}', '${front_page}', ARRAY [${catString}])`;
+  }, '${img_url}', '${favorite}', '${front_page}', ${
+    categories.length > 0 ? `ARRAY [${catString}]` : "NULL"
+  })`;
 };
