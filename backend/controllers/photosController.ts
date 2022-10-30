@@ -1,6 +1,7 @@
 import express from "express";
 import pool from "../db/db-connect";
 import { getAllPhotosQuery } from "../db/queries/images/get-all-photos-query";
+import { getLatestFavoritesQuery } from "../db/queries/images/get-latest-favorites-query";
 
 /**
  * @route   GET /api/photos/
@@ -29,5 +30,27 @@ export const getAllPhotos = async (
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: "Server Error" });
+  }
+};
+
+/**
+ * @route   GET /api/photos/latestfavorite?limit={number}
+ * @access  Public
+ * @desc    Retrieve {limit} number of images that have the favorite flag. Newest images first
+ *
+ * @query   limit - number of images to be retrieved
+ */
+export const getLatestFavorites = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const limit = (req.query.limit as string) || "5";
+
+    const photoQueryRes = await pool.query(getLatestFavoritesQuery(limit));
+    res.json(photoQueryRes.rows);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server Error" });
   }
 };

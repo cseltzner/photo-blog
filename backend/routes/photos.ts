@@ -1,5 +1,8 @@
 import express from "express";
-import { getAllPhotos } from "../controllers/photosController";
+import {
+  getAllPhotos,
+  getLatestFavorites,
+} from "../controllers/photosController";
 
 const router = express.Router();
 
@@ -13,5 +16,14 @@ const router = express.Router();
  * @query   front_page - Boolean value of photograph's "front page" status
  */
 router.get("/", getAllPhotos);
+
+/**
+ * @route   GET /api/photos/latestfavorite?limit={number}
+ * @access  Public
+ * @desc    Retrieve {limit} number of images that have the favorite flag. Newest images first
+ *
+ * @query   limit - number of images to be retrieved
+ */
+router.get("/latestfavorite", getLatestFavorites);
 
 export default router;
