@@ -7,6 +7,7 @@ import Spinner from "../spinner/Spinner";
 
 const UploadImage = () => {
   const [file, setFile] = useState<File>(null);
+  const [fileValidity, setFileValidity] = useState(true);
   const [categoriesChecked, setCategoriesChecked] = useState<number[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isFront, setIsFront] = useState(false);
@@ -21,6 +22,11 @@ const UploadImage = () => {
   const router = useRouter();
 
   const onFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Max filesize ~10mb
+    if (e.target.files[0].size > 1_000_000 * 10) {
+      setFileValidity(false);
+      return;
+    }
     setFile(e.target.files[0]);
   };
 
@@ -72,6 +78,7 @@ const UploadImage = () => {
 
   const clearInputs = () => {
     setFile(null);
+    setFileValidity(true);
     setCategoriesChecked([]);
     setIsFavorite(false);
     setIsFront(false);
@@ -233,8 +240,10 @@ const UploadImage = () => {
               onFileSelected(e);
             }}
           />
-          <p className="mb-4 self-start">
-            {file ? `File - ${file.name}` : "No file selected..."}
+          <p className={`mb-4 self-start ${!fileValidity && "text-red-600"}`}>
+            {file && fileValidity && `File - ${file.name}`}
+            {!file && "No file selected..."}
+            {!fileValidity && "File must be smaller than 10MB"}
           </p>
           {/* Categories */}
           <div>
@@ -378,7 +387,11 @@ const UploadImage = () => {
               "block relative w-full transition py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
             }
             disabled={
-              loading || !file || !titleValidity || !descriptionValidity
+              loading ||
+              !file ||
+              !fileValidity ||
+              !titleValidity ||
+              !descriptionValidity
             }
           >
             {loading ? (
