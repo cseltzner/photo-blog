@@ -4,8 +4,8 @@ import moment from "moment";
 interface Props {
   images?: {
     id: string;
-    src: string;
-    date: string;
+    img_url: string;
+    date_added: string;
     title: string;
   }[];
 }
@@ -16,9 +16,9 @@ const TriplePhotoGallery = ({ images }: Props) => {
       {/* Item 1 */}
       <a href={`/favorites/${images[0] && images[0].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[0] && images[0].src} alt="Recent favorite" />
+          <img src={images[0] && images[0].img_url} alt="Recent favorite" />
           <p className={"text-lg mt-3 opacity-70"}>
-            {moment(images[0] && images[0].date).format("MMMM DD YYYY")}
+            {moment(images[0] && images[0].date_added).format("MMMM DD YYYY")}
           </p>
           <h4 className={"font-serif text-3xl mt-1 group-hover:underline"}>
             {images[0] && images[0].title}
@@ -28,9 +28,9 @@ const TriplePhotoGallery = ({ images }: Props) => {
       {/* Item 2 */}
       <a href={`/favorites/${images[1] && images[1].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[1] && images[1].src} alt="Recent favorite" />
+          <img src={images[1] && images[1].img_url} alt="Recent favorite" />
           <p className={"text-lg mt-3 opacity-70"}>
-            {moment(images[1] && images[1].date).format("MMMM DD YYYY")}
+            {moment(images[1] && images[1].date_added).format("MMMM DD YYYY")}
           </p>
           <h4 className={"font-serif text-3xl mt-1  group-hover:underline"}>
             {images[1] && images[1].title}
@@ -40,9 +40,9 @@ const TriplePhotoGallery = ({ images }: Props) => {
       {/* Item 3 */}
       <a href={`/favorites/${images[2] && images[2].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[2] && images[2].src} alt="Recent favorite" />
+          <img src={images[2] && images[2].img_url} alt="Recent favorite" />
           <p className={"text-lg mt-3 opacity-70"}>
-            {moment(images[2] && images[2].date).format("MMMM DD YYYY")}
+            {moment(images[2] && images[2].date_added).format("MMMM DD YYYY")}
           </p>
           <h4 className={"font-serif text-3xl mt-1  group-hover:underline"}>
             {images[2] && images[2].title}

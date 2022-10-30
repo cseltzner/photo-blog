@@ -1,30 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TriplePhotoGallery from "../../triple-photo-gallery/TriplePhotoGallery";
 import Link from "next/link";
+import { apiProxy } from "../../../utils/apiProxy";
+import { useAlertContext } from "../../../hooks/useAlertContext";
+import { transformLink } from "../../../utils/transformLink";
 
 const RecentFavoritesSection = () => {
-  // @todo Remove when real data is accessed
-  const placeholderImages = [
-    {
-      id: "0",
-      src: "https://via.placeholder.com/600/92c952",
-      date: "2022-03-25",
-      title: "Fake title",
-    },
-    {
-      id: "1",
-      src: "https://via.placeholder.com/600/771796",
-      date: "2022-12-05",
-      title: "Fake title again",
-    },
-    {
-      id: "2",
-      src: "https://via.placeholder.com/600/24f355",
-      date: "2022-03-25",
-      title: "This is the third image",
-    },
-  ];
-  // End placeholder data
+  const photoLimit = 3;
+  const photoWidth = 450;
+  const photoHeight = 254;
+
+  const { setAlert } = useAlertContext();
+
+  const [images, setImages] = useState([]);
+  // Fetch recent favorite photos
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          apiProxy.concat(`/photos/latestfavorite?limit=${photoLimit}`),
+          {
+            method: "GET",
+          }
+        );
+        if (res.status !== 200) {
+          setAlert({
+            type: "error",
+            title: "error",
+            messages: [
+              "Network error. Please check your internet connection and refresh the page",
+            ],
+          });
+          return;
+        }
+        const photos = await res.json();
+        photos.forEach((photo) => {
+          if (photo.img_url) {
+            photo.img_url = transformLink(
+              photo.img_url,
+              photoWidth,
+              photoHeight
+            );
+          }
+        });
+        setImages(photos);
+      } catch (err) {}
+    };
+    fetchData();
+  }, []);
 
   return (
     <section
@@ -33,7 +56,7 @@ const RecentFavoritesSection = () => {
       <h3 className={"font-serif mb-12 lg:text-5xl"}>
         <span className={"italic"}>The Latest</span> Favorites
       </h3>
-      <TriplePhotoGallery images={placeholderImages} />
+      <TriplePhotoGallery images={images} />
       <Link href={"/favorites"} passHref={true}>
         <a
           className={

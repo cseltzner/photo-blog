@@ -16,6 +16,7 @@ export default function Home() {
 
   const [carouselImages, setCarouselImages] = useState<Array<string>>([]);
 
+  // Get carousel images
   useEffect(() => {
     const queryImages = async () => {
       setCarouselLoading(true);
@@ -23,6 +24,14 @@ export default function Home() {
         const res = await fetch(apiProxy.concat("/photos?front_page=true"), {
           method: "GET",
         });
+        if (res.status !== 200) {
+          setAlert({
+            type: "error",
+            title: "error",
+            messages: ["Server error. Please try again later"],
+          });
+        }
+
         const images: Array<any> = await res.json();
         if (images.length < 1) {
           setAlert({
