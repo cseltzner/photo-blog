@@ -101,7 +101,7 @@ const Navbar = () => {
         <a>
           <div
             className={
-              "max-w-[225px] min-w-[200px] cursor-pointer hover:opacity-90"
+              "max-w-[225px] min-w-[200px] mr-6 cursor-pointer hover:opacity-90"
             }
           >
             <Image src={logo} alt={"SeltzPort brand"} role={"navigation"} />
