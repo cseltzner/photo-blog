@@ -12,7 +12,9 @@ const NavDropdown = ({ children, links, defaultHref }: Props) => {
     <>
       <div className={"relative group cursor-pointer p-2 hover:text-zinc-500"}>
         {defaultHref ? (
-          <Link href={defaultHref}>{children}</Link>
+          <Link href={defaultHref} className={"w-full h-full"}>
+            {children}
+          </Link>
         ) : (
           <div>{children}</div>
         )}
@@ -23,14 +25,15 @@ const NavDropdown = ({ children, links, defaultHref }: Props) => {
         >
           {links.map((link, index) => {
             return (
-              <li
-                key={index}
-                className={
-                  "py-4 rounded px-10 text-xl from-zinc-200 to-zinc-300 hover:bg-gradient-to-r"
-                }
-              >
-                <Link href={link.href}>{link.name}</Link>
-              </li>
+              <Link key={index} href={link.href}>
+                <li
+                  className={
+                    "py-4 rounded px-10 text-xl from-zinc-200 to-zinc-300 hover:bg-gradient-to-r"
+                  }
+                >
+                  {link.name}
+                </li>
+              </Link>
             );
           })}
         </ul>
