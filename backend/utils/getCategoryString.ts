@@ -6,9 +6,9 @@ export const getCategoryString = (categories: string[]) => {
   let catString = "";
   categories.forEach((category, index) => {
     if (index < categories.length - 1) {
-      catString = catString.concat(`'${category}'`, ", ");
+      catString = catString.concat(`'${category.toLowerCase()}'`, ", ");
     } else {
-      catString = catString.concat(`'${category}'`);
+      catString = catString.concat(`'${category.toLowerCase()}'`);
     }
   });
   return catString;

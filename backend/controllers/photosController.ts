@@ -18,8 +18,9 @@ export const getAllPhotos = async (
   res: express.Response
 ) => {
   const { category, favorite, front_page } = req.query;
+  const categoryQuery = category === "all" ? "" : category;
   const dbQuery = getAllPhotosQuery(
-    category?.toString(),
+    categoryQuery?.toString(),
     favorite?.toString(),
     front_page?.toString()
   );

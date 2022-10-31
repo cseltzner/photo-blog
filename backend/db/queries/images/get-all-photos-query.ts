@@ -30,6 +30,7 @@ export const getAllPhotosQuery = (
     " AND ",
     front_pageClause
   );
+  const orderStmt = "ORDER BY date_added";
 
-  return selectStmt.concat(" ", whereStmt);
+  return selectStmt.concat(" ", whereStmt, " ", orderStmt);
 };

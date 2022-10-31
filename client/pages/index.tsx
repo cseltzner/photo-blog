@@ -1,6 +1,4 @@
-import Head from "next/head";
 import { useEffect, useState } from "react";
-import { fetchTemplatePhotos } from "../utils/fetchTemplatePhotos";
 import CarouselSection from "../components/sections/home/CarouselSection";
 import Metadata from "../components/meta/Metadata";
 import AboutSection from "../components/sections/home/AboutSection";

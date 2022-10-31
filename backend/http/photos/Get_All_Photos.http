@@ -3,7 +3,7 @@ Accept: application/json
 
 ###
 
-GET http://localhost:4000/api/photos?category=landscape
+GET http://localhost:4000/api/photos?category=other
 Accept: application/json
 
 ###

@@ -71,7 +71,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             <a onClick={() => onCloseHandler()}>Home</a>
           </Link>
         </div>
-        {/* Gallery */}
+        {/* GallerySection */}
         <NavMenuDropdown
           links={navGalleryLinks}
           onClose={() => onCloseHandler()}

@@ -96,7 +96,7 @@ const UploadImage = () => {
 
     const categoryArray: Array<string> = [];
     categoriesChecked.forEach((categoryChecked) => {
-      categoryArray.push(categories[categoryChecked]);
+      categoryArray.push(categories[categoryChecked].toLowerCase());
     });
     formData.append("categories", JSON.stringify(categoryArray));
 
