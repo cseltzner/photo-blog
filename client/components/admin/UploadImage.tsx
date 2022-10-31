@@ -23,7 +23,7 @@ const UploadImage = () => {
 
   const onFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Max filesize ~10mb
-    if (e.target.files[0].size > 1_000_000 * 10) {
+    if (e.target.files[0] && e.target.files[0].size > 1_000_000 * 10) {
       setFileValidity(false);
       return;
     }
