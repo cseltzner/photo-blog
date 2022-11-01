@@ -39,7 +39,7 @@ export const registerUser = async (
   }
 
   // Check if role is "admin" or "user"
-  if (role.toLowerCase() !== "admin" || role.toLowerCase() !== "user") {
+  if (role.toLowerCase() !== "admin" && role.toLowerCase() !== "user") {
     return res.status(400).json({ message: "Invalid user role" });
   }
 
