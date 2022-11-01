@@ -49,7 +49,7 @@ const Carousel = ({ imgUrls, height, autoScroll, autoScrollTimeMs }: Props) => {
       <div
         style={{ height: `${height}px` ? height : "auto" }}
         className={
-          "flex justify-center group relative w-full overflow-hidden select-none"
+          "flex justify-center group relative w-full overflow-hidden select-none shadow-lg hover:scale-[101%] transition"
         }
       >
         {imgUrls &&
