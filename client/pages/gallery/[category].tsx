@@ -67,7 +67,7 @@ const GalleryPage = () => {
       <h1
         className={"block border-b border-zinc-500 mb-12 mx-12 px-2 text-3xl"}
       >
-        {category[0].toUpperCase() + category.substring(1)} Photos
+        {category[0].toUpperCase() + category.substring(1)}
       </h1>
 
       <Gallery
