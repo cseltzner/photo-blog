@@ -65,7 +65,7 @@ const Index = () => {
                   </p>
                   <h4
                     className={
-                      "font-serif text-xl sm:text-3xl mt-1 group-hover:underline"
+                      "font-serif text-xl sm:text-3xl group-hover:underline"
                     }
                   >
                     {image.title}
