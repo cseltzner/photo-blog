@@ -88,7 +88,7 @@ const SingleFavoritePage = () => {
         <h3 className={"text-xl mb-8 font-serif"}>
           {image.date_added && moment(image.date_added).format("MMMM DD YYYY")}
         </h3>
-        <div className={"flex gap-8 mb-4 flex-wrap justify-center"}>
+        <div className={"flex gap-8 mb-8 flex-wrap justify-center"}>
           {image.categories.map((category) => {
             return (
               <Link
@@ -107,10 +107,15 @@ const SingleFavoritePage = () => {
             );
           })}
         </div>
-        <img src={image.img_url} className={"mb-8"} />
-        <p className={"self-start text-xl mb-12 max-w-[50ch]"}>
-          {image.description}
-        </p>
+        <a href={image.img_url} target={"_blank"} rel="noreferrer">
+          <img
+            src={image.img_url}
+            className={
+              "mb-12 border border-zinc-400 shadow hover:shadow-xl transition hover:scale-[101%]"
+            }
+          />
+        </a>
+        <p className={"text-xl mb-12 max-w-[50ch] "}>{image.description}</p>
       </main>
     </>
   );
