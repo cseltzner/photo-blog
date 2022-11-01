@@ -33,13 +33,17 @@ const GalleryImage = ({ image, imageThumbnail, width }: Props) => {
       // Disable scrolling when full image is shown
       document.body.style.overflow = "hidden";
       // Set Esc key to minimize full image
-      window.addEventListener("keydown", () => {
-        onRemoveFullImage();
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Esc" || e.key === "Escape") {
+          onRemoveFullImage();
+        }
       });
     } else {
       document.body.style.overflow = "visible";
-      window.removeEventListener("keydown", () => {
-        onRemoveFullImage();
+      window.removeEventListener("keydown", (e) => {
+        if (e.key === "Esc" || e.key === "Escape") {
+          onRemoveFullImage();
+        }
       });
     }
   }, [fullImageOpen]);
@@ -75,7 +79,7 @@ const GalleryImage = ({ image, imageThumbnail, width }: Props) => {
             </div>
             {/* Close button */}
             <div
-              className="fixed top-12 right-12 cursor-pointer rounded-full p-2 text-white opacity-90 transition-all hover:bg-zinc-600"
+              className="fixed top-12 z-50 right-12 cursor-pointer rounded-full p-2 text-white opacity-90 transition-all hover:bg-zinc-600"
               onClick={() => {
                 onRemoveFullImage();
               }}
