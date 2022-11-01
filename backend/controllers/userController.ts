@@ -46,7 +46,7 @@ export const registerUser = async (
   try {
     // Check if user already exists
     const possibleUser = await pool.query(checkIfUserExistsQuery(username));
-    if (possibleUser.rows) {
+    if (possibleUser.rows[0]?.id) {
       return res.status(409).json({ message: "User already exists" });
     }
 
