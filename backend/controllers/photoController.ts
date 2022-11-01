@@ -23,6 +23,8 @@ cloudinary.config({
  * @access  Public
  *
  * @params  :photoId - Unique, length 10 alphanumeric Id
+ *
+ * @status  404 - No image found
  */
 
 export const getPhoto = async (req: express.Request, res: express.Response) => {
@@ -31,6 +33,12 @@ export const getPhoto = async (req: express.Request, res: express.Response) => {
   try {
     const response = await pool.query(getSinglePhotoQuery(photoId));
     const photo = response.rows[0];
+
+    if (!photo) {
+      return res
+        .status(404)
+        .json({ message: `No photo with ID ${photoId} found` });
+    }
 
     res.json(photo);
   } catch (e) {
