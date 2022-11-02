@@ -29,37 +29,49 @@ const SingleFavoritePage = () => {
       if (!photoId) return; // Without this the page will flash a 404 for a moment because router.query is not instant
 
       setLoading(true);
-      const res = await fetch(apiProxy.concat(`/photo/${photoId}`), {
-        method: "GET",
-      });
 
-      // If photo not found throw 404
-      if (res.status !== 200) {
-        setIs404(true);
+      try {
+        const res = await fetch(apiProxy.concat(`/photo/${photoId}`), {
+          method: "GET",
+        });
+
+        // If photo not found throw 404
+        if (res.status !== 200) {
+          setIs404(true);
+          setLoading(false);
+          return;
+        }
+
+        // If photo found
+        const photo = await res.json();
+        console.log(photo);
+
+        // If photo does not have a title or description throw 404
+        if (!photo?.title || !photo?.description) {
+          setIs404(true);
+          setLoading(false);
+          return;
+        }
+        setImage({
+          id: photo.id,
+          img_url: photo.img_url,
+          title: photo.title,
+          description: photo.description,
+          date_added: photo.date_added,
+          categories: photo.categories,
+        });
+        setIs404(false);
         setLoading(false);
-        return;
-      }
-
-      // If photo found
-      const photo = await res.json();
-      console.log(photo);
-
-      // If photo does not have a title or description throw 404
-      if (!photo?.title || !photo?.description) {
-        setIs404(true);
+      } catch (err) {
+        setAlert({
+          type: "error",
+          title: "error",
+          messages: [
+            "There was an error fetching the photo data. Please check your connection and try again",
+          ],
+        });
         setLoading(false);
-        return;
       }
-      setImage({
-        id: photo.id,
-        img_url: photo.img_url,
-        title: photo.title,
-        description: photo.description,
-        date_added: photo.date_added,
-        categories: photo.categories,
-      });
-      setIs404(false);
-      setLoading(false);
     };
     fetchPhoto();
   }, [photoId]);

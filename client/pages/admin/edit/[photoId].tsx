@@ -4,10 +4,11 @@ import { useAlertContext } from "../../../hooks/useAlertContext";
 import { apiProxy } from "../../../utils/apiProxy";
 import { categories } from "../../../resources/links";
 import Spinner from "../../../components/spinner/Spinner";
+import Alert from "../../../components/alert/Alert";
 
 const EditPhotoPage = () => {
   const router = useRouter();
-  const { setAlert } = useAlertContext();
+  const { alert, setAlert } = useAlertContext();
 
   const photoId = router.query.photoId;
 
@@ -151,43 +152,59 @@ const EditPhotoPage = () => {
 
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(apiProxy.concat(`/photo/${photoId}`), {
-        method: "GET",
-      });
+      try {
+        const res = await fetch(apiProxy.concat(`/photo/${photoId}`), {
+          method: "GET",
+        });
 
-      setLoading(false);
-      // If error
-      if (res.status !== 200) {
+        setLoading(false);
+        // If error
+        if (res.status !== 200) {
+          setAlert({
+            type: "error",
+            title: "error",
+            messages: [
+              "There was an error fetching the photo data. Please try again",
+            ],
+          });
+          router.back();
+          return;
+        }
+
+        // If success
+        const photo = await res.json();
+        setPhotoSrc(photo.img_url);
+        setTitle(photo.title);
+        setDescription(photo.description);
+        setIsFavorite(photo.favorite);
+        setIsFront(photo.front_page);
+        setTitleValidity(true);
+        setDescriptionValidity(true);
+        categories.forEach((category, index) => {
+          if (photo.categories.includes(category.toLowerCase())) {
+            setCategoriesChecked((prevState) => [...prevState, index]);
+          }
+        });
+      } catch (err) {
         setAlert({
           type: "error",
           title: "error",
           messages: [
-            "There was an error fetching the photo data. Please try again",
+            "Connection error. Please check your connection and try again",
           ],
         });
-        router.back();
-        return;
       }
-
-      // If success
-      const photo = await res.json();
-      setPhotoSrc(photo.img_url);
-      setTitle(photo.title);
-      setDescription(photo.description);
-      setIsFavorite(photo.favorite);
-      setIsFront(photo.front_page);
-      setTitleValidity(true);
-      setDescriptionValidity(true);
-      categories.forEach((category, index) => {
-        if (photo.categories.includes(category.toLowerCase())) {
-          setCategoriesChecked((prevState) => [...prevState, index]);
-        }
-      });
     };
+
     fetchData();
   }, [router.query.photoId]);
   return (
     <>
+      <Alert
+        type={alert?.type}
+        title={alert?.title}
+        messages={alert?.messages}
+      />
       <div className="container mx-auto select-none text-xl flex flex-col items-center pt-8 pb-24 text-center">
         <div>
           <img src={photoSrc} alt="Photograph to be edited" />

@@ -47,36 +47,49 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
   // This is a low priority for now though
   const onDelete = async () => {
     setDeleteLoading(true);
-    const res = await fetch(apiProxy.concat(`/photo/${imgId}`), {
-      method: "DELETE",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    });
+    try {
+      const res = await fetch(apiProxy.concat(`/photo/${imgId}`), {
+        method: "DELETE",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
 
-    // If delete fails
-    if (res.status !== 200) {
+      // If delete fails
+      if (res.status !== 200) {
+        setAlert({
+          type: "error",
+          title: "error",
+          messages: [
+            "An error occurred while deleting the photo. Please refresh and try again",
+          ],
+        });
+        setDeleteModalOpen(false);
+        setDeleteLoading(false);
+        return;
+      }
+
+      setAlert({
+        type: "success",
+        title: "error",
+        messages: ["Photo succesfully deleted!"],
+      });
+      setDeleteModalOpen(false);
+      setDeleteLoading(false);
+      setFullImageOpen(false);
+      router.reload();
+    } catch (err) {
       setAlert({
         type: "error",
         title: "error",
         messages: [
-          "An error occurred while deleting the photo. Please refresh and try again",
+          "There was an error fetching the photo data. Please try again",
         ],
       });
       setDeleteModalOpen(false);
       setDeleteLoading(false);
-      return;
+      setFullImageOpen(false);
     }
-
-    setAlert({
-      type: "success",
-      title: "error",
-      messages: ["Photo succesfully deleted!"],
-    });
-    setDeleteModalOpen(false);
-    setDeleteLoading(false);
-    setFullImageOpen(false);
-    router.reload();
   };
 
   // Document changes when full image is open
