@@ -48,7 +48,7 @@ router.post("/", auth, upload.single("image"), postPhoto);
 router.delete("/:photoId", auth, deletePhoto);
 
 /**
- * @route   POST /api/photo/:photoId
+ * @route   PUT /api/photo/:photoId
  * @access  Private - Authorization header
  * @desc    Update a photo's title, description, favorite status, front page status, or category array
  *          All parameters to update are optionally passed into the body of the request
