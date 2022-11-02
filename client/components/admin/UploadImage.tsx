@@ -257,6 +257,7 @@ const UploadImage = () => {
                       type="checkbox"
                       name={category}
                       id={category}
+                      checked={categoriesChecked.includes(index)}
                       className={"hidden"}
                       onChange={(e) => onCheckChange(e, index)}
                     />
