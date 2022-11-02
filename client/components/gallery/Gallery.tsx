@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import GalleryImage from "./GalleryImage";
 
 interface Props {
+  imgIds: string[];
   imgThumbnailUrls: string[];
   imgFullUrls: string[];
   imagesPerPage: number;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const Gallery = ({
+  imgIds,
   imgThumbnailUrls,
   imgFullUrls,
   imagesPerPage,
@@ -85,6 +87,7 @@ const Gallery = ({
           return (
             <GalleryImage
               key={img}
+              imgId={imgIds[index]}
               imageThumbnail={imgThumbnailUrls[index]}
               image={imgFullUrls[index]}
               width={imageWidth}

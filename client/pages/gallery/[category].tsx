@@ -11,6 +11,7 @@ const GalleryPage = () => {
   const imageWidth = 750;
   const imagesPerPage = 5;
 
+  const [imgIds, setImageIds] = useState<Array<string>>([]);
   const [imgThumbnails, setImgThumbnails] = useState<Array<string>>([]);
   const [imgFull, setImgFull] = useState<Array<string>>([]);
 
@@ -33,6 +34,10 @@ const GalleryPage = () => {
           }
         );
         const photos = await res.json();
+
+        // Get all image id's
+        const ids = photos.map((photo) => photo.id);
+        setImageIds(ids);
 
         // Get all imageThumbnail urls
         const thumbnailUrls = photos.map((photo) =>
@@ -71,6 +76,7 @@ const GalleryPage = () => {
       </h1>
 
       <Gallery
+        imgIds={imgIds}
         imgThumbnailUrls={imgThumbnails}
         imgFullUrls={imgFull}
         imagesPerPage={imagesPerPage}
