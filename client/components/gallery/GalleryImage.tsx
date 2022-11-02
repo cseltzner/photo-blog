@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import DeleteModal from "../modal/DeleteModal";
+import { useAlertContext } from "../../hooks/useAlertContext";
+import { apiProxy } from "../../utils/apiProxy";
 
 interface Props {
   imgId: string;
@@ -12,6 +15,7 @@ interface Props {
 const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
   const router = useRouter();
   const auth = useAuthContext();
+  const { setAlert } = useAlertContext();
 
   const thumbnailStyle = {
     width,
@@ -24,6 +28,12 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
   };
 
   const [fullImageOpen, setFullImageOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const onDeleteModalOpen = () => {
+    setDeleteModalOpen(true);
+  };
 
   const onClickThumbnail = () => {
     setFullImageOpen(true);
@@ -31,6 +41,42 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
 
   const onRemoveFullImage = () => {
     setFullImageOpen(false);
+  };
+
+  // I should refactor this to be passed in as a prop.
+  // This is a low priority for now though
+  const onDelete = async () => {
+    setDeleteLoading(true);
+    const res = await fetch(apiProxy.concat(`/photo/${imgId}`), {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+
+    // If delete fails
+    if (res.status !== 200) {
+      setAlert({
+        type: "error",
+        title: "error",
+        messages: [
+          "An error occurred while deleting the photo. Please refresh and try again",
+        ],
+      });
+      setDeleteModalOpen(false);
+      setDeleteLoading(false);
+      return;
+    }
+
+    setAlert({
+      type: "success",
+      title: "error",
+      messages: ["Photo succesfully deleted!"],
+    });
+    setDeleteModalOpen(false);
+    setDeleteLoading(false);
+    setFullImageOpen(false);
+    router.reload();
   };
 
   // Document changes when full image is open
@@ -81,13 +127,13 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
             {/* Backdrop */}
             <div
               className={
-                "fixed inset-0 h-screen w-screen bg-zinc-900 opacity-90 z-40"
+                "fixed inset-0 h-screen w-screen bg-zinc-900 opacity-90 z-20"
               }
               onClick={() => onRemoveFullImage()}
             ></div>
             {/* Image positioned in middle of screen */}
             <div
-              className={`min-w-[85vw] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-zinc-800 shadow-2xl z-50`}
+              className={`min-w-[85vw] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-zinc-800 shadow-2xl z-30`}
             >
               <img src={image} alt="full" />
               {/* Admin controls */}
@@ -122,6 +168,7 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
                     className={
                       "text-red-400 opacity-90 p-2 m-2 rounded-full hover:bg-red-900"
                     }
+                    onClick={() => onDeleteModalOpen()}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +190,7 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
             </div>
             {/* Close button */}
             <div
-              className="fixed top-12 z-50 right-12 cursor-pointer rounded-full p-2 text-white opacity-90 transition-all hover:bg-zinc-600"
+              className="fixed top-12 z-30 right-12 cursor-pointer rounded-full p-2 text-white opacity-90 transition-all hover:bg-zinc-600"
               onClick={() => {
                 onRemoveFullImage();
               }}
@@ -164,6 +211,14 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
               </svg>
             </div>
           </div>
+          <DeleteModal
+            onConfirm={() => onDelete()}
+            onCancel={() => setDeleteModalOpen(false)}
+            isOpen={deleteModalOpen}
+            loading={deleteLoading}
+            title={"Delete photo?"}
+            body={"Are you sure you want to delete this photo?"}
+          />
         </>
       )}
     </>
