@@ -88,7 +88,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             <a onClick={() => onCloseHandler()}> Chase&apos;s favorites</a>
           </Link>
         </div>
-        {/* About */}
+        {/* Index */}
         <div
           className={
             "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
