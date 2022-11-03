@@ -88,7 +88,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             <a onClick={() => onCloseHandler()}> Chase&apos;s favorites</a>
           </Link>
         </div>
-        {/* Index */}
+        {/* About */}
         <div
           className={
             "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
@@ -97,8 +97,18 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
           <Link href={"/about"} passHref={true}>
             <a onClick={() => onCloseHandler()}>About</a>
           </Link>
-          {/* Admin tab */}
         </div>
+        {/* Contact */}
+        <div
+          className={
+            "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
+          }
+        >
+          <Link href={"/contact"} passHref={true}>
+            <a onClick={() => onCloseHandler()}>Contact</a>
+          </Link>
+        </div>
+        z {/* Admin tab */}
         {auth.isLoggedIn && (
           <NavMenuDropdown
             links={navAdminLinks}
