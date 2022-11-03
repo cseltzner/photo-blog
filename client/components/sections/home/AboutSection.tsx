@@ -13,21 +13,28 @@ const AboutSection = () => {
       }
     >
       <h3 className={"text-4xl lg:text-5xl mb-8 font-serif"}>Chase Seltzner</h3>
-      <p className={"mb-6 max-w-[70ch] mx-auto"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi harum
-        ipsa maiores mollitia pariatur perferendis quo rem voluptates
-        voluptatibus. Aliquam assumenda beatae consequatur deleniti, distinctio
-        dolor ducimus eos exercitationem itaque minima neque nisi odit provident
-        quas ratione rem totam voluptatem.
-      </p>
-      <p className={"mb-6 max-w-[70ch] mx-auto"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-        corporis excepturi harum minus neque nobis officiis reiciendis
-        similique! A ab alias aliquid atque cupiditate excepturi non odit porro
-        voluptas voluptatum.
-      </p>
+      <div className={"bg-black bg-opacity-20 w-max mx-auto py-1 shadow-2xl"}>
+        <p className={"mb-6 max-w-[70ch] mx-auto"}>
+          I&apos;m Chase, an aspiring web developer and amateur photographer. I
+          custom built this site using some of the most exciting web frameworks
+          today, including NextJS, TailwindCSS, and Express (okay, that one is
+          not very new). All of the styling and animations on this site are
+          custom-made by me, and was very enjoyable to design.
+        </p>
+        <p className={"mb-6 max-w-[70ch] mx-auto"}>
+          I primarily photograph nature and wildlife with my FujiFilm camera and
+          a lovely 55-200mm lens. Photography is the perfect excuse to step
+          outside and enjoy the fresh air. The vast majority of photos on this
+          site are straight out of camera JPEGs with very minor tweaks to
+          exposure and cropping.
+        </p>
+      </div>
       <Link href={"/about"} passHref={true}>
-        <a className={"text-2xl underline italic hover:text-blue-300"}>
+        <a
+          className={
+            "text-2xl underline inline-block mt-2 italic hover:text-blue-300"
+          }
+        >
           Read more about me
         </a>
       </Link>
