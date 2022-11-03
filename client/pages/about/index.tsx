@@ -6,7 +6,9 @@ const AboutPage = () => {
   return (
     <>
       <main
-        className={"container mx-auto mt-4 mb-24 flex flex-col items-center"}
+        className={
+          "container mx-auto px-1 mt-4 mb-24 flex flex-col items-center"
+        }
       >
         {/* Intro */}
         <h1 className={"text-3xl lg:text-4xl font-serif"}>About Chase</h1>
