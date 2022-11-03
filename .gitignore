@@ -2,6 +2,7 @@ node_modules/
 notes.md
 .idea/
 .env
+dev.env
 backend/build/**/*
 /backend/db/init.sql
 /postgres-data/

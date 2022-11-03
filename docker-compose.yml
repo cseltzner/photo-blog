@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-#  client:
-#    build:
-#      context: ./client
-#      dockerfile: dev.Dockerfile
-#    depends_on:
-#      - backend
-#    ports:
-#      - "4001:3000"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "4001:3000"
   backend:
     build:
       context: ./backend
@@ -26,6 +26,6 @@ services:
       - "5432:5432"
     volumes:
       - ./backend/db/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./postgres-data:/var/lib/postgresql/data  # Named volume for data storage
+      - /postgres-data:/var/lib/postgresql/data  # Named volume for data storage
 volumes:
   dbdata:
