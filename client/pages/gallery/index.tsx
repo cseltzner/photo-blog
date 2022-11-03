@@ -1,10 +1,9 @@
 import React from "react";
-import { useRouter } from "next/router";
 
-const Index = () => {
-  const router = useRouter();
-  router.push("/gallery/all");
+// This page will be redirected to /gallery/all
+// See next.config.js
+const GalleryIndex = () => {
   return <></>;
 };
 
-export default Index;
+export default GalleryIndex;
