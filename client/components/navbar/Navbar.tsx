@@ -110,7 +110,7 @@ const Navbar = () => {
       </Link>
 
       {/*  Hamburger icon when smaller than lg screens  */}
-      <div
+      <button
         className={
           "group lg:hidden relative cursor-pointer p-4 transition-all rounded-full hover:bg-blue-50 "
         }
@@ -118,7 +118,7 @@ const Navbar = () => {
       >
         <div
           className={
-            "absolute left-0 transition-all duration-300 ease-in-out -translate-x-[200%] opacity-0 group-hover:-translate-x-[120%] group-hover:opacity-90"
+            "absolute left-0 outline-none transition-all duration-300 ease-in-out -translate-x-[200%] opacity-0 group-hover:-translate-x-[120%] group-hover:opacity-90"
           }
         >
           Menu
@@ -137,7 +137,7 @@ const Navbar = () => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-      </div>
+      </button>
       {/*  Navigation menu on small screens  */}
       <NavMenu
         onCloseHandler={() => onMenuCloseButtonClick()}
