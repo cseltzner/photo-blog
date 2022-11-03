@@ -110,7 +110,7 @@ const Navbar = () => {
       </Link>
 
       {/*  Hamburger icon when smaller than lg screens  */}
-      <button
+      <div
         className={
           "group lg:hidden relative cursor-pointer p-4 transition-all rounded-full hover:bg-blue-50 "
         }
@@ -137,7 +137,7 @@ const Navbar = () => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-      </button>
+      </div>
       {/*  Navigation menu on small screens  */}
       <NavMenu
         onCloseHandler={() => onMenuCloseButtonClick()}
