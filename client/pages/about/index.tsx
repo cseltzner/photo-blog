@@ -1,6 +1,7 @@
 import React from "react";
 import mojoImage from "../../assets/contact/mojo.jpg";
 import butterflyImage from "../../assets/contact/butterfly.jpg";
+import Link from "next/link";
 
 const AboutPage = () => {
   return (
@@ -12,13 +13,14 @@ const AboutPage = () => {
       >
         {/* Intro */}
         <h1 className={"text-3xl lg:text-4xl font-serif"}>About Chase</h1>
-        <p className={"text-lg mt-4 max-w-[60ch]"}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
-          deserunt dicta distinctio ea, eaque laboriosam modi nobis quae quam
-          quisquam! Assumenda illo perspiciatis porro quaerat reiciendis
-          repellat repellendus, sunt temporibus totam ut veniam vero vitae
-          voluptate. Assumenda atque aut fuga itaque necessitatibus neque
-          nesciunt non reprehenderit suscipit vero. Harum, iusto!
+        <p className={"text-lg lg:text-xl mt-4 lg:mt-6 max-w-[60ch]"}>
+          Hi, I&apos;m Chase Seltzner, an aspiring web developer and amateur
+          photographer. I received my Bachelor&apos;s of Science in Biology and
+          Economics at the University of Wisconsin, Madison, and my love of
+          learning and endless amount of new things eventually led me into the
+          field of web development. My love of nature led me to picking up my
+          first real camera in early 2022, and I have not stopped snapping
+          since.
         </p>
 
         {/* Image section */}
@@ -51,22 +53,44 @@ const AboutPage = () => {
 
         {/* For the photographers */}
         <h2 className={"mt-24 font-serif text-3xl"}>For the photographers</h2>
-        <p className={"mt-4 max-w-[60ch] text-lg"}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore odio
-          quidem reiciendis! At corporis doloremque dolorum eaque eveniet magni
-          maiores molestiae nulla provident quaerat reprehenderit tempora
-          temporibus tenetur vel voluptates, voluptatibus voluptatum? Alias
-          aliquam hic natus nesciunt quidem voluptate voluptatibus?
+        <p className={"mt-4 lg:mt-6 max-w-[60ch] text-lg lg:text-xl"}>
+          All of the photographs on my site were taken with my one and only
+          FujiFilm X-T30 II. Most the images were taken using a Fuji 55-200mm,
+          18-55mm, or the lovely 27mm. I shoot almost exclusively in JPEG with
+          the Astia film simulation, and perform very minor edits to exposure
+          and contrast in Lightroom or Darktable. As a newer photographer I
+          prefer the experience of getting the shot right in camera and
+          minimizing the amount of post-processing needed, which is why FujiFilm
+          is the perfect fit for me.
         </p>
         {/* For the developers */}
         <h2 className={"mt-24 font-serif text-3xl"}>For the developers</h2>
-        <p className={"mt-4 max-w-[60ch] text-lg"}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum,
-          itaque neque! Aperiam, ea incidunt ipsam laboriosam necessitatibus sed
-          tempora voluptate.Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Earum, itaque neque! Aperiam, ea incidunt ipsam laboriosam
-          necessitatibus sed tempora voluptate.
+        <p className={"mt-4 lg:mt-6 max-w-[60ch] text-lg lg:text-xl"}>
+          I wanted to create this site to get more experience with the fullstack
+          development process, and the related technologies. My goal for this
+          site was to get more experience with the Postgres, Express,
+          React/NextJS, and TailwindCSS stack. I am also using Cloudinary as a
+          CDN for my uploaded photos. Beyond those frameworks, my philosophy
+          with this site was to use as few non-security related libraries as
+          possible, which means that all of the styling and animation on this
+          site is custom, as well as the basic server and client side logic.
+          <br />
+          <br />
+          This site&apos;s design was inspired from various photographer&apos;s
+          sites as well as some very clean WordPress sites, but ultimately all
+          styling was custom created by me in TailwindCSS. I want to credit
+          Heroicons for their wonderful free icons, and all of the animals who
+          stood still while I was taking photos of them.
         </p>
+        <Link href={"/contact"} passHref={true}>
+          <a
+            className={
+              "inline-block mt-8 lg:mt-16 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
+            }
+          >
+            How to contact me
+          </a>
+        </Link>
       </main>
     </>
   );

@@ -10,7 +10,7 @@ import { transformLink } from "../utils/transformLink";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
-  const { alert, setAlert, removeAlert } = useAlertContext();
+  const { alert, setAlert } = useAlertContext();
 
   const [carouselImages, setCarouselImages] = useState<Array<string>>([]);
 
