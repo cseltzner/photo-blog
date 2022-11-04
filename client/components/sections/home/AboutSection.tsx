@@ -16,10 +16,10 @@ const AboutSection = () => {
       <div className={"bg-black bg-opacity-20 w-max mx-auto py-1 shadow-2xl"}>
         <p className={"mb-6 max-w-[70ch] mx-auto"}>
           I&apos;m Chase, an aspiring web developer and amateur photographer. I
-          custom built this site using some of the most exciting web frameworks
-          today, including NextJS, TailwindCSS, and Express (okay, that one is
-          not very new). All of the styling and animations on this site are
-          custom-made by me, and was very enjoyable to design.
+          custom built this site using some of the most exciting new web
+          frameworks today, including NextJS, TailwindCSS, and Express (okay,
+          that one is not very new). All of the styling and animations on this
+          site are custom-made by me with love.
         </p>
         <p className={"mb-6 max-w-[70ch] mx-auto"}>
           I primarily photograph nature and wildlife with my FujiFilm camera and

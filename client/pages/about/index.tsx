@@ -17,10 +17,9 @@ const AboutPage = () => {
           Hi, I&apos;m Chase Seltzner, an aspiring web developer and amateur
           photographer. I received my Bachelor&apos;s of Science in Biology and
           Economics at the University of Wisconsin, Madison, and my love of
-          learning and endless amount of new things eventually led me into the
-          field of web development. My love of nature led me to picking up my
-          first real camera in early 2022, and I have not stopped snapping
-          since.
+          learning an endless amount of new ideas eventually led me into the
+          field of web development. My love of nature led me to pick up my first
+          real camera in early 2022, and I have not stopped snapping since.
         </p>
 
         {/* Image section */}
@@ -78,7 +77,7 @@ const AboutPage = () => {
           <br />
           This site&apos;s design was inspired from various photographer&apos;s
           sites as well as some very clean WordPress sites, but ultimately all
-          styling was custom created by me in TailwindCSS. I want to credit
+          styling was custom created by me with TailwindCSS. I want to credit
           Heroicons for their wonderful free icons, and all of the animals who
           stood still while I was taking photos of them.
         </p>
