@@ -12,7 +12,10 @@ const AlertSuccess = ({ title, messages, onClose }: Props) => {
       <div className="relative mx-auto text-lg flex flex-col rounded-lg bg-green-50 p-4 shadow-lg opacity-[.95]">
         <div className="absolute top-0 bottom-0 left-0 w-1 rounded-tl rounded-bl bg-green-400"></div>
         <div className="flex items-start gap-6">
-          <div className="mt-[2px] w-4 text-green-400" id="alert-close">
+          <div
+            className="mt-[2px] w-4 text-green-400 hidden sm:block"
+            id="alert-close"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
