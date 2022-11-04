@@ -14,7 +14,7 @@ const NavMenuDropdown = ({ children, links, onClose }: Props) => {
       <div
         className={`${
           isActive && "my-4"
-        } text-4xl text-center relative group cursor-pointer pt-2 text-white`}
+        } text-3xl md:text-4xl text-center relative group cursor-pointer pt-2 text-white`}
       >
         <div
           className={`${isActive && "text-blue-500"}`}
@@ -31,7 +31,7 @@ const NavMenuDropdown = ({ children, links, onClose }: Props) => {
             return (
               <li
                 key={index}
-                className={"py-2 hover:text-zinc-400"}
+                className={"py-1 hover:text-zinc-400"}
                 onClick={() => onClose()}
               >
                 <Link href={link.href}>{link.name}</Link>

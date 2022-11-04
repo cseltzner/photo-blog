@@ -190,7 +190,7 @@ const UploadImage = () => {
 
   return (
     <>
-      <div className="container mx-auto select-none text-xl flex flex-col items-center pt-8 pb-24 text-center">
+      <div className="container mx-auto px-4 select-none text-xl flex flex-col items-center pt-8 pb-24 text-center">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,7 @@ const UploadImage = () => {
         <form className="mt-12" onSubmit={(e) => onSubmit(e)}>
           <label
             htmlFor="file-upload"
-            className="mb-8 flex flex-col items-center mx-auto inline-block cursor-pointer px-12 p-12 border border-zinc-800 rounded shadow-sm hover:bg-zinc-50 hover:shadow active:shadow-sm"
+            className="mb-8 flex flex-col items-center mx-auto inline-block cursor-pointer py-8 md:py-12 border border-zinc-800 rounded shadow-sm hover:bg-zinc-50 hover:shadow active:shadow-sm"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +248,7 @@ const UploadImage = () => {
           {/* Categories */}
           <div>
             <h3 className={"text-start text-2xl"}>Categories</h3>
-            <div className={"flex gap-4 mt-4"}>
+            <div className={"flex flex-wrap justify-center gap-4 mt-4"}>
               {categories.map((category, index) => {
                 return (
                   <>
@@ -277,7 +277,7 @@ const UploadImage = () => {
             </div>
           </div>
           {/* Favorite and Front Page checkboxes */}
-          <div className="flex justify-around mt-16">
+          <div className="flex justify-around mt-6 md:mt-16">
             {/* Favorite button */}
             <input
               type="checkbox"
@@ -342,7 +342,7 @@ const UploadImage = () => {
             </label>
           </div>
           {/* Title and description */}
-          <div className={"mt-12"}>
+          <div className={"mt-6 md:mt-12"}>
             <div className={"flex flex-col items-start"}>
               <label htmlFor="title" className="self-start text-2xl">
                 Title
@@ -356,7 +356,7 @@ const UploadImage = () => {
               />
               <small
                 className={`${
-                  titleValidity ? "opacity-0" : "opacity-1"
+                  titleValidity ? "opacity-0 h-0" : "opacity-1 h-full"
                 } mt-1 ml-0.5 inline-block text-lg text-red-600 transition`}
               >
                 Favorite photos must have a title
@@ -385,7 +385,7 @@ const UploadImage = () => {
           <button
             type="submit"
             className={
-              "block relative w-full transition py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
+              "block relative w-full transition mt-8 py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
             }
             disabled={
               loading ||

@@ -152,7 +152,7 @@ const LoginComponent = () => {
             <a className="text-blue-600 hover:opacity-90"> return to home</a>
           </Link>
         </p>
-        <form className="mt-12" onSubmit={(e) => onSubmit(e)}>
+        <form className="mt-12 flex flex-col" onSubmit={(e) => onSubmit(e)}>
           <input
             type="text"
             placeholder="Username"
@@ -161,7 +161,7 @@ const LoginComponent = () => {
             onChange={(e) => {
               onInputChange(e);
             }}
-            className="block rounded-md rounded-b-none border border-gray-400 py-3 pl-4 pr-64 placeholder-gray-500"
+            className="block rounded-md rounded-b-none border border-gray-400 py-3  px-4 placeholder-gray-500"
           />
           <input
             type="password"
@@ -171,9 +171,9 @@ const LoginComponent = () => {
             onChange={(e) => {
               onInputChange(e);
             }}
-            className="block rounded-md rounded-t-none border border-t-0 border-gray-400 py-3 pl-4 pr-64 placeholder-gray-500"
+            className="block rounded-md rounded-t-none border border-t-0 border-gray-400 py-3 px-4  placeholder-gray-500"
           />
-          <div className="mt-8 flex flex-col justify-between md:flex-row">
+          <div className="mt-8 flex flex-col md:gap-24 items-center justify-between md:flex-row">
             <div className="text-md flex gap-2 text-gray-800">
               <input
                 type="checkbox"

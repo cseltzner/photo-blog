@@ -8,7 +8,7 @@ const AboutPage = () => {
     <>
       <main
         className={
-          "container mx-auto px-1 mt-4 mb-24 flex flex-col items-center"
+          "container mx-auto px-4 mt-4 mb-24 flex flex-col items-center"
         }
       >
         {/* Intro */}

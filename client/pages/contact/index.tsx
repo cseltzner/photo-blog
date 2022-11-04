@@ -5,7 +5,7 @@ const Contact = () => {
   const emailBase64 = "Y2hhc2Uuc2VsdHoyMUBnbWFpbC5jb20=";
 
   return (
-    <main className={"max-w-[800px] mx-auto pb-24"}>
+    <main className={"max-w-[800px] mx-auto pb-24 px-4"}>
       <h1 className={"text-4xl font-serif border-b"}>Contact me</h1>
       <address className={"text-xl mt-12"}>
         {/* Email */}

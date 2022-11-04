@@ -12,7 +12,7 @@ interface Props {
 
 const TriplePhotoGallery = ({ images }: Props) => {
   return (
-    <div className={"flex gap-8 text-center px-2"}>
+    <div className={"flex gap-4 sm:gap-8 text-center px-2"}>
       {/* Item 1 */}
       <a href={`/favorites/${images[0] && images[0].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">

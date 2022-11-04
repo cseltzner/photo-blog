@@ -13,7 +13,7 @@ const AboutSection = () => {
       }
     >
       <h3 className={"text-4xl lg:text-5xl mb-8 font-serif"}>Chase Seltzner</h3>
-      <div className={"bg-black bg-opacity-20 w-max mx-auto py-1 shadow-2xl"}>
+      <div className={"bg-black bg-opacity-20 mx-auto py-1 shadow-2xl"}>
         <p className={"mb-6 max-w-[70ch] mx-auto"}>
           I&apos;m Chase, an aspiring web developer and amateur photographer. I
           custom built this site using some of the most exciting new web

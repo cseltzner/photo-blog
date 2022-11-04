@@ -92,7 +92,7 @@ const Navbar = () => {
   return (
     <nav
       className={
-        "container mx-auto text-[1.35rem] lg:text-2xl w-full py-12 flex flex-row justify-between items-center"
+        "container mx-auto text-[1.35rem] lg:text-2xl w-full py-12 px-4 flex flex-row justify-between items-center"
       }
       id="top-nav"
     >

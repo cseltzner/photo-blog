@@ -64,7 +64,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         {/* Home */}
         <div
           className={
-            "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
+            "text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400"
           }
         >
           <Link href={"/"} passHref={true}>
@@ -81,7 +81,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         {/* Chase's favorites */}
         <div
           className={
-            "text-white py-4 text-4xl transition-all hover:text-zinc-400"
+            "text-white py-2 text-3xl sm:text-4xl transition-all hover:text-zinc-400"
           }
         >
           <Link href={"/favorites"} passHref={true}>
@@ -91,7 +91,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         {/* About */}
         <div
           className={
-            "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
+            "text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400"
           }
         >
           <Link href={"/about"} passHref={true}>
@@ -101,7 +101,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         {/* Contact */}
         <div
           className={
-            "text-white py-4 text-4xl  transition-all hover:text-zinc-400"
+            "text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400"
           }
         >
           <Link href={"/contact"} passHref={true}>
@@ -119,7 +119,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         )}
         {/* Log out */}
         {auth.isLoggedIn && (
-          <div className="text-white py-4 text-4xl  transition-all hover:text-zinc-400">
+          <div className="text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400">
             <button
               onClick={() => {
                 onLogout();
