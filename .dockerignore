@@ -3,3 +3,4 @@ client/node_modules/
 backend/build/
 postgres-data/
 client/.next/
+client/out/
