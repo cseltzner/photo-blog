@@ -4,7 +4,7 @@ import Head from "next/head";
 const Metadata = () => {
   return (
     <Head>
-      <title>Create Next App</title>
+      <title>Seltzport</title>
       <meta name="author" content="Chase Seltzner" />
       <meta name="description" content="Chase's personal photography blog" />
       <meta
