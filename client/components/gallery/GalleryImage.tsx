@@ -148,7 +148,7 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
             <div
               className={`min-w-[85vw] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-zinc-800 shadow-2xl z-30`}
             >
-              <img src={image} alt="full" />
+              <img src={image} alt="full" loading={"lazy"} />
               {/* Admin controls */}
               {auth.isLoggedIn && (
                 <div className={"flex justify-around"}>
