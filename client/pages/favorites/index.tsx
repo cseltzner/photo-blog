@@ -49,6 +49,9 @@ const Index = () => {
         messages={alert?.messages}
       />
       {loading && <Spinner size={12} />}
+      <h1 className={"font-serif border-b mb-8 text-3xl"}>
+        Chase&apos;s Favorites
+      </h1>
       <ul
         className={
           "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
@@ -59,7 +62,7 @@ const Index = () => {
             <li key={image.id}>
               <a href={`/favorites/${image.id}`} className={"group"}>
                 <div className="flex flex-col items-center cursor-pointer">
-                  <img src={image.img_url} alt="Favorite" />
+                  <img src={image.img_url} alt="Favorite" loading={"lazy"} />
                   <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
                     {moment(image.date_added).format("MMMM DD YYYY")}
                   </p>
