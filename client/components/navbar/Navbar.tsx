@@ -61,6 +61,15 @@ const Navbar = () => {
     const checkAuthorized = async () => {
       auth.setLoading(true);
       const token = localStorage.getItem("token");
+
+      // If user has a demo token, act like they are validated cilent-side
+      if (token === "Demo token") {
+        auth.setIsLoggedIn(true);
+        auth.setLoading(false);
+        return;
+      }
+
+      // Check if user has a real auth token
       if (token) {
         const res = await fetch(apiProxy.concat("/user"), {
           method: "GET",

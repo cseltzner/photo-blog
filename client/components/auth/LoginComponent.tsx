@@ -20,6 +20,21 @@ const LoginComponent = () => {
     setAuthInput({ ...authInput, [e.target.name]: e.target.value });
   };
 
+  // Sets fake login token
+  const onDemoAdminClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    localStorage.setItem("token", "Demo token");
+    auth.setIsLoggedIn(true);
+    router.push("/");
+    setAlert({
+      type: "success",
+      title: "Demo login successful",
+      messages: [
+        "You are now signed in as a demo user. You may view all of the admin components but will be unable to add, edit, or delete photos or users",
+      ],
+    });
+  };
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -183,12 +198,17 @@ const LoginComponent = () => {
               />
               <label htmlFor="remember">Remember me</label>
             </div>
-            <a
-              href="#"
+            <button
               className="mt-4 text-left text-blue-600 md:mt-0 hover:opacity-90"
+              onClick={(e) => {
+                onDemoAdminClicked(e);
+              }}
+              title={
+                "Sign in as a demo user. You may view all of the admin components but will be unable to add, edit, or delete photos"
+              }
             >
-              Forgot your password?
-            </a>
+              Sign in as demo admin
+            </button>
           </div>
           <input
             type="submit"
