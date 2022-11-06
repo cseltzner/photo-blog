@@ -10,8 +10,4 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:1.23 AS server
-
-COPY --from=builder ./app/out /usr/share/nginx/html
-
-COPY ./etc/nginx.conf /etc/nginx/conf.d/default.conf
+CMD ["npm", "run", "start"]
