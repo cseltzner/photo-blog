@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import mojoImage from "../../assets/contact/mojo.jpg";
 import butterflyImage from "../../assets/contact/butterfly.jpg";
 import Link from "next/link";
 
 const AboutPage = () => {
+  // Update title
+  useEffect(() => {
+    document.title = "About | Seltzport";
+  }, []);
+
   return (
     <>
       <main

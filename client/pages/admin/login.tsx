@@ -10,6 +10,11 @@ const Login = () => {
   const auth = useAuthContext();
   const router = useRouter();
 
+  // Update title
+  useEffect(() => {
+    document.title = "Log in | Seltzport";
+  }, []);
+
   // Redirect user if already logged in
   useEffect(() => {
     if (!auth.loading && auth.isLoggedIn) {

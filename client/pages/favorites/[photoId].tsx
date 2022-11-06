@@ -24,6 +24,11 @@ const SingleFavoritePage = () => {
     date_added: "",
   });
 
+  // Update title
+  useEffect(() => {
+    document.title = `${image.title} | Seltzport`;
+  }, []);
+
   useEffect(() => {
     const fetchPhoto = async () => {
       if (!photoId) return; // Without this the page will flash a 404 for a moment because router.query is not instant

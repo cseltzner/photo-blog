@@ -133,6 +133,11 @@ const EditPhotoPage = () => {
     }
   };
 
+  // Update title
+  useEffect(() => {
+    document.title = "Update photo | Seltzport";
+  }, []);
+
   // Check for authentication
   useEffect(() => {
     if (!localStorage.getItem("token")) {

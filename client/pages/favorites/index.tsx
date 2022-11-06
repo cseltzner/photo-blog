@@ -11,6 +11,11 @@ const Index = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Update title
+  useEffect(() => {
+    document.title = "Chase's favorites | Seltzport";
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);

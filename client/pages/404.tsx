@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import frogPhoto from "../assets/404/frog-compressed.jpg";
 import Link from "next/link";
 
 const Custom404 = () => {
+  // Update title
+  useEffect(() => {
+    document.title = "Page not found | Seltzport";
+  }, []);
+
   return (
     <div className={"flex items-center flex-col gap-4 px-8 py-8 text-4xl"}>
       <h1>Oops!</h1>

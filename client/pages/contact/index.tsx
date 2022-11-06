@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Contact = () => {
   // Email encrypted with base64 to avoid crawlers spamming me (hopefully?)
   const emailBase64 = "Y2hhc2Uuc2VsdHoyMUBnbWFpbC5jb20=";
+
+  // Update title
+  useEffect(() => {
+    document.title = "Contact | Seltzport";
+  }, []);
 
   return (
     <main className={"max-w-[800px] mx-auto pb-24 px-4"}>

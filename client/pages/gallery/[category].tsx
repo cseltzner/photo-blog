@@ -23,6 +23,13 @@ const GalleryPage = () => {
 
   const { alert, setAlert } = useAlertContext();
 
+  // Update title
+  useEffect(() => {
+    document.title = `${
+      category.charAt(0).toUpperCase() + category.substring(1)
+    } | Seltzport`;
+  }, [category]);
+
   // Load gallery urls from database
   useEffect(() => {
     const fetchData = async () => {
