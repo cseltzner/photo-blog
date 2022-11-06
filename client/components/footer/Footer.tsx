@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { navGalleryLinks } from "../../resources/links";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Footer = () => {
+  const auth = useAuthContext();
+
   return (
     <footer className={"bg-zinc-900 text-opacity-90 text-white relative"}>
       <div
@@ -20,7 +23,10 @@ const Footer = () => {
           <Link href={"/about"} passHref={true}>
             <a className={"hover:text-blue-300"}>About</a>
           </Link>
-          <Link href={"/admin/login"} passHref={true}>
+          <Link
+            href={`${auth.isLoggedIn ? "/admin/upload" : "/admin/login"}`}
+            passHref={true}
+          >
             <a className={"hover:text-blue-300"}>Admin</a>
           </Link>
         </div>
