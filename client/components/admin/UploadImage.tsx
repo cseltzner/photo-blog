@@ -265,7 +265,7 @@ const UploadImage = () => {
                       htmlFor={category}
                       className={`${
                         categoriesChecked.includes(index)
-                          ? "bg-blue-200 border-blue-300 hover:bg-blue-100"
+                          ? "bg-blue-300 border-blue-300 hover:bg-blue-200"
                           : "hover:bg-zinc-100 border-zinc-400"
                       } text-base border  rounded-full px-4 py-2 transition`}
                     >
@@ -289,8 +289,8 @@ const UploadImage = () => {
               htmlFor={"Favorite"}
               className={`${
                 isFavorite
-                  ? "bg-blue-100 hover:bg-blue-50"
-                  : "hover:bg-zinc-100"
+                  ? "bg-blue-300 hover:bg-blue-200"
+                  : "hover:bg-zinc-200"
               } flex flex-col items-center rounded-full transition p-7`}
             >
               <svg
@@ -321,7 +321,7 @@ const UploadImage = () => {
             <label
               htmlFor={"Front"}
               className={`${
-                isFront ? "bg-blue-100 hover:bg-blue-50" : "hover:bg-zinc-100"
+                isFront ? "bg-blue-300 hover:bg-blue-200" : "hover:bg-zinc-200"
               } flex flex-col items-center rounded-full transition p-7`}
             >
               <svg
