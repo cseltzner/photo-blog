@@ -9,8 +9,9 @@ import {
 import auth from "../middleware/auth";
 
 // Multer configuration
+const maxSize = 10 * 1024 * 1024; // 10mb
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+const upload = multer({ storage, limits: { files: 1, fileSize: maxSize } });
 
 const router = express.Router();
 
