@@ -44,7 +44,7 @@ export default function Home() {
 
         const imageUrls = images.map((image) => {
           // Resize and return image urls
-          return transformLink(image.img_url, 1366, 768);
+          return transformLink(image.img_url, 1280, 720);
         });
 
         setCarouselImages(imageUrls);

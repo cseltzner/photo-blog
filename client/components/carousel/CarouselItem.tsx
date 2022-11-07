@@ -36,7 +36,7 @@ const CarouselItem = ({
         undefined
       }
     >
-      <img src={imageUrl} alt="Photograph" loading={"lazy"} />
+      <img src={imageUrl} alt="Photograph" />
     </div>
   );
 };
