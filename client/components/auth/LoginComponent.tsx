@@ -21,7 +21,7 @@ const LoginComponent = () => {
   };
 
   // Sets fake login token
-  const onDemoAdminClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onDemoAdminClicked = (e: React.MouseEvent) => {
     e.preventDefault();
     localStorage.setItem("token", "Demo token");
     auth.setIsLoggedIn(true);
@@ -198,8 +198,8 @@ const LoginComponent = () => {
               />
               <label htmlFor="remember">Remember me</label>
             </div>
-            <button
-              className="mt-4 text-left text-blue-600 md:mt-0 hover:opacity-90"
+            <a
+              className="mt-4 text-left text-blue-600 md:mt-0 hover:opacity-90 cursor-pointer"
               onClick={(e) => {
                 onDemoAdminClicked(e);
               }}
@@ -208,7 +208,7 @@ const LoginComponent = () => {
               }
             >
               Sign in as demo admin
-            </button>
+            </a>
           </div>
           <input
             type="submit"
