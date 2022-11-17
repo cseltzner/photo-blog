@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:start": "next dev",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "moment": "^2.29.4",
@@ -18,6 +20,7 @@
     "@types/node": "18.11.2",
     "@types/react": "18.0.21",
     "autoprefixer": "^10.4.12",
+    "cypress": "^11.1.0",
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
     "postcss": "^8.4.18",
