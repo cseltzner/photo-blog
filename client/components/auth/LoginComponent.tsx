@@ -6,6 +6,7 @@ import { apiProxy } from "../../utils/apiProxy";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { useRouter } from "next/router";
+import { loginComponentStrings as strings } from "../../strings/components/auth/loginComponentStrings";
 
 const LoginComponent = () => {
   const [authInput, setAuthInput] = useState({
@@ -23,15 +24,13 @@ const LoginComponent = () => {
   // Sets fake login token
   const onDemoAdminClicked = (e: React.MouseEvent) => {
     e.preventDefault();
-    localStorage.setItem("token", "Demo token");
+    localStorage.setItem("token", strings.demoToken);
     auth.setIsLoggedIn(true);
     router.push("/");
     setAlert({
       type: "success",
-      title: "Demo login successful",
-      messages: [
-        "You are now signed in as a demo user. You may view all of the admin components but will be unable to add, edit, or delete photos or users",
-      ],
+      title: strings.alert_demoLoginSuccessTitle,
+      messages: [strings.alert_demoSignIn],
     });
   };
 
@@ -42,10 +41,7 @@ const LoginComponent = () => {
       setAlert({
         type: "error",
         title: "error",
-        messages: [
-          "You must provide your username!",
-          "You must provide your password!",
-        ],
+        messages: [strings.alert_usernameNeeded, strings.alert_passwordNeeded],
       });
       return;
     }
@@ -53,8 +49,8 @@ const LoginComponent = () => {
     if (!authInput.username) {
       setAlert({
         type: "error",
-        title: "Username required",
-        messages: ["You must provide your username!"],
+        title: "error",
+        messages: [strings.alert_usernameNeeded],
       });
       return;
     }
@@ -63,7 +59,7 @@ const LoginComponent = () => {
       setAlert({
         type: "error",
         title: "Password required",
-        messages: ["You must provide your password!"],
+        messages: [strings.alert_passwordNeeded],
       });
       return;
     }
@@ -91,7 +87,7 @@ const LoginComponent = () => {
         setAlert({
           type: "error",
           title: "Error",
-          messages: ["Server error. Please try again later"],
+          messages: [strings.alert_serverError],
         });
         return;
       }
@@ -101,7 +97,7 @@ const LoginComponent = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["Please include all required fields"],
+          messages: [strings.alert_invalidBodyError],
         });
         return;
       }
@@ -111,7 +107,7 @@ const LoginComponent = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["The password you provided is not correct"],
+          messages: [strings.alert_invalidPasswordError],
         });
         return;
       }
@@ -121,7 +117,7 @@ const LoginComponent = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["The username provided does not exist"],
+          messages: [strings.alert_invalidUsernameError],
         });
         return;
       }
@@ -134,8 +130,8 @@ const LoginComponent = () => {
       router.push("/");
       setAlert({
         type: "success",
-        title: "Signed in",
-        messages: ["You are now signed in!"],
+        title: strings.alert_loginSuccessTitle,
+        messages: [strings.alert_loginSuccess],
       });
     } catch (e) {
       console.error(e);
@@ -145,9 +141,7 @@ const LoginComponent = () => {
       setAlert({
         type: "error",
         title: "Authentication error",
-        messages: [
-          "An error occurred. Please check your internet and try again",
-        ],
+        messages: [strings.alert_authenticationError],
       });
     }
   };
@@ -156,21 +150,27 @@ const LoginComponent = () => {
     <>
       <div className="container mx-auto select-none text-xl flex flex-col items-center pt-8 pb-24 text-center">
         <div>
-          <Image src={logo} alt="SeltzPort" className="img block w-32" />
+          <Image
+            src={logo}
+            alt={strings.html_logoAlt}
+            className="img block w-32"
+          />
         </div>
-        <p className="mt-4 text-3xl font-extrabold text-gray-900">
-          Sign in to your account
-        </p>
+        <h1 className="mt-4 text-3xl font-extrabold text-gray-900">
+          {strings.html_header}
+        </h1>
         <p className="mt-1 text-gray-600">
-          Or
+          {strings.html_or}
           <Link href="/" passHref={true}>
-            <a className="text-blue-600 hover:opacity-90"> return to home</a>
+            <a className="text-blue-600 hover:opacity-90">
+              {strings.html_returnHome}
+            </a>
           </Link>
         </p>
         <form className="mt-12 flex flex-col" onSubmit={(e) => onSubmit(e)}>
           <input
             type="text"
-            placeholder="Username"
+            placeholder={strings.html_usernamePlaceholder}
             name="username"
             value={authInput.username}
             onChange={(e) => {
@@ -180,7 +180,7 @@ const LoginComponent = () => {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder={strings.html_passwordPlaceholder}
             name="password"
             value={authInput.password}
             onChange={(e) => {
@@ -196,23 +196,21 @@ const LoginComponent = () => {
                 id="remember"
                 className="w-4"
               />
-              <label htmlFor="remember">Remember me</label>
+              <label htmlFor="remember">{strings.html_checkboxLabel}</label>
             </div>
             <a
               className="mt-4 text-left text-blue-600 md:mt-0 hover:opacity-90 cursor-pointer"
               onClick={(e) => {
                 onDemoAdminClicked(e);
               }}
-              title={
-                "Sign in as a demo user. You may view all of the admin components but will be unable to add, edit, or delete photos"
-              }
+              title={strings.html_demoAdminTitle}
             >
-              Sign in as demo admin
+              {strings.html_demoAdminText}
             </a>
           </div>
           <input
             type="submit"
-            value="Sign in"
+            value={strings.html_signInButton}
             className="m-0 mt-8 block w-full cursor-pointer rounded-lg bg-blue-600 py-3 text-xl text-white shadow hover:opacity-95 hover:shadow-sm active:opacity-100 active:shadow-lg"
           />
         </form>
