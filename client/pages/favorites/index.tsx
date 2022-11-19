@@ -5,6 +5,7 @@ import Alert from "../../components/alert/Alert";
 import Spinner from "../../components/spinner/Spinner";
 import moment from "moment/moment";
 import { transformLink } from "../../utils/transformLink";
+import { favoritesStrings as strings } from "../../strings/components/favorites/favoritesStrings";
 
 const Index = () => {
   const { alert, setAlert } = useAlertContext();
@@ -13,7 +14,7 @@ const Index = () => {
 
   // Update title
   useEffect(() => {
-    document.title = "Chase's favorites | Seltzport";
+    document.title = strings.html_pageTitle;
   }, []);
 
   useEffect(() => {
@@ -36,9 +37,7 @@ const Index = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: [
-            "Failed to fetch photos. Check your internet connection and refresh the page",
-          ],
+          messages: [strings.alert_networkError],
         });
         setLoading(false);
       }
@@ -55,7 +54,7 @@ const Index = () => {
       />
       {loading && <Spinner size={12} />}
       <h1 className={"font-serif border-b mb-8 text-3xl"}>
-        Chase&apos;s Favorites
+        {strings.html_mainHeader}
       </h1>
       <ul
         className={
@@ -67,7 +66,11 @@ const Index = () => {
             <li key={image.id}>
               <a href={`/favorites/${image.id}`} className={"group"}>
                 <div className="flex flex-col items-center cursor-pointer">
-                  <img src={image.img_url} alt="Favorite" loading={"lazy"} />
+                  <img
+                    src={image.img_url}
+                    alt={strings.img_alt}
+                    loading={"lazy"}
+                  />
                   <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
                     {moment(image.date_added).format("MMMM DD YYYY")}
                   </p>
