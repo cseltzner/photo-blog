@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
+    "test-once": "jest",
     "test:start": "next dev",
     "cypress": "cypress open"
   },
@@ -19,8 +20,10 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
+    "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.2.3",
     "@types/node": "18.11.2",
     "@types/react": "18.0.21",

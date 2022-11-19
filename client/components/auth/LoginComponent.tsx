@@ -134,7 +134,6 @@ const LoginComponent = () => {
         messages: [strings.alert_loginSuccess],
       });
     } catch (e) {
-      console.error(e);
       localStorage.removeItem("token");
       auth.setIsLoggedIn(false);
       auth.setLoading(false);

@@ -8,7 +8,11 @@ interface Props {
 const AlertError = ({ messages, onClose }: Props) => {
   return (
     <>
-      <div className="relative mx-auto text-lg flex w-10/12 flex-col rounded-lg bg-red-50 p-4 shadow-lg opacity-[.95]">
+      <div
+        role={"alert"}
+        id={"alert-error"}
+        className="relative mx-auto text-lg flex w-10/12 flex-col rounded-lg bg-red-50 p-4 shadow-lg opacity-[.95]"
+      >
         <div className="absolute top-0 bottom-0 left-0 w-1 rounded-tl rounded-bl bg-red-600"></div>
         <div className="flex items-start gap-6">
           <div className="w-4 text-red-600 hidden sm:block" id="alert-close">

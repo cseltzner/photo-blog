@@ -27,6 +27,7 @@ const Spinner = ({
   return (
     <>
       <div
+        role={"progressbar"}
         style={{
           display: "flex",
           alignItems: "center",
