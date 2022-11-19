@@ -7,6 +7,7 @@ import Custom404 from "../404";
 import moment from "moment/moment";
 import Spinner from "../../components/spinner/Spinner";
 import Link from "next/link";
+import { favoriteStrings as strings } from "../../strings/components/favorites/favoriteStrings";
 
 const SingleFavoritePage = () => {
   const { alert, setAlert } = useAlertContext();
@@ -26,7 +27,7 @@ const SingleFavoritePage = () => {
 
   // Update title
   useEffect(() => {
-    document.title = `${image.title} | Seltzport`;
+    document.title = strings.html_pageTitle(image.title);
   }, []);
 
   useEffect(() => {
@@ -71,9 +72,7 @@ const SingleFavoritePage = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: [
-            "There was an error fetching the photo data. Please check your connection and try again",
-          ],
+          messages: [strings.alert_networkError],
         });
         setLoading(false);
       }
