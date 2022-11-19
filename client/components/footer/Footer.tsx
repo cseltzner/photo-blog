@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { navGalleryLinks } from "../../resources/links";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { footerStrings as strings } from "../../strings/components/footer/footerStrings";
 
 const Footer = () => {
   const auth = useAuthContext();
@@ -14,25 +15,31 @@ const Footer = () => {
         }
       >
         <div className="underline text-xl flex flex-col gap-8 text-lg justify-between">
-          <Link href={"/"} passHref={true}>
-            <a className={"hover:text-blue-300"}>Home</a>
+          <Link href={strings.html_navHomeHref} passHref={true}>
+            <a className={"hover:text-blue-300"}>{strings.html_navHome}</a>
           </Link>
-          <Link href={"/favorites"} passHref={true}>
-            <a className={"hover:text-blue-300"}> Chase&apos;s favorites</a>
+          <Link href={strings.html_navFavoritesHref} passHref={true}>
+            <a className={"hover:text-blue-300"}>{strings.html_navFavorites}</a>
           </Link>
-          <Link href={"/about"} passHref={true}>
-            <a className={"hover:text-blue-300"}>About</a>
+          <Link href={strings.html_navAboutHref} passHref={true}>
+            <a className={"hover:text-blue-300"}>{strings.html_navAbout}</a>
           </Link>
           <Link
-            href={`${auth.isLoggedIn ? "/admin/upload" : "/admin/login"}`}
+            href={`${
+              auth.isLoggedIn
+                ? strings.html_navAdminUploadHref
+                : strings.html_navAdminLoginHref
+            }`}
             passHref={true}
           >
-            <a className={"hover:text-blue-300"}>Admin</a>
+            <a className={"hover:text-blue-300"}>{strings.html_navAdmin}</a>
           </Link>
         </div>
         <div className={"flex flex-col flex-wrap"}>
-          <Link href={"/gallery"} passHref={true}>
-            <a className={"text-xl underline hover:text-blue-300"}>Gallery</a>
+          <Link href={strings.html_navGalleryHref} passHref={true}>
+            <a className={"text-xl underline hover:text-blue-300"}>
+              {strings.html_navGallery}
+            </a>
           </Link>
           {navGalleryLinks.map((link) => {
             return (
@@ -46,12 +53,12 @@ const Footer = () => {
         </div>
       </div>
       <div className={"container mx-auto flex justify-center pb-4"}>
-        <div>Copyright &copy; 2022 Chase Seltzner. All Rights Reserved</div>
+        <div>{strings.html_copyright}</div>
       </div>
       <div className="absolute right-12 bottom-12 md:bottom-8">
         <a
           className={"fill-white hover:fill-blue-300 transition-all"}
-          href="https://github.com/cseltzner"
+          href={strings.html_githubHref}
           target={"_blank"}
           rel="noreferrer"
         >
