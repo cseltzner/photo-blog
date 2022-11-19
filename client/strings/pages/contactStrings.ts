@@ -1,5 +1,5 @@
 export const contactStrings = {
-  html_pageTitle: "Contact | Seltzport",
+  html_pageTitle: "Contact | SeltzPort",
   html_mainHeader: "Contact me",
   html_contactHeader1: "Email",
   html_contactHeader2: "Github",

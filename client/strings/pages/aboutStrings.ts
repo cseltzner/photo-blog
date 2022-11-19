@@ -1,5 +1,5 @@
 export const aboutStrings = {
-  html_pageTitle: "About | Seltzport",
+  html_pageTitle: "About | SeltzPort",
 
   // Section 1
   html_mainHeader: "About Chase",

@@ -1,5 +1,5 @@
 export const uploadImageStrings = {
-  html_pageTitle: "Upload image | Seltzport",
+  html_pageTitle: "Upload image | SeltzPort",
   html_mainHeader: "Upload photo",
 
   html_categoriesHeader: "Categories",

@@ -1,5 +1,5 @@
 export const editImageStrings = {
-  html_pageTitle: "Update photo | Seltzport",
+  html_pageTitle: "Update photo | SeltzPort",
   html_mainHeader: "Update photo",
 
   html_categoriesHeader: "Categories",

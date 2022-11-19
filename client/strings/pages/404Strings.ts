@@ -1,5 +1,5 @@
 export const _404Strings = {
-  html_pageTitle: "Page not found | Seltzport",
+  html_pageTitle: "Page not found | SeltzPort",
   html_mainHeader: "Oops!",
   html_mainText: "Page not found",
   html_returnLink: "Return home",

@@ -1,5 +1,5 @@
 export const addUserStrings = {
-  html_pageTitle: "Add user | Seltzport",
+  html_pageTitle: "Add user | SeltzPort",
   html_mainHeader: "Add user",
 
   html_usernameLabel: "Username",

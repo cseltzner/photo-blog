@@ -28,7 +28,7 @@ export const loginComponentStrings = {
    */
 
   // General
-  html_pageTitle: "Log in | Seltzport",
+  html_pageTitle: "Log in | SeltzPort",
   html_logoAlt: "SeltzPort",
   html_header: "Sign in to your account",
   html_or: "Or",
