@@ -20,7 +20,7 @@ const Contact = () => {
             href={`mailto:${atob(emailBase64)}`}
             className={"text-blue-700 hover:underline"}
           >
-            {atob(emailBase64)}
+            {Buffer.from(emailBase64, "base64").toString()}
           </a>
         </div>
         {/* Github */}
