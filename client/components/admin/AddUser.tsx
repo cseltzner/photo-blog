@@ -3,6 +3,7 @@ import Spinner from "../spinner/Spinner";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { apiProxy } from "../../utils/apiProxy";
 import { useRouter } from "next/router";
+import { addUserStrings as strings } from "../../strings/components/admin/addUserStrings";
 
 const AddUser = () => {
   const [inputData, setInputData] = useState({
@@ -33,7 +34,7 @@ const AddUser = () => {
       setAlert({
         type: "error",
         title: "error",
-        messages: ["Your passwords do not match!"],
+        messages: [strings.alert_passwordNoMatch],
       });
       return;
     }
@@ -61,7 +62,7 @@ const AddUser = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["Unauthorized. Log in and try again"],
+          messages: [strings.alert_unauthorized],
         });
         setLoading(false);
         return;
@@ -71,9 +72,7 @@ const AddUser = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: [
-            `User with username '${inputData.username}' already exists`,
-          ],
+          messages: [strings.alert_userAlreadyExists(inputData.username)],
         });
         setLoading(false);
         return;
@@ -85,7 +84,7 @@ const AddUser = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["An error occurred. Try again later"],
+          messages: [strings.alert_miscError],
         });
         setLoading(false);
         return;
@@ -96,16 +95,14 @@ const AddUser = () => {
       setAlert({
         type: "success",
         title: "User created",
-        messages: ["User successfully created!"],
+        messages: [strings.alert_userCreated],
       });
       router.push("/");
     } catch (err) {
       setAlert({
         type: "error",
         title: "error",
-        messages: [
-          "Connection error. Please check your internet connection and try again",
-        ],
+        messages: [strings.alert_connectionError],
       });
       setLoading(false);
     }
@@ -134,14 +131,16 @@ const AddUser = () => {
             />
           </svg>
         </div>
-        <h1 className="mt-4 text-3xl font-extrabold text-gray-900">Add user</h1>
+        <h1 className="mt-4 text-3xl font-extrabold text-gray-900">
+          {strings.html_mainHeader}
+        </h1>
         <form className="w-full max-w-[500px]" onSubmit={(e) => onSubmit(e)}>
           {/* Username and password inputs */}
           <div className={"mt-12"}>
             {/* Username input */}
             <div className={"flex flex-col items-start"}>
               <label htmlFor="username" className="self-start text-2xl">
-                Username
+                {strings.html_usernameLabel}
               </label>
               <input
                 type="text"
@@ -156,7 +155,7 @@ const AddUser = () => {
               {/* Password input */}
               <div className={"flex flex-col items-start"}>
                 <label htmlFor="password" className="self-start text-2xl">
-                  Password
+                  {strings.html_passwordLabel}
                 </label>
                 <input
                   type="password"
@@ -171,7 +170,7 @@ const AddUser = () => {
             {/* Password confirmation input */}
             <div className={"flex flex-col items-start mt-8"}>
               <label htmlFor="confirmPassword" className="self-start text-2xl">
-                Confirm password
+                {strings.html_confirmPasswordLabel}
               </label>
               <input
                 type="password"
@@ -201,7 +200,7 @@ const AddUser = () => {
                 <Spinner size={12} />
               </div>
             ) : (
-              "Add user"
+              strings.html_submitButton
             )}
           </button>
         </form>
