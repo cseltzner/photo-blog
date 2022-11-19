@@ -4,6 +4,7 @@ import Link from "next/link";
 import { apiProxy } from "../../../utils/apiProxy";
 import { useAlertContext } from "../../../hooks/useAlertContext";
 import { transformLink } from "../../../utils/transformLink";
+import { recentFavoritesSectionStrings as strings } from "../../../strings/components/sections/recentFavoritesSectionStrings";
 
 const RecentFavoritesSection = () => {
   const photoLimit = 3;
@@ -27,9 +28,7 @@ const RecentFavoritesSection = () => {
           setAlert({
             type: "error",
             title: "error",
-            messages: [
-              "Network error. Please check your internet connection and refresh the page",
-            ],
+            messages: [strings.alert_networkError],
           });
           return;
         }
@@ -56,7 +55,8 @@ const RecentFavoritesSection = () => {
       }
     >
       <h3 className={"font-serif mb-12 lg:text-5xl"}>
-        <span className={"italic"}>The Latest</span> Favorites
+        <span className={"italic"}>{strings.html_mainHeaderSpan}</span>
+        {strings.html_mainHeaderPostSpan}
       </h3>
       <TriplePhotoGallery images={images} />
       <Link href={"/favorites"} passHref={true}>
@@ -65,7 +65,7 @@ const RecentFavoritesSection = () => {
             "inline-block mt-4 lg:mt-16 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
           }
         >
-          View the favorites
+          {strings.html_favoritesLinkText}
         </a>
       </Link>
     </section>

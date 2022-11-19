@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import { recentFavoritesSectionStrings as strings } from "../../strings/components/sections/recentFavoritesSectionStrings";
 
 interface Props {
   images?: {
@@ -16,7 +17,7 @@ const TriplePhotoGallery = ({ images }: Props) => {
       {/* Item 1 */}
       <a href={`/favorites/${images[0] && images[0].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[0] && images[0].img_url} alt="Recent favorite" />
+          <img src={images[0] && images[0].img_url} alt={strings.html_imgAlt} />
           <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
             {moment(images[0] && images[0].date_added).format("MMMM DD YYYY")}
           </p>
@@ -32,7 +33,7 @@ const TriplePhotoGallery = ({ images }: Props) => {
       {/* Item 2 */}
       <a href={`/favorites/${images[1] && images[1].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[1] && images[1].img_url} alt="Recent favorite" />
+          <img src={images[1] && images[1].img_url} alt={strings.html_imgAlt} />
           <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
             {moment(images[1] && images[1].date_added).format("MMMM DD YYYY")}
           </p>
@@ -48,7 +49,7 @@ const TriplePhotoGallery = ({ images }: Props) => {
       {/* Item 3 */}
       <a href={`/favorites/${images[2] && images[2].id}`} className={"group"}>
         <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[2] && images[2].img_url} alt="Recent favorite" />
+          <img src={images[2] && images[2].img_url} alt={strings.html_imgAlt} />
           <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
             {moment(images[2] && images[2].date_added).format("MMMM DD YYYY")}
           </p>

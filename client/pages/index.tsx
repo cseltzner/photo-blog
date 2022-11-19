@@ -7,6 +7,7 @@ import Alert from "../components/alert/Alert";
 import { useAlertContext } from "../hooks/useAlertContext";
 import { apiProxy } from "../utils/apiProxy";
 import { transformLink } from "../utils/transformLink";
+import { indexStrings as strings } from "../strings/pages/indexStrings";
 
 export default function Home() {
   const [carouselLoading, setCarouselLoading] = useState(true);
@@ -26,7 +27,7 @@ export default function Home() {
           setAlert({
             type: "error",
             title: "error",
-            messages: ["Server error. Please try again later"],
+            messages: [strings.alert_serverError],
           });
         }
 
@@ -35,9 +36,7 @@ export default function Home() {
           setAlert({
             type: "error",
             title: "error",
-            messages: [
-              "No images found. Check your connection and try again later",
-            ],
+            messages: [strings.alert_noImagesFound],
           });
           return;
         }
@@ -53,9 +52,7 @@ export default function Home() {
         setAlert({
           type: "error",
           title: "error",
-          messages: [
-            "Network error. Please check your internet connection and refresh the page",
-          ],
+          messages: [strings.alert_networkError],
         });
         setCarouselLoading(false);
       }
