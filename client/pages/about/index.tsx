@@ -60,11 +60,11 @@ const AboutPage = () => {
         </h2>
         <p className={"mt-4 lg:mt-6 max-w-[60ch] text-lg lg:text-xl"}>
           {strings.html_tertiaryTextPar1}
-          <br />
-          <br />
+        </p>
+        <p className={"mt-4 lg:mt-6 max-w-[60ch] text-lg lg:text-xl"}>
           {strings.html_tertiaryTextPar2}
         </p>
-        <Link href={"/contact"} passHref={true}>
+        <Link href={strings.html_contactButtonHref} passHref={true}>
           <a
             className={
               "inline-block mt-8 lg:mt-16 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"

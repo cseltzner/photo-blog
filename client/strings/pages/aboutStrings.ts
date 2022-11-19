@@ -25,4 +25,5 @@ export const aboutStrings = {
 
   // Other
   html_contactButton: "How to contact me",
+  html_contactButtonHref: "/contact",
 };
