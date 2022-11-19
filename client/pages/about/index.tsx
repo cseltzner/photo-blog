@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import mojoImage from "../../assets/contact/mojo.jpg";
 import butterflyImage from "../../assets/contact/butterfly.jpg";
 import Link from "next/link";
+import { aboutStrings as strings } from "../../strings/pages/aboutStrings";
 
 const AboutPage = () => {
   // Update title
   useEffect(() => {
-    document.title = "About | Seltzport";
+    document.title = strings.html_pageTitle;
   }, []);
 
   return (
@@ -17,14 +18,11 @@ const AboutPage = () => {
         }
       >
         {/* Intro */}
-        <h1 className={"text-3xl lg:text-4xl font-serif"}>About Chase</h1>
+        <h1 className={"text-3xl lg:text-4xl font-serif"}>
+          {strings.html_mainHeader}
+        </h1>
         <p className={"text-lg lg:text-xl mt-4 lg:mt-6 max-w-[60ch]"}>
-          Hi, I&apos;m Chase Seltzner, an aspiring web developer and amateur
-          photographer. I received my Bachelor&apos;s of Science in Biology and
-          Economics at the University of Wisconsin, Madison, and my love of
-          learning an endless amount of new ideas eventually led me into the
-          field of web development. My love of nature led me to pick up my first
-          real camera in early 2022, and I have not stopped snapping since.
+          {strings.html_mainText}
         </p>
 
         {/* Image section */}
@@ -35,10 +33,7 @@ const AboutPage = () => {
         >
           {/* Bottom Left image */}
           <div className={"inline-block relative"}>
-            <img
-              src={mojoImage.src}
-              alt="Pomeranian walking toward the camera with the sun toward his back"
-            />
+            <img src={mojoImage.src} alt={strings.html_img1Alt} />
             {/* Top Right image */}
             <div
               className={"absolute inset-0"}
@@ -47,44 +42,27 @@ const AboutPage = () => {
                 objectFit: "fill",
               }}
             >
-              <img
-                src={butterflyImage.src}
-                alt="Yellow and black butterfly surrounded by colorful flowers"
-              />
+              <img src={butterflyImage.src} alt={strings.html_img2Alt} />
             </div>
           </div>
         </div>
 
         {/* For the photographers */}
-        <h2 className={"mt-24 font-serif text-3xl"}>For the photographers</h2>
+        <h2 className={"mt-24 font-serif text-3xl"}>
+          {strings.html_secondaryHeader}
+        </h2>
         <p className={"mt-4 lg:mt-6 max-w-[60ch] text-lg lg:text-xl"}>
-          All of the photographs on my site were taken with my one and only
-          FujiFilm X-T30 II. Most the images were taken using a Fuji 55-200mm,
-          18-55mm, or the lovely 27mm. I shoot almost exclusively in JPEG with
-          the Astia film simulation, and perform very minor edits to exposure
-          and contrast in Lightroom or Darktable. As a newer photographer I
-          prefer the experience of getting the shot right in camera and
-          minimizing the amount of post-processing needed, which is why FujiFilm
-          is the perfect fit for me.
+          {strings.html_secondaryText}
         </p>
         {/* For the developers */}
-        <h2 className={"mt-24 font-serif text-3xl"}>For the developers</h2>
+        <h2 className={"mt-24 font-serif text-3xl"}>
+          {strings.html_tertiaryHeader}
+        </h2>
         <p className={"mt-4 lg:mt-6 max-w-[60ch] text-lg lg:text-xl"}>
-          I wanted to create this site to get more experience with the fullstack
-          development process, and the related technologies. My goal for this
-          site was to get more experience with the Postgres, Express,
-          React/NextJS, and TailwindCSS stack. I am also using Cloudinary as a
-          CDN for my uploaded photos. Beyond those frameworks, my philosophy
-          with this site was to use as few non-security related libraries as
-          possible, which means that all of the styling and animation on this
-          site is custom, as well as the basic server and client side logic.
+          {strings.html_tertiaryTextPar1}
           <br />
           <br />
-          This site&apos;s design was inspired from various photographer&apos;s
-          sites as well as some very clean WordPress sites, but ultimately all
-          styling was custom created by me with TailwindCSS. I want to credit
-          Heroicons for their wonderful free icons, and all of the animals who
-          stood still while I was taking photos of them.
+          {strings.html_tertiaryTextPar2}
         </p>
         <Link href={"/contact"} passHref={true}>
           <a
@@ -92,7 +70,7 @@ const AboutPage = () => {
               "inline-block mt-8 lg:mt-16 px-4 py-3 text-xl border border-blue-500 text-blue-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
             }
           >
-            How to contact me
+            {strings.html_contactButton}
           </a>
         </Link>
       </main>
