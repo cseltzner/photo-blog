@@ -9,6 +9,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { apiProxy } from "../../utils/apiProxy";
+import { navbarStrings as strings } from "../../strings/components/navbar/navbarStrings";
 
 const Navbar = () => {
   // State
@@ -34,8 +35,8 @@ const Navbar = () => {
     router.push("/");
     alert.setAlert({
       type: "success",
-      title: "Successful log out",
-      messages: ["You are now logged out"],
+      title: strings.alert_logoutSuccessTitle,
+      messages: [strings.alert_logoutSuccess],
     });
   };
 
@@ -63,7 +64,7 @@ const Navbar = () => {
       const token = localStorage.getItem("token");
 
       // If user has a demo token, act like they are validated cilent-side
-      if (token === "Demo token") {
+      if (token === strings.demoToken) {
         auth.setIsLoggedIn(true);
         auth.setLoading(false);
         return;
@@ -113,7 +114,7 @@ const Navbar = () => {
               "max-w-[225px] min-w-[200px] mr-6 cursor-pointer hover:opacity-90"
             }
           >
-            <Image src={logo} alt={"SeltzPort brand"} role={"navigation"} />
+            <Image src={logo} alt={strings.html_logoAlt} role={"navigation"} />
           </div>
         </a>
       </Link>
@@ -130,7 +131,7 @@ const Navbar = () => {
             "absolute left-0 outline-none transition-all duration-300 ease-in-out -translate-x-[200%] opacity-0 group-hover:-translate-x-[120%] group-hover:opacity-90"
           }
         >
-          Menu
+          {strings.html_hamburgerButtonText}
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +163,10 @@ const Navbar = () => {
         }
       >
         <li>
-          <Link href={"/"} passHref={true}>
-            <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>Home</a>
+          <Link href={strings.html_navHomeHref} passHref={true}>
+            <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>
+              {strings.html_navHome}
+            </a>
           </Link>
         </li>
         <li>
@@ -171,42 +174,48 @@ const Navbar = () => {
             links={navGalleryLinks}
             defaultHref={navGalleryLinks[0].href}
           >
-            Gallery
+            {strings.html_navGallery}
           </NavDropdown>
         </li>
         <li>
-          <Link href={"/favorites"} passHref={true}>
+          <Link href={strings.html_navFavoritesHref} passHref={true}>
             <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>
-              Chase&apos;s favorites
+              {strings.html_navFavorites}
             </a>
           </Link>
         </li>
         <li>
-          <Link href={"/about"} passHref={true}>
+          <Link href={strings.html_navAboutHref} passHref={true}>
             <a className={"inline-block px-1 py-2 hover:text-zinc-500"}>
-              About
+              {strings.html_navAbout}
             </a>
           </Link>
         </li>
       </ul>
 
       {/*  Contact  */}
-      <Link href={"/contact"} passHref={true} className={"hidden lg:block"}>
+      <Link
+        href={strings.html_navContactHref}
+        passHref={true}
+        className={"hidden lg:block"}
+      >
         <a className={"hidden lg:inline-block px-1 py-2 hover:text-zinc-500"}>
-          Contact
+          {strings.html_navContact}
         </a>
       </Link>
 
       {/*  Admin tab (if logged in)  */}
       {auth.isLoggedIn && (
         <div className={"hidden lg:flex gap-8"}>
-          <NavDropdown links={navAdminLinks}>Admin</NavDropdown>
+          <NavDropdown links={navAdminLinks}>
+            {strings.html_navAdmin}
+          </NavDropdown>
           <button
             onClick={() => {
               onLogOut();
             }}
           >
-            Log out
+            {strings.html_navLogout}
           </button>
         </div>
       )}
