@@ -4,6 +4,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import DeleteModal from "../modal/DeleteModal";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { apiProxy } from "../../utils/apiProxy";
+import { galleryStrings as strings } from "../../strings/components/gallery/galleryStrings";
 
 interface Props {
   imgId: string;
@@ -60,9 +61,7 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
         setAlert({
           type: "error",
           title: "error",
-          messages: [
-            "An error occurred while deleting the photo. Please refresh and try again",
-          ],
+          messages: [strings.alert_deleteError],
         });
         setDeleteModalOpen(false);
         setDeleteLoading(false);
@@ -72,7 +71,7 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
       setAlert({
         type: "success",
         title: "error",
-        messages: ["Photo succesfully deleted!"],
+        messages: [strings.alert_deleteSuccess],
       });
       setDeleteModalOpen(false);
       setDeleteLoading(false);
@@ -82,9 +81,7 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
       setAlert({
         type: "error",
         title: "error",
-        messages: [
-          "There was an error fetching the photo data. Please try again",
-        ],
+        messages: [strings.alert_deleteError],
       });
       setDeleteModalOpen(false);
       setDeleteLoading(false);
@@ -229,8 +226,8 @@ const GalleryImage = ({ imgId, image, imageThumbnail, width }: Props) => {
             onCancel={() => setDeleteModalOpen(false)}
             isOpen={deleteModalOpen}
             loading={deleteLoading}
-            title={"Delete photo?"}
-            body={"Are you sure you want to delete this photo?"}
+            title={strings.html_deleteModalTitle}
+            body={strings.html_deleteModalBody}
           />
         </>
       )}

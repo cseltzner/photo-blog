@@ -6,6 +6,7 @@ import { useAlertContext } from "../../hooks/useAlertContext";
 import Gallery from "../../components/gallery/Gallery";
 import { apiProxy } from "../../utils/apiProxy";
 import { transformLink } from "../../utils/transformLink";
+import { galleryStrings as strings } from "../../strings/components/gallery/galleryStrings";
 
 const GalleryPage = () => {
   const imageWidth = 750;
@@ -25,9 +26,9 @@ const GalleryPage = () => {
 
   // Update title
   useEffect(() => {
-    document.title = `${
+    document.title = strings.html_pageTitle(
       category.charAt(0).toUpperCase() + category.substring(1)
-    } | Seltzport`;
+    ); // Capitalize category
   }, [category]);
 
   // Load gallery urls from database
@@ -59,9 +60,7 @@ const GalleryPage = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: [
-            "Connection error. Please check your internet and refresh",
-          ],
+          messages: [strings.alert_networkError],
         });
       }
     };
