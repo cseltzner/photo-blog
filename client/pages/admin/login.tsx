@@ -4,6 +4,7 @@ import Alert from "../../components/alert/Alert";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useRouter } from "next/router";
+import { loginComponentStrings as strings } from "../../strings/components/auth/loginComponentStrings";
 
 const Login = () => {
   const { alert } = useAlertContext();
@@ -12,7 +13,7 @@ const Login = () => {
 
   // Update title
   useEffect(() => {
-    document.title = "Log in | Seltzport";
+    document.title = strings.html_pageTitle;
   }, []);
 
   // Redirect user if already logged in
