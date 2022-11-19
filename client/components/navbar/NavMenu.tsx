@@ -3,6 +3,7 @@ import { navAdminLinks, navGalleryLinks } from "../../resources/links";
 import Link from "next/link";
 import NavMenuDropdown from "./NavMenuDropdown";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { navMenuStrings as strings } from "../../strings/components/navbar/navMenuStrings";
 
 interface Props {
   onCloseHandler: () => void;
@@ -67,8 +68,8 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             "text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400"
           }
         >
-          <Link href={"/"} passHref={true}>
-            <a onClick={() => onCloseHandler()}>Home</a>
+          <Link href={strings.html_navHomeHref} passHref={true}>
+            <a onClick={() => onCloseHandler()}>{strings.html_navHome}</a>
           </Link>
         </div>
         {/* GallerySection */}
@@ -76,7 +77,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
           links={navGalleryLinks}
           onClose={() => onCloseHandler()}
         >
-          Gallery
+          {strings.html_navGallery}
         </NavMenuDropdown>
         {/* Chase's favorites */}
         <div
@@ -84,8 +85,8 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             "text-white py-2 text-3xl sm:text-4xl transition-all hover:text-zinc-400"
           }
         >
-          <Link href={"/favorites"} passHref={true}>
-            <a onClick={() => onCloseHandler()}> Chase&apos;s favorites</a>
+          <Link href={strings.html_navFavoritesHref} passHref={true}>
+            <a onClick={() => onCloseHandler()}>{strings.html_navFavorites}</a>
           </Link>
         </div>
         {/* About */}
@@ -94,8 +95,8 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             "text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400"
           }
         >
-          <Link href={"/about"} passHref={true}>
-            <a onClick={() => onCloseHandler()}>About</a>
+          <Link href={strings.html_navAboutHref} passHref={true}>
+            <a onClick={() => onCloseHandler()}>{strings.html_navAbout}</a>
           </Link>
         </div>
         {/* Contact */}
@@ -104,8 +105,8 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             "text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400"
           }
         >
-          <Link href={"/contact"} passHref={true}>
-            <a onClick={() => onCloseHandler()}>Contact</a>
+          <Link href={strings.html_navContactHref} passHref={true}>
+            <a onClick={() => onCloseHandler()}>{strings.html_navContact}</a>
           </Link>
         </div>
         z {/* Admin tab */}
@@ -114,7 +115,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             links={navAdminLinks}
             onClose={() => onCloseHandler()}
           >
-            Admin
+            {strings.html_navAdmin}
           </NavMenuDropdown>
         )}
         {/* Log out */}
@@ -126,7 +127,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
                 onCloseHandler();
               }}
             >
-              Log out
+              {strings.html_navLogout}
             </button>
           </div>
         )}
