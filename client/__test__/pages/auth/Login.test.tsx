@@ -23,6 +23,11 @@ beforeEach(() => {
 });
 
 describe("Login component", () => {
+  test("page title changes on page load", () => {
+    render(<Login />);
+    expect(document.title).toBe(strings.html_pageTitle);
+  });
+
   test("component renders correctly", () => {
     render(<Login />);
 
