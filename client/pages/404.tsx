@@ -13,7 +13,7 @@ const Custom404 = () => {
     <div className={"flex items-center flex-col gap-4 px-8 py-8 text-4xl"}>
       <h1>{strings.html_mainHeader}</h1>
       <p>{strings.html_mainText}</p>
-      <Link href={"/"}>
+      <Link href={strings.html_returnLinkHref}>
         <a className={"text-blue-700 underline text-3xl mb-2"}>
           {strings.html_returnLink}
         </a>
