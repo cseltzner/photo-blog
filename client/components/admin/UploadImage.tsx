@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { apiProxy } from "../../utils/apiProxy";
 import Spinner from "../spinner/Spinner";
+import { uploadImageStrings as strings } from "../../strings/components/admin/uploadImageStrings";
 
 const UploadImage = () => {
   const [file, setFile] = useState<File>(null);
@@ -120,7 +121,7 @@ const UploadImage = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["Bad request. Please check your file and try again"],
+          messages: [strings.alert_badRequest],
         });
         setLoading(false);
         return;
@@ -130,7 +131,7 @@ const UploadImage = () => {
         setAlert({
           type: "error",
           title: "error",
-          messages: ["Server error. Please try again later"],
+          messages: [strings.alert_serverError],
         });
         setLoading(false);
         return;
@@ -140,8 +141,8 @@ const UploadImage = () => {
       if (res.status === 200) {
         setAlert({
           type: "success",
-          title: "Photo uploaded",
-          messages: ["Your photo has been successfully uploaded"],
+          title: strings.alert_photoUploadTitle,
+          messages: [strings.alert_photoUpload],
         });
         clearInputs();
         const { url } = await res.json();
@@ -156,9 +157,7 @@ const UploadImage = () => {
       setAlert({
         type: "error",
         title: "error",
-        messages: [
-          "An error occurred. Please check your internet connection and try again",
-        ],
+        messages: [strings.alert_networkError],
       });
       setLoading(false);
     }
@@ -181,9 +180,7 @@ const UploadImage = () => {
       setAlert({
         type: "error",
         title: "error",
-        messages: [
-          "You must be logged in as an administrator to upload a photo!",
-        ],
+        messages: [strings.alert_unauthorized],
       });
     }
   }, []);
@@ -208,7 +205,7 @@ const UploadImage = () => {
           </svg>
         </div>
         <h1 className="mt-4 text-3xl font-extrabold text-gray-900">
-          Upload photo
+          {strings.html_mainHeader}
         </h1>
         <form className="mt-12" onSubmit={(e) => onSubmit(e)}>
           <label
@@ -229,7 +226,7 @@ const UploadImage = () => {
                 d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
               />
             </svg>
-            <p>Upload</p>
+            <p>{strings.html_uploadHint}</p>
           </label>
           <input
             type="file"
@@ -242,12 +239,14 @@ const UploadImage = () => {
           />
           <p className={`mb-4 self-start ${!fileValidity && "text-red-600"}`}>
             {file && fileValidity && `File - ${file.name}`}
-            {!file && "No file selected..."}
-            {!fileValidity && "File must be smaller than 10MB"}
+            {!file && strings.html_noFileError}
+            {!fileValidity && strings.html_fileSizeTooLargeError}
           </p>
           {/* Categories */}
           <div>
-            <h3 className={"text-start text-2xl"}>Categories</h3>
+            <h3 className={"text-start text-2xl"}>
+              {strings.html_categoriesHeader}
+            </h3>
             <div className={"flex flex-wrap justify-center gap-4 mt-4"}>
               {categories.map((category, index) => {
                 return (
@@ -307,7 +306,7 @@ const UploadImage = () => {
                   d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                 />
               </svg>
-              <p>Favorite</p>
+              <p>{strings.html_favoriteLabel}</p>
             </label>
             {/* Front page button */}
             <input
@@ -338,14 +337,14 @@ const UploadImage = () => {
                   d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
                 />
               </svg>
-              <p>Front page</p>
+              <p>{strings.html_frontPageLabel}</p>
             </label>
           </div>
           {/* Title and description */}
           <div className={"mt-6 md:mt-12"}>
             <div className={"flex flex-col items-start"}>
               <label htmlFor="title" className="self-start text-2xl">
-                Title
+                {strings.html_titleLabel}
               </label>
               <input
                 type="text"
@@ -359,12 +358,12 @@ const UploadImage = () => {
                   titleValidity ? "opacity-0 h-0" : "opacity-1 h-full"
                 } mt-1 ml-0.5 inline-block text-lg text-red-600 transition`}
               >
-                Favorite photos must have a title
+                {strings.html_invalidTitleError}
               </small>
             </div>
             <div className={"flex flex-col items-start mt-6"}>
               <label htmlFor="description" className="self-start text-2xl">
-                Description
+                {strings.html_descriptionLabel}
               </label>
               <textarea
                 id="description"
@@ -377,7 +376,7 @@ const UploadImage = () => {
                   descriptionValidity ? "opacity-0" : "opacity-1"
                 } mt-1 ml-0.5 inline-block text-lg text-red-600 transition`}
               >
-                Favorite photos must have a description
+                {strings.html_invalidDescriptionError}
               </small>
             </div>
           </div>
@@ -400,7 +399,7 @@ const UploadImage = () => {
                 <Spinner size={12} />
               </div>
             ) : (
-              "Add Photo"
+              strings.html_submitButton
             )}
           </button>
         </form>
@@ -409,7 +408,7 @@ const UploadImage = () => {
         {filesUploaded.length > 0 && (
           <div className={"mt-8"}>
             <h3 className={"text-2xl mt-4 pt-8 border-t-2"}>
-              Files uploaded this session
+              {strings.html_filesUploadedText}
             </h3>
             <ul>
               {filesUploaded.map((url) => {
