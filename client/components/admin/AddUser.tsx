@@ -80,7 +80,6 @@ const AddUser = () => {
 
       // Handle other errors (eg. server errors)
       if (res.status !== 200) {
-        console.log(await res.json());
         setAlert({
           type: "error",
           title: "error",
@@ -90,11 +89,11 @@ const AddUser = () => {
         return;
       }
 
-      // Handle success
+      // Handle success (200 response)
       setLoading(false);
       setAlert({
         type: "success",
-        title: "User created",
+        title: strings.alert_userCreatedTitle,
         messages: [strings.alert_userCreated],
       });
       router.push("/");
@@ -123,6 +122,8 @@ const AddUser = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-24 h-24"
+            role={"img"}
+            aria-label={strings.html_imgLabel}
           >
             <path
               strokeLinecap="round"

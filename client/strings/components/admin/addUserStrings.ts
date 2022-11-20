@@ -7,6 +7,9 @@ export const addUserStrings = {
   html_confirmPasswordLabel: "Confirm password",
   html_submitButton: "Add user",
 
+  // Alt text
+  html_imgLabel: "Add user image",
+
   /**
    * Alert strings
    */
@@ -22,4 +25,5 @@ export const addUserStrings = {
 
   // Success strings
   alert_userCreated: "User successfully created!",
+  alert_userCreatedTitle: "User created",
 };

@@ -299,7 +299,7 @@ describe("Login component", () => {
     // Returns token
     server.use(
       rest.post(apiProxy.concat("/user/auth"), (req, res, ctx) => {
-        return res.once(ctx.delay(), ctx.json({ token: "test token" }));
+        return res.once(ctx.json({ token: "test token" }));
       })
     );
 
@@ -337,7 +337,7 @@ describe("Login component", () => {
     // Returns token
     server.use(
       rest.post(apiProxy.concat("/user/auth"), (req, res, ctx) => {
-        return res.once(ctx.delay(), ctx.json({ token: "test token" }));
+        return res.once(ctx.json({ token: "test token" }));
       })
     );
 
