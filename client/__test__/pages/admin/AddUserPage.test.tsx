@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { addUserStrings as strings } from "../../../strings/components/admin/addUserStrings";
 import AddUserPage from "../../../pages/admin/user";
@@ -20,6 +20,7 @@ const push = jest.fn();
 
 describe("Add User page", () => {
   beforeEach(() => {
+    localStorage.setItem("token", "test token");
     render(
       <AuthContextTestProvider>
         <AlertContextTestProvider>
@@ -29,8 +30,23 @@ describe("Add User page", () => {
     );
   });
 
+  afterEach(() => {
+    localStorage.clear();
+    push.mockClear();
+  });
+
   test("page title changes on page load", () => {
     expect(document.title).toBe(strings.html_pageTitle);
+  });
+
+  test("user is routed away if not logged in", () => {
+    cleanup();
+    localStorage.clear();
+    render(<AddUserPage />);
+
+    waitFor(() => {
+      expect(push).toBeCalledTimes(1);
+    });
   });
 
   test("component renders properly", () => {
@@ -373,7 +389,9 @@ describe("Add User page", () => {
     await userEvent.type(confirmPasswordInput, testString);
     await userEvent.click(submitButton);
 
-    expect(push).toBeCalled();
+    waitFor(() => {
+      expect(push).toBeCalledTimes(1);
+    });
   });
 
   test("loading spinner is shown when data is being fetched and removed afterwards", async () => {

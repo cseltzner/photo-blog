@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../spinner/Spinner";
 import { useAlertContext } from "../../hooks/useAlertContext";
 import { apiProxy } from "../../utils/apiProxy";
@@ -110,6 +110,19 @@ const AddUser = () => {
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
+
+  // Redirect when unauthenticated
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/");
+      setAlert({
+        type: "error",
+        title: "error",
+        messages: [strings.alert_unauthorized],
+      });
+    }
+  }, []);
 
   return (
     <>
