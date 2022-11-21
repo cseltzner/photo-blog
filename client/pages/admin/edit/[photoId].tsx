@@ -205,7 +205,7 @@ const EditPhotoPage = () => {
       />
       <div className="container mx-auto select-none text-xl flex flex-col items-center pt-8 pb-24 text-center">
         <div>
-          <img src={photoSrc} alt="Photograph to be edited" />
+          <img src={photoSrc} alt={strings.html_imgEditPhotoAlt} />
         </div>
         <h1 className="mt-4 text-3xl font-extrabold text-gray-900">
           {strings.html_mainHeader}
@@ -216,12 +216,14 @@ const EditPhotoPage = () => {
             <h3 className={"text-start text-2xl"}>
               {strings.html_categoriesHeader}
             </h3>
-            <div className={"flex gap-4 mt-4"}>
+            <ul className={"flex gap-4 mt-4"}>
               {categories.map((category, index) => {
                 return (
-                  <>
+                  <li
+                    key={category}
+                    data-testid={strings.html_categoriesListItemTestId}
+                  >
                     <input
-                      key={category}
                       type="checkbox"
                       name={category}
                       id={category}
@@ -239,10 +241,10 @@ const EditPhotoPage = () => {
                     >
                       {category}
                     </label>
-                  </>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           {/* Favorite and Front Page checkboxes */}
           <div className="flex justify-around mt-16">
@@ -355,6 +357,7 @@ const EditPhotoPage = () => {
             className={
               "block relative w-full transition py-5 rounded-lg bg-blue-600 text-white shadow-sm cursor-pointer hover:shadow active:shadow-sm disabled:bg-zinc-300 disabled:opacity-80 disabled:cursor-not-allowed"
             }
+            data-testid={strings.html_submitButtonTestId}
             disabled={loading || !titleValidity || !descriptionValidity}
           >
             {loading ? (

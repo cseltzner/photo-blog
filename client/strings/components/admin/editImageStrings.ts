@@ -2,6 +2,10 @@ export const editImageStrings = {
   html_pageTitle: "Update photo | SeltzPort",
   html_mainHeader: "Update photo",
 
+  html_imgEditPhotoAlt: "Photo to be updated",
+
+  html_categoriesListItemTestId: "cat-li",
+
   html_categoriesHeader: "Categories",
   html_favoriteLabel: "Favorite",
   html_frontPageLabel: "Front page",
@@ -13,6 +17,7 @@ export const editImageStrings = {
   html_invalidDescriptionError: "Favorite photos must have a description",
 
   html_submitButton: "Update photo",
+  html_submitButtonTestId: "submit-button",
 
   /**
    * Alert strings
