@@ -1,6 +1,15 @@
 export const uploadImageStrings = {
+  maxFileSize: 1_000_000 * 10,
+
+  // Test id's
+  html_categoriesListItemTestId: "categories-list-item",
+  html_categoriesLabelTestId: "categories-list-item-label",
+  html_sessionUploadLiTestId: "session-upload-li",
+
   html_pageTitle: "Upload image | SeltzPort",
   html_mainHeader: "Upload photo",
+
+  html_imgLabel: "Upload photo icon",
 
   html_categoriesHeader: "Categories",
   html_favoriteLabel: "Favorite",

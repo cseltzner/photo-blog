@@ -24,11 +24,12 @@ const UploadImage = () => {
 
   const onFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Max filesize ~10mb
-    if (e.target.files[0] && e.target.files[0].size > 1_000_000 * 10) {
+    if (e.target.files[0] && e.target.files[0].size > strings.maxFileSize) {
       setFileValidity(false);
       return;
     }
     setFile(e.target.files[0]);
+    setFileValidity(true);
   };
 
   const onCheckChange = (
@@ -153,7 +154,6 @@ const UploadImage = () => {
 
       throw new Error();
     } catch (err) {
-      console.error(err);
       setAlert({
         type: "error",
         title: "error",
@@ -190,6 +190,8 @@ const UploadImage = () => {
       <div className="container mx-auto px-4 select-none text-xl flex flex-col items-center pt-8 pb-24 text-center">
         <div>
           <svg
+            role="presentation"
+            aria-label={strings.html_imgLabel}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -247,13 +249,13 @@ const UploadImage = () => {
             <h3 className={"text-start text-2xl"}>
               {strings.html_categoriesHeader}
             </h3>
-            <div className={"flex flex-wrap justify-center gap-4 mt-4"}>
+            <ul className={"flex flex-wrap justify-center gap-4 mt-4"}>
               {categories.map((category, index) => {
                 return (
-                  <>
+                  <li key={category}>
                     <input
-                      key={category}
                       type="checkbox"
+                      data-testid={strings.html_categoriesListItemTestId}
                       name={category}
                       id={category}
                       checked={categoriesChecked.includes(index)}
@@ -262,6 +264,7 @@ const UploadImage = () => {
                     />
                     <label
                       htmlFor={category}
+                      data-testid={strings.html_categoriesLabelTestId}
                       className={`${
                         categoriesChecked.includes(index)
                           ? "bg-blue-300 border-blue-300 hover:bg-blue-200"
@@ -270,10 +273,10 @@ const UploadImage = () => {
                     >
                       {category}
                     </label>
-                  </>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           {/* Favorite and Front Page checkboxes */}
           <div className="flex justify-around mt-6 md:mt-16">
@@ -282,6 +285,7 @@ const UploadImage = () => {
               type="checkbox"
               id={"Favorite"}
               className={"hidden"}
+              checked={isFavorite}
               onChange={(e) => onFavoriteChange(e)}
             />
             <label
@@ -313,6 +317,7 @@ const UploadImage = () => {
               type="checkbox"
               id={"Front"}
               className={"hidden"}
+              checked={isFront}
               onChange={(e) =>
                 e.target.checked ? setIsFront(true) : setIsFront(false)
               }
@@ -354,6 +359,7 @@ const UploadImage = () => {
                 className="mt-2 block w-full rounded-md border border-zinc-400 py-3 px-4 invalid:border-red-600"
               />
               <small
+                role="alert"
                 className={`${
                   titleValidity ? "opacity-0 h-0" : "opacity-1 h-full"
                 } mt-1 ml-0.5 inline-block text-lg text-red-600 transition`}
@@ -372,6 +378,7 @@ const UploadImage = () => {
                 className="mt-2 block w-full min-h-[200px] rounded-md border border-zinc-400 py-3 px-4 invalid:border-red-600"
               />
               <small
+                role="alert"
                 className={`${
                   descriptionValidity ? "opacity-0" : "opacity-1"
                 } mt-1 ml-0.5 inline-block text-lg text-red-600 transition`}
@@ -416,6 +423,7 @@ const UploadImage = () => {
                   <li
                     key={url}
                     className={"mt-8 text-blue-800 hover:underline"}
+                    data-testid={strings.html_sessionUploadLiTestId}
                   >
                     <a href={url} target={"_blank"} rel="noreferrer">
                       {url}

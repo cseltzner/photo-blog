@@ -12,6 +12,7 @@ const AlertSuccess = ({ title, messages, onClose }: Props) => {
       <div
         role={"alert"}
         id={"alert-success"}
+        data-testid={"alert"}
         className="relative mx-auto text-lg flex flex-col rounded-lg bg-green-50 p-4 shadow-lg opacity-[.95]"
       >
         <div className="absolute top-0 bottom-0 left-0 w-1 rounded-tl rounded-bl bg-green-400"></div>

@@ -11,6 +11,7 @@ const AlertError = ({ messages, onClose }: Props) => {
       <div
         role={"alert"}
         id={"alert-error"}
+        data-testid={"alert"}
         className="relative mx-auto text-lg flex w-10/12 flex-col rounded-lg bg-red-50 p-4 shadow-lg opacity-[.95]"
       >
         <div className="absolute top-0 bottom-0 left-0 w-1 rounded-tl rounded-bl bg-red-600"></div>
@@ -43,7 +44,11 @@ const AlertError = ({ messages, onClose }: Props) => {
             <ul className="list-disc text-red-800">
               {messages.map((message, index) => {
                 return (
-                  <li key={index} className={"ml-8"}>
+                  <li
+                    key={index}
+                    className={"ml-8"}
+                    data-testid={"alert-listitem"}
+                  >
                     {message}
                   </li>
                 );
