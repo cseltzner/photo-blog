@@ -28,7 +28,7 @@ const SingleFavoritePage = () => {
   // Update title
   useEffect(() => {
     document.title = strings.html_pageTitle(image.title);
-  }, []);
+  }, [image.title]);
 
   useEffect(() => {
     const fetchPhoto = async () => {
@@ -50,7 +50,6 @@ const SingleFavoritePage = () => {
 
         // If photo found
         const photo = await res.json();
-        console.log(photo);
 
         // If photo does not have a title or description throw 404
         if (!photo?.title || !photo?.description) {
@@ -91,6 +90,7 @@ const SingleFavoritePage = () => {
         className={`relative w-full transition scale-0 h-0 ${
           loading && "scale-100 min-h-[36rem]"
         }`}
+        data-testid={strings.html_spinnerTestId}
       >
         <Spinner size={24} />
       </div>
@@ -101,9 +101,9 @@ const SingleFavoritePage = () => {
         }`}
       >
         <h1 className={"text-5xl mb-2 font-serif"}>{image.title}</h1>
-        <h3 className={"text-xl mb-8 font-serif"}>
+        <time className={"text-xl mb-8 font-serif"}>
           {image.date_added && moment(image.date_added).format("MMMM DD YYYY")}
-        </h3>
+        </time>
         <div className={"flex gap-8 mb-8 flex-wrap justify-center"}>
           {image.categories.map((category) => {
             return (
@@ -116,6 +116,7 @@ const SingleFavoritePage = () => {
                   className={
                     "px-8 py-2 inline-block rounded-full bg-zinc-300 capitalize hover:bg-zinc-200"
                   }
+                  data-testid={strings.html_categoryLiTestId}
                 >
                   {category}
                 </a>
@@ -123,12 +124,18 @@ const SingleFavoritePage = () => {
             );
           })}
         </div>
-        <a href={image.img_url} target={"_blank"} rel="noreferrer">
+        <a
+          href={image.img_url}
+          target={"_blank"}
+          rel="noreferrer"
+          data-testid={strings.html_imgHref}
+        >
           <img
             src={image.img_url}
             className={
               "mb-12 border border-zinc-400 shadow hover:shadow-xl transition hover:scale-[101%]"
             }
+            alt={image.title}
           />
         </a>
         <p className={"text-xl mb-12 max-w-[50ch] "}>{image.description}</p>

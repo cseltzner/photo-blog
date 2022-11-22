@@ -1,6 +1,10 @@
 export const favoriteStrings = {
   html_pageTitle: (imgName: string) => `${imgName} | SeltzPort`,
 
+  html_spinnerTestId: "spinner",
+  html_categoryLiTestId: "categoryLi",
+  html_imgHref: "imgHref",
+
   /**
    * Alert strings
    */
