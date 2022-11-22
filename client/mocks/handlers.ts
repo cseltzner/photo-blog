@@ -8,16 +8,23 @@ export const handlers = [
     return res(ctx.json({ number: "1" }));
   }),
   rest.get(apiProxy.concat("/photo/:photoId"), (req, res, ctx) => {
-    return res(
-      ctx.json({
-        img_url: handlerStrings.GETphoto_img_url,
-        title: handlerStrings.GETphoto_title,
-        description: handlerStrings.GETphoto_description,
-        favorite: handlerStrings.GETphoto_favorite,
-        front_page: handlerStrings.GETphoto_front_page,
-        categories: handlerStrings.GETphoto_categories,
-      })
-    );
+    if (req.params.photoId === "throw") {
+      throw new Error();
+    }
+    if (req.params.photoId === "200" || !req.params.photoId) {
+      return res(
+        ctx.json({
+          img_url: handlerStrings.GETphoto_img_url,
+          title: handlerStrings.GETphoto_title,
+          description: handlerStrings.GETphoto_description,
+          favorite: handlerStrings.GETphoto_favorite,
+          front_page: handlerStrings.GETphoto_front_page,
+          categories: handlerStrings.GETphoto_categories,
+        })
+      );
+    } else {
+      return res(ctx.status(Number(req.params.photoId)));
+    }
   }),
 ];
 
@@ -28,5 +35,8 @@ export const handlerStrings = {
   GETphoto_description: "description",
   GETphoto_favorite: true,
   GETphoto_front_page: true,
-  GETphoto_categories: [categories[0], categories[1]],
+  GETphoto_categories: [
+    categories[0].toLowerCase(),
+    categories[1].toLowerCase(),
+  ],
 };

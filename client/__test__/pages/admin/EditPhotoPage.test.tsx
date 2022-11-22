@@ -1,6 +1,6 @@
 // Stub out router.push()
 import { useRouter } from "next/router";
-import { render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import AuthContextTestProvider from "../../test-utils/context/AuthContextTestProvider";
 import AlertContextTestProvider from "../../test-utils/context/AlertContextTestProvider";
 import EditPhotoPage from "../../../pages/admin/edit/[photoId]";
@@ -8,23 +8,31 @@ import { editImageStrings as strings } from "../../../strings/components/admin/e
 import { categories } from "../../../resources/links";
 import userEvent from "@testing-library/user-event";
 import { handlerStrings } from "../../../mocks/handlers";
+import { server } from "../../../mocks/server";
+import { rest } from "msw";
+import { apiProxy } from "../../../utils/apiProxy";
 
 // Stub out router.push()
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));
 const push = jest.fn();
+let photoId: string | number = 200;
+const back = jest.fn();
 (useRouter as jest.Mock).mockImplementation(() => ({
   push,
   query: {
-    photoId: 1,
+    photoId: photoId,
   },
+  back,
 }));
 
 describe("Edit photo page", () => {
   describe("Tests without a login token", () => {
     afterEach(() => {
       push.mockClear();
+      back.mockClear();
+      photoId = 200;
     });
     test("user is routed away if not logged in", async () => {
       render(<EditPhotoPage />);
@@ -49,6 +57,8 @@ describe("Edit photo page", () => {
     afterEach(() => {
       localStorage.clear();
       push.mockClear();
+      back.mockClear();
+      photoId = 200;
     });
 
     test("page title changes on page load", () => {
@@ -98,6 +108,48 @@ describe("Edit photo page", () => {
       expect(submitButton).toBeInTheDocument();
     });
 
+    test("component updates input fields as soon as data is fetched from server on page load", async () => {
+      // For tests, default mock response defines that:
+      //  - First 2 category checkboxes are checked
+      //  - Favorite box is checked
+      //  - Front page box is checked
+      //  - Title is included
+      //  - Description is included
+      // See GET "/photo/:photoId" in handlers.ts
+
+      const photoToBeEdited = await screen.findByAltText(
+        strings.html_imgEditPhotoAlt
+      );
+      expect(photoToBeEdited).toBeInTheDocument();
+
+      const categoriesCheckboxes = screen.getAllByTestId(
+        strings.html_categoriesCheckboxTestId
+      );
+      await waitFor(() => {
+        expect(categoriesCheckboxes[0]).toBeChecked();
+        expect(categoriesCheckboxes[1]).toBeChecked();
+        expect(categoriesCheckboxes[2]).not.toBeChecked();
+      });
+
+      const favoriteCheckbox = screen.getByLabelText(
+        strings.html_favoriteLabel
+      );
+      expect(favoriteCheckbox).toBeChecked();
+
+      const frontPageCheckbox = screen.getByLabelText(
+        strings.html_frontPageLabel
+      );
+      expect(frontPageCheckbox).toBeChecked();
+
+      const titleInput = screen.getByLabelText(strings.html_titleLabel);
+      expect(titleInput).toHaveValue(handlerStrings.GETphoto_title);
+
+      const descriptionInput = screen.getByLabelText(
+        strings.html_descriptionLabel
+      );
+      expect(descriptionInput).toHaveValue(handlerStrings.GETphoto_description);
+    });
+
     test("submit button is disabled initially before data is loaded", () => {
       const submitButtonInitial = screen.getByTestId(
         strings.html_submitButtonTestId
@@ -129,7 +181,6 @@ describe("Edit photo page", () => {
     });
 
     test("submit button is disabled if favorite is checked AND no title/description is present", async () => {
-      jest.setTimeout(1000000); // remove me
       // Initially the favorite checkbox is checked, and a title and description is present
       const submitButton = await screen.findByRole("button", {
         name: strings.html_submitButton,
@@ -224,6 +275,214 @@ describe("Edit photo page", () => {
       await userEvent.type(descriptionInput, "test description");
 
       expect(descriptionErrorHint).toHaveClass("opacity-0");
+    });
+
+    test("submit button is disabled as soon as data is sent", async () => {
+      // Return generic success response
+      server.use(
+        rest.put(apiProxy.concat("/photo/:photoId"), (req, res, ctx) => {
+          return res.once(ctx.status(200));
+        })
+      );
+
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await userEvent.click(submitButton);
+
+      expect(submitButton).toBeDisabled();
+    });
+
+    test("photo not found on page load generates alert error", async () => {
+      // Server returns 404
+      photoId = 404;
+
+      const alert = await screen.findByRole("alert");
+      expect(alert).toBeInTheDocument();
+      expect(alert).toHaveAttribute("id", "alert-error");
+
+      const alertText = await screen.getAllByTestId("alert-listitem");
+      expect(alertText.length).toBe(1);
+      expect(alertText[0]).toHaveTextContent(strings.alert_miscError);
+    });
+
+    test("failure to request photo on page load generates alert error", async () => {
+      cleanup();
+      // Failure to fetch
+      photoId = "throw";
+      render(
+        <AuthContextTestProvider>
+          <AlertContextTestProvider>
+            <EditPhotoPage />
+          </AlertContextTestProvider>
+        </AuthContextTestProvider>
+      );
+
+      const alert = await screen.findByRole("alert");
+      expect(alert).toBeInTheDocument();
+      expect(alert).toHaveAttribute("id", "alert-error");
+
+      const alertText = await screen.getAllByTestId("alert-listitem");
+      expect(alertText.length).toBe(1);
+      expect(alertText[0]).toHaveTextContent(strings.alert_networkError);
+    });
+
+    test("photo not found submission error generates alert error", async () => {
+      // Returns 404
+      server.use(
+        rest.put(
+          apiProxy.concat("/photo/").concat(photoId.toString()),
+          (req, res, ctx) => {
+            return res.once(ctx.status(404));
+          }
+        )
+      );
+
+      // Submit "updated" photo
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await waitFor(() => {
+        expect(submitButton).toBeEnabled();
+      });
+      await userEvent.click(submitButton);
+
+      const alert = await screen.findByRole("alert");
+      expect(alert).toBeInTheDocument();
+      expect(alert).toHaveAttribute("id", "alert-error");
+
+      const alertText = await screen.getAllByTestId("alert-listitem");
+      expect(alertText.length).toBe(1);
+      expect(alertText[0]).toHaveTextContent(strings.alert_imgNotFound);
+    });
+
+    test("failed to connect submission error generates alert error", async () => {
+      // Server returns nothing
+      server.use(
+        rest.put(
+          apiProxy.concat("/photo/").concat(photoId.toString()),
+          (req, res, ctx) => {
+            throw new Error();
+          }
+        )
+      );
+
+      // Submit "updated" photo
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await waitFor(() => {
+        expect(submitButton).toBeEnabled();
+      });
+      await userEvent.click(submitButton);
+
+      const alert = await screen.findByRole("alert");
+      expect(alert).toBeInTheDocument();
+      expect(alert).toHaveAttribute("id", "alert-error");
+
+      const alertText = await screen.getAllByTestId("alert-listitem");
+      expect(alertText.length).toBe(1);
+      expect(alertText[0]).toHaveTextContent(strings.alert_networkError);
+    });
+
+    test("successful update generates success alert", async () => {
+      // returns 200 response
+      server.use(
+        rest.put(
+          apiProxy.concat("/photo/").concat(photoId.toString()),
+          (req, res, ctx) => {
+            return res.once(ctx.status(200));
+          }
+        )
+      );
+
+      // Submit "updated" photo
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await waitFor(() => {
+        expect(submitButton).toBeEnabled();
+      });
+      await userEvent.click(submitButton);
+
+      const alert = await screen.findByTestId("alert");
+      expect(alert).toBeInTheDocument();
+      expect(alert).toHaveAttribute("id", "alert-success");
+
+      const alertTitle = await screen.findByText(strings.alert_success);
+      expect(alertTitle).toBeInTheDocument();
+
+      const alertText = await screen.findByText(strings.alert_success);
+      expect(alertText).toBeInTheDocument();
+    });
+    test("successful update routes user to gallery page", async () => {
+      // returns 200 response
+      server.use(
+        rest.put(
+          apiProxy.concat("/photo/").concat(photoId.toString()),
+          (req, res, ctx) => {
+            return res.once(ctx.status(200));
+          }
+        )
+      );
+
+      // Submit "updated" photo
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await waitFor(() => {
+        expect(submitButton).toBeEnabled();
+      });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(push).toBeCalledWith("/gallery");
+      });
+    });
+    test("submit button becomes disabled while submitting", async () => {
+      // returns 200 response
+      server.use(
+        rest.put(
+          apiProxy.concat("/photo/").concat(photoId.toString()),
+          (req, res, ctx) => {
+            return res.once(ctx.status(200));
+          }
+        )
+      );
+
+      // Submit "updated" photo
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await waitFor(() => {
+        expect(submitButton).toBeEnabled();
+      });
+      await userEvent.click(submitButton);
+      expect(submitButton).toBeDisabled();
+    });
+
+    test("submit button shows loading spinner when submitting", async () => {
+      // returns 200 response
+      server.use(
+        rest.put(
+          apiProxy.concat("/photo/").concat(photoId.toString()),
+          (req, res, ctx) => {
+            return res.once(ctx.status(200));
+          }
+        )
+      );
+
+      // Submit "updated" photo
+      const submitButton = await screen.findByRole("button", {
+        name: strings.html_submitButton,
+      });
+      await waitFor(() => {
+        expect(submitButton).toBeEnabled();
+      });
+      await userEvent.click(submitButton);
+
+      const loadingSpinner = await screen.findByRole("progressbar");
+      expect(loadingSpinner).toBeInTheDocument();
     });
   });
 });

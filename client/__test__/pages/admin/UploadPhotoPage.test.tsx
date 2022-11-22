@@ -1,12 +1,4 @@
-import {
-  cleanup,
-  findByTestId,
-  findByText,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { uploadImageStrings as strings } from "../../../strings/components/admin/uploadImageStrings";
 import { useRouter } from "next/router";

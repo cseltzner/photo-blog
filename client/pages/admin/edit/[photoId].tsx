@@ -120,7 +120,6 @@ const EditPhotoPage = () => {
 
       throw new Error();
     } catch (err) {
-      console.error(err);
       setAlert({
         type: "error",
         title: "error",
@@ -227,6 +226,7 @@ const EditPhotoPage = () => {
                       type="checkbox"
                       name={category}
                       id={category}
+                      data-testid={strings.html_categoriesCheckboxTestId}
                       className={"hidden"}
                       checked={categoriesChecked.includes(index)}
                       onChange={(e) => onCheckChange(e, index)}
@@ -254,6 +254,7 @@ const EditPhotoPage = () => {
               id={"Favorite"}
               className={"hidden"}
               onChange={(e) => onFavoriteChange(e)}
+              checked={isFavorite}
             />
             <label
               htmlFor={"Favorite"}
@@ -287,6 +288,7 @@ const EditPhotoPage = () => {
               onChange={(e) =>
                 e.target.checked ? setIsFront(true) : setIsFront(false)
               }
+              checked={isFront}
             />
             <label
               htmlFor={"Front"}

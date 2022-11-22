@@ -5,6 +5,7 @@ export const editImageStrings = {
   html_imgEditPhotoAlt: "Photo to be updated",
 
   html_categoriesListItemTestId: "cat-li",
+  html_categoriesCheckboxTestId: "cat-input",
 
   html_categoriesHeader: "Categories",
   html_favoriteLabel: "Favorite",
