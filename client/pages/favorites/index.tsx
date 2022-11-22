@@ -7,7 +7,7 @@ import moment from "moment/moment";
 import { transformLink } from "../../utils/transformLink";
 import { favoritesStrings as strings } from "../../strings/components/favorites/favoritesStrings";
 
-const Index = () => {
+const FavoritesPage = () => {
   const { alert, setAlert } = useAlertContext();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -71,9 +71,12 @@ const Index = () => {
                     alt={strings.img_alt}
                     loading={"lazy"}
                   />
-                  <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
+                  <time
+                    className={"text-sm sm:text-lg mt-3 opacity-70"}
+                    data-testid={strings.html_dateTestId}
+                  >
                     {moment(image.date_added).format("MMMM DD YYYY")}
-                  </p>
+                  </time>
                   <h4
                     className={
                       "font-serif text-xl sm:text-3xl group-hover:underline"
@@ -91,4 +94,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default FavoritesPage;

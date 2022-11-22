@@ -2,6 +2,8 @@ export const favoritesStrings = {
   html_pageTitle: "Chase's favorites | SeltzPort",
   html_mainHeader: "Chase's Favorites",
 
+  html_dateTestId: "date",
+
   // Alt text
   img_alt: "Favorite",
 
