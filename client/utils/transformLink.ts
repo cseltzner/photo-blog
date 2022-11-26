@@ -10,12 +10,24 @@ export const transformLink = (
   width?: number,
   height?: number
 ) => {
-  const transformationArr: Array<string> = [];
-  width && transformationArr.push(`w_${width}`);
-  height && transformationArr.push(`h_${height}`);
-  const transformationString = transformationArr.join(",");
+  if (!width && !height) return link;
 
-  const linkArr = link.split("/");
-  linkArr.splice(6, 0, transformationString);
-  return linkArr.join("/");
+  try {
+    const transformationArr: Array<string> = [];
+    width && transformationArr.push(`w_${width}`);
+    height && transformationArr.push(`h_${height}`);
+    const transformationString = transformationArr.join(",");
+
+    const linkArr = link.split("/");
+
+    // Throws if not enough url splits
+    if (linkArr.length < 6) {
+      throw new Error();
+    }
+
+    linkArr.splice(6, 0, transformationString);
+    return linkArr.join("/");
+  } catch (err) {
+    throw new Error("Invalid link to be transformed");
+  }
 };
