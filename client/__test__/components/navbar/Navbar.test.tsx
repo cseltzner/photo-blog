@@ -9,6 +9,10 @@ import { server } from "../../../mocks/server";
 import { rest } from "msw";
 import { apiProxy } from "../../../utils/apiProxy";
 
+/**
+ * Incompletely tested component
+ */
+
 // Stub out router.push()
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),

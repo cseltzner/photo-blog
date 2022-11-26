@@ -51,18 +51,19 @@ const Carousel = ({ imgUrls, height, autoScroll, autoScrollTimeMs }: Props) => {
         className={
           "flex justify-center group relative w-full overflow-hidden select-none shadow-lg hover:scale-[101%] transition"
         }
+        aria-label="Photo carousel"
       >
         {imgUrls &&
           imgUrls.map((img, index) => {
             return (
-              <>
+              // If carousel looks strange, first thing to check is this div
+              <div key={imgUrls[index]}>
                 <CarouselItem
                   imageUrl={img}
                   show={index === itemIndex}
                   animateForward={animateForward}
-                  key={index}
                 />
-              </>
+              </div>
             );
           })}
 

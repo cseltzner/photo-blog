@@ -35,6 +35,7 @@ const CarouselItem = ({
         (animateForward === false && backwardAnimation) ||
         undefined
       }
+      aria-label={"Photo carousel item"}
     >
       <img src={imageUrl} alt="Photograph" />
     </div>
