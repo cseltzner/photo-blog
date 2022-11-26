@@ -63,7 +63,7 @@ const Navbar = () => {
       auth.setLoading(true);
       const token = localStorage.getItem("token");
 
-      // If user has a demo token, act like they are validated cilent-side
+      // If user has a demo token, act like they are validated client-side
       if (token === strings.demoToken) {
         auth.setIsLoggedIn(true);
         auth.setLoading(false);
@@ -105,6 +105,7 @@ const Navbar = () => {
         "container mx-auto text-[1.35rem] lg:text-2xl w-full py-12 px-4 flex flex-row justify-between items-center"
       }
       id="top-nav"
+      aria-label={"full screen navigation bar"}
     >
       {/*  Logo  */}
       <Link href={"/"} passHref>
@@ -125,6 +126,7 @@ const Navbar = () => {
           "group lg:hidden relative cursor-pointer p-4 transition-all rounded-full hover:bg-blue-50 "
         }
         onClick={() => onMenuButtonClick()}
+        aria-label={"Navigation Menu Open button"}
       >
         <div
           className={
@@ -161,6 +163,7 @@ const Navbar = () => {
         className={
           "-ml-6 flex-row gap-12 justify-between items-center hidden lg:flex"
         }
+        aria-label={strings.html_mainNavigationLinksLabel}
       >
         <li>
           <Link href={strings.html_navHomeHref} passHref={true}>
@@ -206,7 +209,10 @@ const Navbar = () => {
 
       {/*  Admin tab (if logged in)  */}
       {auth.isLoggedIn && (
-        <div className={"hidden lg:flex gap-8"}>
+        <div
+          className={"hidden lg:flex gap-8"}
+          aria-label={strings.html_adminNavigationLabel}
+        >
           <NavDropdown links={navAdminLinks}>
             {strings.html_navAdmin}
           </NavDropdown>

@@ -24,6 +24,9 @@ export const navbarStrings = {
 
   html_hamburgerButtonText: "Menu",
 
+  html_adminNavigationLabel: "Admin navigation links",
+  html_mainNavigationLinksLabel: "Main links",
+
   // Alt text
   html_logoAlt: "SeltzPort brand",
 

@@ -36,6 +36,8 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         className={`${
           isOpen ? "scale-100 opacity-90" : "scale-0 opacity-0"
         } fixed flex flex-col justify-center items-center inset-0 transition-opacity duration-500 bg-black z-10`}
+        aria-disabled={!isOpen}
+        aria-label="Navigation menu"
       >
         {/* Close button */}
         <div
@@ -109,7 +111,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
             <a onClick={() => onCloseHandler()}>{strings.html_navContact}</a>
           </Link>
         </div>
-        z {/* Admin tab */}
+        {/* Admin tab */}
         {auth.isLoggedIn && (
           <NavMenuDropdown
             links={navAdminLinks}
@@ -122,6 +124,7 @@ const NavMenu = ({ onCloseHandler, isOpen, onLogout }: Props) => {
         {auth.isLoggedIn && (
           <div className="text-white py-2 text-3xl sm:text-4xl  transition-all hover:text-zinc-400">
             <button
+              aria-label={"small screen admin tab"}
               onClick={() => {
                 onLogout();
                 onCloseHandler();
