@@ -15,53 +15,77 @@ const TriplePhotoGallery = ({ images }: Props) => {
   return (
     <div className={"flex gap-4 sm:gap-8 text-center px-2"}>
       {/* Item 1 */}
-      <a href={`/favorites/${images[0] && images[0].id}`} className={"group"}>
-        <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[0] && images[0].img_url} alt={strings.html_imgAlt} />
-          <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
-            {moment(images[0] && images[0].date_added).format("MMMM DD YYYY")}
-          </p>
-          <h4
-            className={
-              "font-serif text-xl sm:text-3xl mt-1 group-hover:underline"
-            }
-          >
-            {images[0] && images[0].title}
-          </h4>
-        </div>
-      </a>
+      {images[0] && (
+        <a href={`/favorites/${images[0] && images[0].id}`} className={"group"}>
+          <article className="flex flex-col items-center cursor-pointer">
+            <img
+              src={images[0] && images[0].img_url}
+              alt={strings.html_imgAlt}
+            />
+            <time
+              aria-label={"date"}
+              className={"text-sm sm:text-lg mt-3 opacity-70"}
+            >
+              {moment(images[0] && images[0].date_added).format("MMMM DD YYYY")}
+            </time>
+            <h4
+              className={
+                "font-serif text-xl sm:text-3xl mt-1 group-hover:underline"
+              }
+            >
+              {images[0] && images[0].title}
+            </h4>
+          </article>
+        </a>
+      )}
       {/* Item 2 */}
-      <a href={`/favorites/${images[1] && images[1].id}`} className={"group"}>
-        <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[1] && images[1].img_url} alt={strings.html_imgAlt} />
-          <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
-            {moment(images[1] && images[1].date_added).format("MMMM DD YYYY")}
-          </p>
-          <h4
-            className={
-              "font-serif text-xl sm:text-3xl mt-1  group-hover:underline"
-            }
-          >
-            {images[1] && images[1].title}
-          </h4>
-        </div>
-      </a>
+      {images[1] && (
+        <a href={`/favorites/${images[1] && images[1].id}`} className={"group"}>
+          <article className="flex flex-col items-center cursor-pointer">
+            <img
+              src={images[1] && images[1].img_url}
+              alt={strings.html_imgAlt}
+            />
+            <time
+              aria-label={"date"}
+              className={"text-sm sm:text-lg mt-3 opacity-70"}
+            >
+              {moment(images[1] && images[1].date_added).format("MMMM DD YYYY")}
+            </time>
+            <h4
+              className={
+                "font-serif text-xl sm:text-3xl mt-1  group-hover:underline"
+              }
+            >
+              {images[1] && images[1].title}
+            </h4>
+          </article>
+        </a>
+      )}
       {/* Item 3 */}
-      <a href={`/favorites/${images[2] && images[2].id}`} className={"group"}>
-        <div className="flex flex-col items-center cursor-pointer">
-          <img src={images[2] && images[2].img_url} alt={strings.html_imgAlt} />
-          <p className={"text-sm sm:text-lg mt-3 opacity-70"}>
-            {moment(images[2] && images[2].date_added).format("MMMM DD YYYY")}
-          </p>
-          <h4
-            className={
-              "font-serif text-xl sm:text-3xl mt-1  group-hover:underline"
-            }
-          >
-            {images[2] && images[2].title}
-          </h4>
-        </div>
-      </a>
+      {images[2] && (
+        <a href={`/favorites/${images[2] && images[2].id}`} className={"group"}>
+          <article className="flex flex-col items-center cursor-pointer">
+            <img
+              src={images[2] && images[2].img_url}
+              alt={strings.html_imgAlt}
+            />
+            <time
+              aria-label={"date"}
+              className={"text-sm sm:text-lg mt-3 opacity-70"}
+            >
+              {moment(images[2] && images[2].date_added).format("MMMM DD YYYY")}
+            </time>
+            <h4
+              className={
+                "font-serif text-xl sm:text-3xl mt-1  group-hover:underline"
+              }
+            >
+              {images[2] && images[2].title}
+            </h4>
+          </article>
+        </a>
+      )}
     </div>
   );
 };
