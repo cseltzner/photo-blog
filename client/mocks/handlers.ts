@@ -2,11 +2,8 @@ import { rest } from "msw";
 import { apiProxy } from "../utils/apiProxy";
 import { categories } from "../resources/links";
 
+// Note that most msw handlers reside in the test it's being used for
 export const handlers = [
-  // Example to ensure that msw is working properly. Delete later
-  rest.get(apiProxy.concat("/example"), (req, res, ctx) => {
-    return res(ctx.json({ number: "1" }));
-  }),
   rest.get(apiProxy.concat("/photo/:photoId"), (req, res, ctx) => {
     if (req.params.photoId === "throw") {
       throw new Error();
