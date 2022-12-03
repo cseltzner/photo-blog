@@ -10,7 +10,7 @@ export const getAllPhotosQuery = (
     front_page,
   };
 
-  if (!queries) {
+  if (!queries.category && !queries.favorite && !queries.front_page) {
     return selectStmt;
   }
 
