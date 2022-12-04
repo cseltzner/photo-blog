@@ -1,6 +1,4 @@
 import pool from "../../../db/db-connect";
-import auth from "../../../middleware/auth";
-import express from "express";
 import jwt from "jsonwebtoken";
 import supertest from "supertest";
 import app from "../../../setupServer";

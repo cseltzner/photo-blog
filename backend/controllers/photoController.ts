@@ -7,7 +7,6 @@ import { insertPhotoQuery } from "../db/queries/images/insert-photo-query";
 import generateId from "../utils/generateId";
 import { deleteSinglePhotoQuery } from "../db/queries/images/delete-single-photo-query";
 import { updatePhotoQuery } from "../db/queries/images/update-photo-query";
-import { getLatestFavoritesQuery } from "../db/queries/images/get-latest-favorites-query";
 
 // Cloudinary configuration
 cloudinary.config({
