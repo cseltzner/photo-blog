@@ -20,7 +20,7 @@ export const footerStrings = {
   html_navAdminLoginHref: "/admin/login",
 
   // Copyright
-  html_copyright: "Copyright © 2022 Chase Seltzner. All Rights Reserved",
+  html_copyright: "Copyright © 2024 Chase Seltzner. All Rights Reserved",
 
   // Github
   html_githubHref: "https://github.com/cseltzner",
